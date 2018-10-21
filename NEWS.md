@@ -9,5 +9,5 @@
 
 - The crux of this package has largely been developed by 
   Ensmallen development team that consists of Conrad Sanderson, Ryan Curtin, 
-  and MLPACK developers
+  and the MLPACK developers
 
