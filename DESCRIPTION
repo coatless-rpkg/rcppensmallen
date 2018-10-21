@@ -25,8 +25,8 @@ Description: 'Ensmallen' is a templated C++ mathematical optimization library
  'C++11' and 'Armadillo' 6.500 or later.
 Depends: R (>= 3.3.0)
 License: GPL (>= 2)
-URL: https://github.com/coatless/RcppEnsmallen, https://github.com/mlpack/ensmallen, http://ensmallen.org/
-BugReports: https://github.com/coatless/RcppEnsmallen/issues
+URL: https://github.com/coatless/rcppensmallen, https://github.com/mlpack/ensmallen, http://ensmallen.org/
+BugReports: https://github.com/coatless/rcppensmallen/issues
 Encoding: UTF-8
 LazyData: true
 LinkingTo: Rcpp, RcppArmadillo
