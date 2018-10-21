@@ -24,10 +24,10 @@
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/coatless/RcppEnsmallen}
+  \item \url{https://github.com/coatless/rcppensmallen}
   \item \url{https://github.com/mlpack/ensmallen}
   \item \url{http://ensmallen.org/}
-  \item Report bugs at \url{https://github.com/coatless/RcppEnsmallen/issues}
+  \item Report bugs at \url{https://github.com/coatless/rcppensmallen/issues}
 }
 
 }

@@ -11,9 +11,20 @@ lin_reg_lbfgs(X, y)
 
 \item{y}{A \code{vec} containing the response values.}
 }
+\value{
+The estimated \eqn{\beta}{beta} parameter values for the linear regression.
+}
 \description{
 Solves the Linear Regression's Residual Sum of Squares using the L-BFGS
 optimizer.
+}
+\details{
+Consider the \strong{Residual Sum of Squares}, also known as \strong{RSS}, defined as:
+\deqn{RSS\left( \beta \right) = \left( { \mathbf{y} - \mathbf{X} \beta } \right)^{T} \left( \mathbf{y} - \mathbf{X} \beta \right)}{RSS(beta) = (y - X*beta)^T * (y - X*beta)}
+The objective function is defined as:
+\deqn{f(\beta) = (y - X\beta)^2}{f(beta) = (y - X * beta)^2}
+The gradient is defined as:
+\deqn{\frac{\partial RSS}{\partial \beta} = -2 \mathbf{X}^{T} \left(\mathbf{y} - \mathbf{X} \beta \right)}{dRSS/dbeta = -2 X^T (y - X * beta)}
 }
 \examples{
 # Number of Points

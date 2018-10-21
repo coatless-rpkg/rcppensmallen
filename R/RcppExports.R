@@ -6,18 +6,18 @@
 #' Solves the Linear Regression's Residual Sum of Squares using the L-BFGS
 #' optimizer.
 #'
-#' @details
-#'
-#' The objective function is defined as:
-#'
-#' \deqn{f(\beta) = (y - X\beta)^2}{f(beta) = (y - X * beta)^2}
-#'
-#' The gradient is defined as:
-#'
-#' \deqn{\frac{\partial RSS}}{\partial \beta} = -2\mathbf{X}^{T}\left(\mathbf{y}-\mathbf{X}\beta\right)}{dRSS/dbeta = -2 X' (y - X * beta)}
-#'
 #' @param X A `matrix` that is the Design Matrix for the regression problem.
 #' @param y A `vec` containing the response values.
+#'
+#' @return
+#' The estimated \eqn{\beta}{beta} parameter values for the linear regression.
+#' @details
+#' Consider the **Residual Sum of Squares**, also known as **RSS**, defined as:
+#' \deqn{RSS\left( \beta \right) = \left( { \mathbf{y} - \mathbf{X} \beta } \right)^{T} \left( \mathbf{y} - \mathbf{X} \beta \right)}{RSS(beta) = (y - X*beta)^T * (y - X*beta)}
+#' The objective function is defined as:
+#' \deqn{f(\beta) = (y - X\beta)^2}{f(beta) = (y - X * beta)^2}
+#' The gradient is defined as:
+#' \deqn{\frac{\partial RSS}{\partial \beta} = -2 \mathbf{X}^{T} \left(\mathbf{y} - \mathbf{X} \beta \right)}{dRSS/dbeta = -2 X^T (y - X * beta)}
 #' @export
 #' @examples
 #' # Number of Points
