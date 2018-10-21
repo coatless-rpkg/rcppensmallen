@@ -1,0 +1,9 @@
+2018-10-21  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version, Date): Initial release
+	* inline.R: Add connection to Rcpp's package manager for compiling outside
+	  of a package
+	* src/example-linear-regression-lbfgs.cpp: Example usage for solving a
+	  linear regression using the L-BFGS optimizer.
+	* inst/include/ensmallen_bits: Implementation of Ensmallen
+	* inst/include/RcppEnsmallen.h: Header file for inclusion in Rcpp scripts.
