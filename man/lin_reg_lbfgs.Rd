@@ -12,16 +12,17 @@ lin_reg_lbfgs(X, y)
 \item{y}{A \code{vec} containing the response values.}
 }
 \description{
-Optimizes Linear Regression's Residual Sum of Squares.
+Solves the Linear Regression's Residual Sum of Squares using the L-BFGS
+optimizer.
 }
 \details{
 The objective function is defined as:
 
-\deqn{f(\theta) = (y - \theta' X)^2}{f(theta) = (y - theta' X)^2}
+\deqn{f(\beta) = (y - X\beta)^2}{f(beta) = (y - X * beta)^2}
 
 The gradient is defined as:
 
-\deqn{\dfrac{\partial\text{RSS}}{\partial \beta} = -2\mathbf{X}^{T}\left(\mathbf{y}-\mathbf{X}\beta\right)}{dRSS/dBeta = -2 X' (y - X theta)}
+\deqn{\frac{\partial\text{RSS}}{\partial \beta} = -2\mathbf{X}^{T}\left(\mathbf{y}-\mathbf{X}\beta\right)}{dRSS/dbeta = -2 X' (y - X * beta)}
 }
 \examples{
 # Number of Points

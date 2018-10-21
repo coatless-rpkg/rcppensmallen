@@ -4,10 +4,10 @@
 \name{RcppEnsmallen-package}
 \alias{RcppEnsmallen}
 \alias{RcppEnsmallen-package}
-\title{RcppEnsmallen: Header-only C++ Mathematical Optimization Library for 'Armadillo'}
+\title{RcppEnsmallen: Header-Only C++ Mathematical Optimization Library for 'Armadillo'}
 \description{
 'Ensmallen' is a templated C++ mathematical optimization library 
- (by the MLPACK team) that provides a simple set of abstractions for writing an
+ (by the 'MLPACK' team) that provides a simple set of abstractions for writing an
  objective function to optimize. Provided within are various standard and
  cutting-edge optimizers that include full-batch gradient descent techniques, 
  small-batch techniques, gradient-free optimizers, and constrained optimization.
@@ -37,9 +37,6 @@ Useful links:
 Authors:
 \itemize{
   \item Dirk Eddelbuettel \email{edd@debian.org} (0000-0001-6419-907X) [copyright holder]
-  \item Conrad Sanderson \email{conradsand@gmail.com} [copyright holder]
-  \item Ryan Curtin \email{ryan@ratml.org} [copyright holder]
-  \item Ensmallen and MLPACK Development Team [copyright holder]
 }
 
 }
