@@ -1,0 +1,4 @@
+Procedure for updating the ensmallen library:
+
+- Download ensmallen from upstream
+- Copy and replace the ensmallen.hpp and ensmallen_bits found in this directory

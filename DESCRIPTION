@@ -1,0 +1,36 @@
+Package: RcppEnsmallen
+Title: Header-only C++ Mathematical Optimization Library for 'Armadillo'
+Version: 0.1.10.0.1
+Authors@R: c(
+    person("James", "Balamuta", email = "balamut2@illinois.edu", 
+           role = c("aut", "cre", "cph"), 
+           comment = c(ORCID = "0000-0003-2826-8458")),
+    person("Dirk", "Eddelbuettel", email = "edd@debian.org", 
+           role = c("aut", "cph"),
+           comment = c(ORCID = "0000-0001-6419-907X"))
+    )
+Description: 'Ensmallen' is a templated C++ mathematical optimization library 
+ (by the MLPACK team) that provides a simple set of abstractions for writing an
+ objective function to optimize. Provided within are various standard and
+ cutting-edge optimizers that include full-batch gradient descent techniques, 
+ small-batch techniques, gradient-free optimizers, and constrained optimization.
+ The 'RcppEnsmallen' package includes the header files from the 'Ensmallen' library
+ and pairs the appropriate header files from 'armadillo' through the 
+ 'RcppArmadillo' package. Therefore, users do not need to install 'Ensmallen' nor
+ 'Armadillo' to use 'RcppEnsmallen'. Note that 'Ensmallen' is licensed under 
+ 3-Clause BSD, 'Armadillo' starting from 7.800.0 is licensed under Apache License 2,
+ 'RcppArmadillo' (the 'Rcpp' bindings/bridge to 'Armadillo') is licensed under 
+ the GNU GPL version 2 or later. Thus, 'RcppEnsmallen' is also licensed under
+ similar terms. Note that 'Ensmallen' requires a compiler that supports 
+ 'C++11' and 'Armadillo' 6.500 or later.
+Depends: R (>= 3.3.0)
+License: GPL (>= 2)
+URL: https://github.com/coatless/RcppEnsmallen, https://github.com/mlpack/ensmallen, http://ensmallen.org/
+BugReports: https://github.com/coatless/RcppEnsmallen/issues
+Encoding: UTF-8
+LazyData: true
+LinkingTo: Rcpp, RcppArmadillo
+Imports: Rcpp
+RoxygenNote: 6.1.0
+Roxygen: list(markdown = TRUE)
+SystemRequirements: C++11

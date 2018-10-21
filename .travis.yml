@@ -1,0 +1,44 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+###### Default build via devtools::use_travis()
+
+language: r
+sudo: false
+cache: packages
+
+###### Custom Options
+
+# Containers have 2 CPUs by default. Speed up the build by using both.
+# c.f. https://docs.travis-ci.com/user/reference/overview/#virtualisation-environment-vs-operating-system
+env:
+  global:
+  - MAKEFLAGS="-j 2"
+  - _R_CHECK_FORCE_SUGGESTS=0
+
+# Enable a build matrix that individually tests the package against the
+# appropriate operating systems.
+matrix:
+    include:
+        - os: linux
+          r: oldrel
+        - os: linux
+          r: release
+        - os: linux
+          r: devel
+        - os: osx
+          r: oldrel
+        - os: osx
+          r: release
+        - os: osx
+          r: devel
+
+# Enable a fast finish if any job in the matrix fails.
+# c.f. https://blog.travis-ci.com/2013-11-27-fast-finishing-builds
+matrix:
+  - fast_finish: true
+
+# Set notification options
+notifications:
+  email:
+    on_success: change
+    on_failure: change
