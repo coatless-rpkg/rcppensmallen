@@ -14,7 +14,7 @@
 #'
 #' The gradient is defined as:
 #'
-#' \deqn{\frac{\partial\text{RSS}}{\partial \beta} = -2\mathbf{X}^{T}\left(\mathbf{y}-\mathbf{X}\beta\right)}{dRSS/dbeta = -2 X' (y - X * beta)}
+#' \deqn{\frac{\partial RSS}}{\partial \beta} = -2\mathbf{X}^{T}\left(\mathbf{y}-\mathbf{X}\beta\right)}{dRSS/dbeta = -2 X' (y - X * beta)}
 #'
 #' @param X A `matrix` that is the Design Matrix for the regression problem.
 #' @param y A `vec` containing the response values.

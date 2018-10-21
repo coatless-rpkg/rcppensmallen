@@ -15,15 +15,6 @@ lin_reg_lbfgs(X, y)
 Solves the Linear Regression's Residual Sum of Squares using the L-BFGS
 optimizer.
 }
-\details{
-The objective function is defined as:
-
-\deqn{f(\beta) = (y - X\beta)^2}{f(beta) = (y - X * beta)^2}
-
-The gradient is defined as:
-
-\deqn{\frac{\partial\text{RSS}}{\partial \beta} = -2\mathbf{X}^{T}\left(\mathbf{y}-\mathbf{X}\beta\right)}{dRSS/dbeta = -2 X' (y - X * beta)}
-}
 \examples{
 # Number of Points
 n = 1000
