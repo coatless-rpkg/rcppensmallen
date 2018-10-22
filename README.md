@@ -1,6 +1,6 @@
 # RcppEnsmallen
 
-[![Build Status](https://travis-ci.org/coatless/RcppEnsmallen.svg)](https://travis-ci.org/coatless/RcppEnsmallen) 
+[![Build Status](https://travis-ci.org/coatless/rcppensmallen.svg)](https://travis-ci.org/coatless/rcppensmallen) 
 [![License](https://eddelbuettel.github.io/badges/GPL2+.svg)](https://www.gnu.org/licenses/gpl-2.0.html) 
 [![CRAN](https://www.r-pkg.org/badges/version/RcppEnsmallen)](https://cran.r-project.org/package=RcppEnsmallen) 
 [![Downloads](https://cranlogs.r-pkg.org/badges/RcppEnsmallen?color=brightgreen)](https://www.r-pkg.org/pkg/RcppEnsmallen)
@@ -17,7 +17,7 @@ gradient-free optimizers, and constrained optimization.
 
 The RcppEnsmallen package includes the header files from the Ensmallen library
 and pairs the appropriate header files from 
-[armadillo](http://arma.sourceforge.net/) through the 
+[Armadillo](http://arma.sourceforge.net/) through the 
 [RcppArmadillo](https://cran.r-project.org/package=RcppArmadillo) package. 
 Therefore, users do not need to install Ensmallen nor Armadillo to use RcppEnsmallen. 
 
