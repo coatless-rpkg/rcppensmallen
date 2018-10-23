@@ -1,0 +1,32 @@
+citHeader("To cite 'RcppEnsmallen' in publications use:")
+
+citEntry(entry = "Manual",
+         title        = "{RcppEnsmallen: Header-Only C++ Mathematical Optimization Library for 'Armadillo'}",
+         author       = personList(as.person("James Joseph Balamuta"),
+                                   as.person("Dirk Eddelbuettel")
+                                  ),
+         year         = 2018,
+         textVersion  = paste("James Joseph Balamuta and Dirk Eddelbuettel (2018)",
+                              "RcppEnsmallen: Header-Only C++ Mathematical Optimization Library for 'Armadillo'.",
+                              "URL https://cran.r-project.org/package=RcppEnsmallen.")
+)
+
+citEntry(entry = "Article",
+         title        = "{ensmallen: a flexible C++ library for efficient function optimization}",
+         author       = personList(as.person("Shikhar Bhardwaj"),
+                                   as.person("Ryan R. Curtin"),
+                                   as.person("Marcus Edel"),
+                                   as.person("Yannis Mentekidis"),
+                                   as.person("Conrad Sanderson")),
+           journal = "{ArXiv e-prints}",
+           archivePrefix = "arXiv",
+           eprint = "{1810.09361}",
+           primaryClass = "cs.MS",
+           keywords = "{Computer Science - Mathematical Software, Computer Science - Machine Learning, Mathematics - Optimization and Control, 65K10, 68N99, 68W99, 90C53, G.1.6, G.4}",
+           year = "2018",
+           month = "oct",
+         textVersion  = paste("Shikhar Bhardwaj, Ryan R. Curtin, Marcus Edel, Yannis Mentekidis, and Conrad Sanderson (2018).",
+                              "ensmallen: a flexible C++ library for efficient function optimization.",
+                              "ArXiv e-prints, 1810.09361, cs.MS.",
+                              "URL https://arxiv.org/abs/1810.09361.")
+)
