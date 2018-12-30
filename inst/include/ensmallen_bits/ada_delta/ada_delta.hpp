@@ -39,25 +39,9 @@ namespace ens {
  * }
  * @endcode
  *
- * For AdaDelta to work, a DecomposableFunctionType template parameter is
- * required. This class must implement the following function:
- *
- *   size_t NumFunctions();
- *   double Evaluate(const arma::mat& coordinates,
- *                   const size_t i,
- *                   const size_t batchSize);
- *   void Gradient(const arma::mat& coordinates,
- *                 const size_t i,
- *                 arma::mat& gradient,
- *                 const size_t batchSize);
- *
- * NumFunctions() should return the number of functions (\f$n\f$), and in the
- * other two functions, the parameter i refers to which individual function (or
- * gradient) is being evaluated.  So, for the case of a data-dependent function,
- * such as NCA, NumFunctions() should return the number of points in the
- * dataset, and Evaluate(coordinates, 0) will evaluate the objective function on
- * the first point in the dataset (presumably, the dataset is held internally in
- * the DecomposableFunctionType).
+ * AdaDelta can optimize differentiable separable functions.  For more details,
+ * see the documentation on function types included with this distribution or on
+ * the ensmallen website.
  */
 class AdaDelta
 {
@@ -80,6 +64,8 @@ class AdaDelta
    * @param tolerance Maximum absolute tolerance to terminate algorithm.
    * @param shuffle If true, the function order is shuffled; otherwise, each
    *        function is visited in linear order.
+   * @param resetPolicy If true, parameters are reset before every Optimize
+   *        call; otherwise, their values are retained.
    */
   AdaDelta(const double stepSize = 1.0,
            const size_t batchSize = 32,
@@ -87,7 +73,8 @@ class AdaDelta
            const double epsilon = 1e-6,
            const size_t maxIterations = 100000,
            const double tolerance = 1e-5,
-           const bool shuffle = true);
+           const bool shuffle = true,
+           const bool resetPolicy = true);
 
   /**
    * Optimize the given function using AdaDelta. The given starting point will
@@ -140,6 +127,13 @@ class AdaDelta
   bool Shuffle() const { return optimizer.Shuffle(); }
   //! Modify whether or not the individual functions are shuffled.
   bool& Shuffle() { return optimizer.Shuffle(); }
+
+  //! Get whether or not the update policy parameters
+  //! are reset before Optimize call.
+  bool ResetPolicy() const { return optimizer.ResetPolicy(); }
+  //! Modify whether or not the update policy parameters
+  //! are reset before Optimize call.
+  bool& ResetPolicy() { return optimizer.ResetPolicy(); }
 
  private:
   //! The Stochastic Gradient Descent object with AdaDelta policy.
