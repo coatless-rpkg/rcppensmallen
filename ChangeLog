@@ -1,3 +1,27 @@
+2018-12-30  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version, Date): Release 1.12.0
+
+	* NEWS.md: Update for Ensmallen release 1.12.0
+
+	* inst/include/ensmallen_bits: Upgraded to Ensmallen 1.12.0
+	* inst/include/ensmallen.hpp: ditto
+
+	* inst/CITATION: Updated to ensmallen's NIPS paper
+
+2018-11-30  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version, Date): Release 1.11.1
+
+	* NEWS.md: Update for Ensmallen release 1.11.1
+
+	* inst/include/ensmallen_bits: Upgraded to Ensmallen 1.11.1
+	* inst/include/ensmallen.hpp: ditto
+
+2018-10-23  James Balamuta  <balamut2@illinois.edu>
+
+	* inst/CITATION: Add citation information for ensmallen's arXiv paper.
+
 2018-10-23  James Balamuta  <balamut2@illinois.edu>
 
 	* inst/CITATION: Add citation information for ensmallen's arXiv paper.
