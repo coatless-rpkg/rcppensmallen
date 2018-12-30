@@ -50,6 +50,10 @@ namespace ens {
  * }
  * @endcode
  *
+ * SnapshotSGDR can optimize differentiable separable functions.  For more
+ * details, see the documentation on function types included with this
+ * distribution or on the ensmallen website.
+ *
  * @tparam UpdatePolicyType Update policy used during the iterative update
  *         process. By default the momentum update policy (see
  *         ens::MomentumUpdate) is used.
@@ -80,6 +84,8 @@ class SnapshotSGDR
    * @param accumulate Accumulate the snapshot parameter (default true).
    * @param updatePolicy Instantiated update policy used to adjust the given
    *        parameters.
+   * @param resetPolicy If true, parameters are reset before every Optimize
+   *        call; otherwise, their values are retained.
    */
   SnapshotSGDR(const size_t epochRestart = 50,
                const double multFactor = 2.0,
@@ -90,7 +96,8 @@ class SnapshotSGDR
                const bool shuffle = true,
                const size_t snapshots = 5,
                const bool accumulate = true,
-               const UpdatePolicyType& updatePolicy = UpdatePolicyType());
+               const UpdatePolicyType& updatePolicy = UpdatePolicyType(),
+               const bool resetPolicy = true);
 
   /**
    * Optimize the given function using SGDR.  The given starting point
@@ -140,6 +147,11 @@ class SnapshotSGDR
     return optimizer.DecayPolicy().Snapshots();
   }
 
+  //! Get whether or not to accumulate the snapshots.
+  bool Accumulate() const { return accumulate; }
+  //! Modify whether or not to accumulate the snapshots.
+  bool& Accumulate() { return accumulate; }
+
   //! Get the update policy.
   const UpdatePolicyType& UpdatePolicy() const
   {
@@ -150,6 +162,13 @@ class SnapshotSGDR
   {
     return optimizer.UpdatePolicy();
   }
+
+  //! Get whether or not the update policy parameters
+  //! are reset before Optimize call.
+  bool ResetPolicy() const { return optimizer.ResetPolicy(); }
+  //! Modify whether or not the update policy parameters
+  //! are reset before Optimize call.
+  bool& ResetPolicy() { return optimizer.ResetPolicy(); }
 
  private:
   //! The size of each mini-batch.
