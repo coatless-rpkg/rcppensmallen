@@ -1,3 +1,11 @@
+# RcppEnsmallen 0.1.13.0.1
+
+- Upgraded to ensmallen release 1.13.0 "Coronavirus Invasion" (2019-01-14)
+   - Enhance options for AugLagrangian optimizer (#66).
+   - Add SPSA optimizer (#69).
+   - Fix list of contributors.
+   - Make sure all files end with newlines.
+
 # RcppEnsmallen 0.1.12.0.1
 
 - Upgraded to ensmallen release 1.12.0 "New Year's Party" (2018-12-30)
