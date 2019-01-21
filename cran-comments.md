@@ -7,5 +7,3 @@
 ## R CMD check results
 
 0 errors | 0 warnings | 0 note
-
-- This release fixes the line ending note given on the package's check page.
