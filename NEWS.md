@@ -5,6 +5,7 @@
    - Add SPSA optimizer (#69).
    - Fix list of contributors.
    - Make sure all files end with newlines.
+- Reordered SPSA parameters to quiet initialization error surfaced with `-Wreorder`.
 
 # RcppEnsmallen 0.1.12.0.1
 
