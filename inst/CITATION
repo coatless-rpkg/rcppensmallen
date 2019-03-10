@@ -1,4 +1,4 @@
-citHeader("To cite 'RcppEnsmallen' in publications use:")
+citHeader("To cite the 'RcppEnsmallen' R package and 'Ensmallen' libray in publications, please use:")
 
 citEntry(entry = "Manual",
          title        = "{RcppEnsmallen: Header-Only C++ Mathematical Optimization Library for 'Armadillo'}",
@@ -6,7 +6,7 @@ citEntry(entry = "Manual",
                                    as.person("Dirk Eddelbuettel")
                                   ),
          year         = 2018,
-         textVersion  = paste("James Joseph Balamuta and Dirk Eddelbuettel (2018)",
+         textVersion  = paste("Balamuta, J.J. and Eddelbuettel, D. (2018)",
                               "RcppEnsmallen: Header-Only C++ Mathematical Optimization Library for 'Armadillo'.",
                               "URL https://cran.r-project.org/package=RcppEnsmallen.")
 )
@@ -21,7 +21,7 @@ citEntry(entry = "Article",
            journal = "Workshop on Systems for ML and Open Source Software at NIPS",
            year = "2018",
            month = "dec",
-         textVersion  = paste("S. Bhardwaj, R. Curtin, M. Edel, Y. Mentekidis, C. Sanderson (2018).",
+         textVersion  = paste("S. Bhardwaj, R. Curtin, M. Edel, Y. Mentekidis, and C. Sanderson (2018).",
                               "ensmallen: a flexible C++ library for efficient function optimization.",
                               "Workshop on Systems for ML and Open Source Software at NIPS 2018.",
                               "URL http://www.ensmallen.org/files/ensmallen_2018.pdf.")

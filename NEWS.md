@@ -1,3 +1,13 @@
+# RcppEnsmallen 0.1.14.1.1
+
+- Upgraded to ensmallen release 1.14.1 "Difficult Crimp" (2019-03-09)
+   - Fixes for SPSA (#87).
+   - Optimized CNE and DE (#90). Changed initial population generation 
+     in CNE to be a normal distribution about the given starting point, 
+     which should accelerate convergence.
+   - Add DE optimizer (#77).
+   - Fix for Cholesky decomposition in CMAES (#83).
+
 # RcppEnsmallen 0.1.13.0.1
 
 - Upgraded to ensmallen release 1.13.0 "Coronavirus Invasion" (2019-01-14)
