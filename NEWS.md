@@ -1,18 +1,27 @@
+# RcppEnsmallen 0.1.14.4.1
+
+- Upgraded to ensmallen release 1.14.4 "Difficult Crimp" (2019-05-12)
+   - Fixes for BigBatchSGD ([#91](https://github.com/mlpack/ensmallen/pull/91)).
+   - Handle eig_sym() failures correctly ([#100](https://github.com/mlpack/ensmallen/pull/100)).
+   - SPSA test tolerance fix ([#97](https://github.com/mlpack/ensmallen/pull/97)).
+   - Minor documentation fixes ([#95](https://github.com/mlpack/ensmallen/pull/95), [#98](https://github.com/mlpack/ensmallen/pull/98)).
+   - Fix newlines at end of file ([#92](https://github.com/mlpack/ensmallen/pull/92)).
+
 # RcppEnsmallen 0.1.14.1.1
 
 - Upgraded to ensmallen release 1.14.1 "Difficult Crimp" (2019-03-09)
-   - Fixes for SPSA (#87).
-   - Optimized CNE and DE (#90). Changed initial population generation 
+   - Fixes for SPSA ([#87](https://github.com/mlpack/ensmallen/pull/87)).
+   - Optimized CNE and DE ([#90](https://github.com/mlpack/ensmallen/pull/90)). Changed initial population generation 
      in CNE to be a normal distribution about the given starting point, 
      which should accelerate convergence.
-   - Add DE optimizer (#77).
-   - Fix for Cholesky decomposition in CMAES (#83).
+   - Add DE optimizer ([#77](https://github.com/mlpack/ensmallen/pull/77)).
+   - Fix for Cholesky decomposition in CMAES ([#83](https://github.com/mlpack/ensmallen/pull/83)).
 
 # RcppEnsmallen 0.1.13.0.1
 
 - Upgraded to ensmallen release 1.13.0 "Coronavirus Invasion" (2019-01-14)
-   - Enhance options for AugLagrangian optimizer (#66).
-   - Add SPSA optimizer (#69).
+   - Enhance options for AugLagrangian optimizer ([#66](https://github.com/mlpack/ensmallen/pull/66)).
+   - Add SPSA optimizer ([#69](https://github.com/mlpack/ensmallen/pull/69)).
    - Fix list of contributors.
    - Make sure all files end with newlines.
 - Reordered SPSA parameters to quiet initialization error surfaced with `-Wreorder`.
@@ -22,12 +31,12 @@
 - Upgraded to ensmallen release 1.12.0 "New Year's Party" (2018-12-30)
    - Add link to ensmallen PDF to README.md.
    - Minor documentation fixes.  Remove too-verbose documentation from source for
-     each optimizer (#61).
-   - Add FTML optimizer (#48).
-   - Add SWATS optimizer (#42).
-   - Add Padam optimizer (#46).
-   - Add Eve optimizer (#45).
-   - Add ResetPolicy() to SGD-like optimizers (#60).
+     each optimizer ([#61](https://github.com/mlpack/ensmallen/pull/61)).
+   - Add FTML optimizer ([#48](https://github.com/mlpack/ensmallen/pull/48)).
+   - Add SWATS optimizer ([#42](https://github.com/mlpack/ensmallen/pull/42)).
+   - Add Padam optimizer ([#46](https://github.com/mlpack/ensmallen/pull/46)).
+   - Add Eve optimizer ([#45](https://github.com/mlpack/ensmallen/pull/45)).
+   - Add ResetPolicy() to SGD-like optimizers ([#60](https://github.com/mlpack/ensmallen/pull/60)).
 - Updated citation information
 
 # RcppEnsmallen 0.1.11.1.1
