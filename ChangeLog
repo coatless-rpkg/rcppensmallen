@@ -1,3 +1,12 @@
+2019-05-12  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version, Date): Release 1.14.4
+
+	* NEWS.md: Update for Ensmallen release 1.14.4
+
+	* inst/include/ensmallen_bits: Upgraded to Ensmallen 1.14.4
+	* inst/include/ensmallen.hpp: ditto
+
 2019-03-09  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version, Date): Release 1.14.1
