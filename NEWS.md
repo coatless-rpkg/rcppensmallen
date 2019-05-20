@@ -2,6 +2,8 @@
 
 - Upgraded to ensmallen release 1.15.0 "Wrong Side Of The Road" (2019-05-14)
    - Added QHAdam and QHSGD optimizers ([#81](https://github.com/mlpack/ensmallen/pull/81)).
+- Fix `-Wreorder` in `qhadam` warning ([#115](https://github.com/mlpack/ensmallen/pull/115)).
+- Fix `-Wunused-private-field` warning in `spsa` ([#115](https://github.com/mlpack/ensmallen/pull/115)).
 
 # RcppEnsmallen 0.1.14.4.1
 
