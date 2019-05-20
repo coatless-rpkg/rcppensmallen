@@ -1,3 +1,8 @@
+# RcppEnsmallen 0.1.15.0.1
+
+- Upgraded to ensmallen release 1.15.0 "Wrong Side Of The Road" (2019-05-14)
+   - Added QHAdam and QHSGD optimizers ([#81](https://github.com/mlpack/ensmallen/pull/81)).
+
 # RcppEnsmallen 0.1.14.4.1
 
 - Upgraded to ensmallen release 1.14.4 "Difficult Crimp" (2019-05-12)
