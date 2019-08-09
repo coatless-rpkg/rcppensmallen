@@ -34,7 +34,7 @@ namespace ens {
  */
 class QHAdamUpdate
 {
-public:
+ public:
   /**
    * Construct the QHAdam update policy with the given parameters.
    *
@@ -50,12 +50,12 @@ public:
                const double beta2 = 0.999,
                const double v1 = 0.7,
                const double v2 = 1) :
-  epsilon(epsilon),
-  beta1(beta1),
-  beta2(beta2),
-  v1(v1),
-  v2(v2),
-  iteration(0)
+    epsilon(epsilon),
+    beta1(beta1),
+    beta2(beta2),
+    v1(v1),
+    v2(v2),
+    iteration(0)
   {
     // Nothing to do.
   }
@@ -102,8 +102,8 @@ public:
 
     // QHAdam recovers Adam when v2 = v1 = 1.
     iterate -= stepSize * ((((1 - v1) * gradient) + v1 * mDash) /
-      (arma::sqrt(((1 - v2) * (gradient % gradient)) +
-        v2 * vDash) + epsilon));
+               (arma::sqrt(((1 - v2) * (gradient % gradient)) +
+               v2 * vDash) + epsilon));
   }
 
   //! Get the value used to initialise the squared gradient parameter.
@@ -131,7 +131,7 @@ public:
   //! Modify the second quasi-hyperbolic term.
   double& V2() { return v2; }
 
-private:
+ private:
   // The epsilon value used to initialise the squared gradient parameter.
   double epsilon;
 
@@ -152,7 +152,7 @@ private:
 
   // The second quasi-hyperbolic term.
   double v2;
-
+  
   // The number of iterations.
   double iteration;
 };
