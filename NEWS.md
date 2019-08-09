@@ -1,3 +1,13 @@
+# RcppEnsmallen 0.1.16.0.1
+
+- Upgraded to ensmallen release 1.16.0 "Loud Alarm Clock" (2019-08-09)
+  - Add option to avoid computing exact objective at the end of the optimization
+    ([#109](https://github.com/mlpack/ensmallen/pull/109)).
+  - Fix handling of curvature for BigBatchSGD ([#118](https://github.com/mlpack/ensmallen/pull/118)).
+  - Reduce runtime of tests ([#118](https://github.com/mlpack/ensmallen/pull/118)).
+  - Introduce local-best particle swarm optimization, `LBestPSO`, for
+    unconstrained optimization problems ([#86](https://github.com/mlpack/ensmallen/pull/86)).
+
 # RcppEnsmallen 0.1.15.0.1
 
 - Upgraded to ensmallen release 1.15.0 "Wrong Side Of The Road" (2019-05-14)
