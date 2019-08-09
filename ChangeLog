@@ -7,6 +7,9 @@
 	* inst/include/ensmallen_bits: Upgraded to Ensmallen 1.16.0
 	* inst/include/ensmallen.hpp: ditto
 
+	* inst/include/ensmallen_bits/pso/pso.hpp: Fixed return type issue detected
+	  by gcc 9.
+
 2019-05-20  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version, Date): Release 1.15.0

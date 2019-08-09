@@ -7,6 +7,7 @@
   - Reduce runtime of tests ([#118](https://github.com/mlpack/ensmallen/pull/118)).
   - Introduce local-best particle swarm optimization, `LBestPSO`, for
     unconstrained optimization problems ([#86](https://github.com/mlpack/ensmallen/pull/86)).
+- Fix return type error in `PSO` ([#123](https://github.com/mlpack/ensmallen/pull/123))
 
 # RcppEnsmallen 0.1.15.0.1
 
