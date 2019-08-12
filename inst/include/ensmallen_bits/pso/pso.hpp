@@ -159,13 +159,13 @@ class PSOType
   size_t& NumParticles() { return numParticles; }
 
   //! Retrieve value of lowerBound.
-  arma::vec LowerBound() const { return lowerBound; }
+  const arma::vec& LowerBound() const { return lowerBound; }
 
   //! Modify value of lowerBound.
   arma::vec& LowerBound() { return lowerBound; }
 
   //! Retrieve value of upperBound.
-  arma::vec UpperBound() const { return upperBound; }
+  const arma::vec& UpperBound() const { return upperBound; }
 
   //! Modify value of upperBound.
   arma::vec& UpperBound() { return upperBound; }
