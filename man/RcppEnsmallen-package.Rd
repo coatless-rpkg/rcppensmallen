@@ -19,7 +19,7 @@
  'RcppArmadillo' (the 'Rcpp' bindings/bridge to 'Armadillo') is licensed under 
  the GNU GPL version 2 or later. Thus, 'RcppEnsmallen' is also licensed under
  similar terms. Note that 'Ensmallen' requires a compiler that supports 
- 'C++11' and 'Armadillo' 6.500 or later.
+ 'C++11' and 'Armadillo' 8.400 or later.
 }
 \seealso{
 Useful links:
