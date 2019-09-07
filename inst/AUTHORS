@@ -1,0 +1,39 @@
+Ensmallen is written by a team of talented developers listed in the COPYRIGHTS.txt
+file:
+
+  ensmallen: a flexible C++ library for efficient function optimization.
+  Copyright 2008-2018, Ryan Curtin <ryan@ratml.org>
+  Copyright 2008-2012, Dongryeol Lee <dongryel@cc.gatech.edu>
+  Copyright 2010-2012, James Cline <james.cline@gatech.edu>
+  Copyright 2013-2018, Marcus Edel <marcus.edel@fu-berlin.de>
+  Copyright 2013-2018, Sumedh Ghaisas <sumedhghaisas@gmail.com>
+  Copyright 2013, Mudit Raj Gupta <mudit.raaj.gupta@gmail.com>
+  Copyright 2014, Ryan Birmingham <birm@gatech.edu>
+  Copyright 2014, Siddharth Agrawal <siddharth.950@gmail.com>
+  Copyright 2014-2015, Stephen Tu <tu.stephenl@gmail.com>
+  Copyright 2015&2017, Shangtong Zhang <zhangshangtong.cpp@gmail.com>
+  Copyright 2016, Shikhar Bhardwaj <shikharbhardwaj68@gmail.com>
+  Copyright 2016, Mike Izbicki <mike@izbicki.me>
+  Copyright 2016, Ranjan Mondal <ranjan.rev@gmail.com>
+  Copyright 2017, Vivek Pal <vivekpal.dtu@gmail.com>
+  Copyright 2017-2018, Sourabh Varshney <sourabhvarshney111@gmail.com>
+  Copyright 2017, Chenzhe Diao <williamdiao@gmail.com>
+  Copyright 2017, Abhinav Moudgil <abhinavmoudgil95@gmail.com>
+  Copyright 2017, Konstantin Sidorov <partobs.mdp@gmail.com>
+  Copyright 2017, Kirill Mishchenko <ki.mishchenko@gmail.com>
+  Copyright 2017&2019, N Rajiv Vaidyanathan <rajivvaidyanathan4@gmail.com>
+  Copyright 2017, Kartik Nighania <kartiknighania@gmail.com>
+  Copyright 2017-2018, Manish Kumar <manish887kr@gmail.com>
+  Copyright 2017-2018, Haritha Sreedharan Nair <haritha1313@gmail.com>
+  Copyright 2018, B Kartheek Reddy <bkartheekreddy@gmail.com>
+  Copyright 2018, Moksh Jain <mokshjn00@gmail.com>
+  Copyright 2018, Shikhar Jaiswal <jaiswalshikhar87@gmail.com>
+  Copyright 2018, Conrad Sanderson
+  Copyright 2018, Dan Timson
+  Copyright 2019, Rahul Ganesh Prabhu
+
+The RcppEnsmallen package provides an integration of Ensmallen and its dependences
+into R. RcppEnsmallen accomplishes this by linking into RcppArmadillo,
+establishing plugins, examples, and more. The R implementation was done by James
+Joseph Balamuta and Dirk Eddelbuettel with additional contributions by
+contributors listed in the ChangeLog.

@@ -7,6 +7,12 @@
 	* inst/include/ensmallen_bits: Upgraded to Ensmallen 2.10.0
 	* inst/include/ensmallen.hpp: ditto
 
+	* inst/COPYRIGHTS: Added a copyright notice
+
+	* inst/AUTHORS: Added an author notice
+
+	* DESCRIPTION (Version, Date): Mark new developer release
+
 2019-08-09  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version, Date): Release 1.16.0
