@@ -1,3 +1,15 @@
+# RcppEnsmallen 0.2.10.2.1
+
+- Upgraded to ensmallen 2.10.2: "Fried Chicken" (2019-09-11)
+  - Add release script to rel/ for maintainers
+    ([#128](https://github.com/mlpack/ensmallen/pull/128)).
+  - Fix Armadillo version check
+    ([#133](https://github.com/mlpack/ensmallen/pull/133)).
+  - Documentation fix for callbacks
+    ([#129](https://github.com/mlpack/ensmallen/pull/129).
+  - Compatibility fixes for ensmallen 1.x
+    ([#131](https://github.com/mlpack/ensmallen/pull/131)).
+
 # RcppEnsmallen 0.2.10.0.1
 
 - Upgraded to ensmallen 2.10.0: "Fried Chicken" (2019-09-07)
