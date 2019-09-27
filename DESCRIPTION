@@ -1,6 +1,6 @@
 Package: RcppEnsmallen
 Title: Header-Only C++ Mathematical Optimization Library for 'Armadillo'
-Version: 0.2.10.2.1
+Version: 0.2.10.3.1
 Authors@R: c(
     person("James Joseph", "Balamuta", email = "balamut2@illinois.edu", 
            role = c("aut", "cre", "cph"), 
@@ -34,3 +34,7 @@ Imports: Rcpp
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 SystemRequirements: C++11
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
