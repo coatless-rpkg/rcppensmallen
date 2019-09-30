@@ -1,3 +1,9 @@
+2019-09-30  James Balamuta  <balamut2@illinois.edu>
+
+	* vignettes/using-rcppensmallen.Rmd: Improved wording.
+
+	* .travis.yml: Disabled vignette building on TravisCI
+
 2019-09-27  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version, Date): Release 2.10.3
