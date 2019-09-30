@@ -53,14 +53,22 @@ $$\frac{\partial RSS}{\partial \beta} = -2 \mathbf{X}^{T} \left(\mathbf{y} - \ma
 
 ### Two-Step Implementation
 
-Within `RcppEnsmallen`, the next example provides
-a Linear Regression class that computes two quantities separately: 
+When using `ensmallen` to solve this problem, we must create a _C++_ class that 
+computes both the objective function value and its gradient value either
+together or separately under member functions named as:
 
-- **Evaluate**: Value of the objective function under the parameters.
-- **Gradient**: Convergence to the correct value under the given parameters. 
+- `Evaluate()`: Value of the objective function under the parameters.
+- `Gradient()`: Convergence to the correct value under the given parameters. 
+- `EvaluateWithGradient()`: Perform both steps at the same time. (Optional)
 
-Before writing the class, note that when using `RcppEnsmallen` in
-a standalone C++ file, e.g. not in a package, the library is accessed using:
+In the Linear Regression scenario, we will define each step separately to
+emphasize the calculation occurring. Generally, the one step `EvaluateWithGradient()` 
+function will be faster than the two step variant. More details on design can be
+found on [`ensmallen` documentation page for differentiable functions](https://www.ensmallen.org/docs.html#differentiable-functions).
+
+Before writing the class, `RcppEnsmallen` requires accessing the
+library in a standalone C++ file with the follow include and Rcpp Attribute
+declarations:
 
 ```{Rcpp header, eval = FALSE}
 #include <RcppEnsmallen.h>
@@ -151,7 +159,6 @@ to methods already implemented in _R_. The best way to achieve this is to create
 an oracle model by specifying the parameters known to generate data and, then,
 try to recover them. Moreover, if a method is already implemented in _R_ feel
 free to try to check the result equality within an appropriate tolerance threshold.  
-
 
 Following with this methodology, data must be generated. 
 
