@@ -147,11 +147,6 @@ arma::mat lin_reg_lbfgs(const arma::mat& X, const arma::vec& y) {
 }
 ```
 
-```{Rcpp build-lin-reg, echo = FALSE}
-<<classdef>>
-<<linreg>>
-```
-
 ### Verifying Results
 
 Prior to using the new optimizer in mission critical work, compare the results
@@ -176,12 +171,14 @@ That said, `lm()` may have more precise results when compared against the
 optimizer as it is implemented with a closed-form solution to linear regression
 plus the computational is performed more rigorously.  
 
-```{r data-estimation}
+```{r data-estimation, eval = FALSE}
 coefs_lbfgs <- lin_reg_lbfgs(X, y)
 coefs_lm <- lm.fit(X, y)$coefficients
 ```
 
 ```{r echo = FALSE}
+coefs_lbfgs <- RcppEnsmallen::lin_reg_lbfgs(X, y)
+coefs_lm <- lm.fit(X, y)$coefficients
 compare_coefs = cbind(coefs_lbfgs, coefs_lm)
 colnames(compare_coefs) = c("LBFGS", "LM")
 rownames(compare_coefs) = paste0("Beta", seq_len(nrow(compare_coefs)))
