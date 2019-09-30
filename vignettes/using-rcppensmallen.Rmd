@@ -1,11 +1,9 @@
 ---
 title: "Using RcppEnsmallen"
 author: James Joseph Balamuta and Dirk Eddelbuettel
-
 abstract: |
   Contained within are examples related to using RcppEnsmallen in everyday 
   work alongside of creating an _R_ package with it. 
-
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using RcppEnsmallen}
