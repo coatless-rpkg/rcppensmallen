@@ -13,6 +13,8 @@ cache: packages
 env:
   global:
   - MAKEFLAGS="-j 2"
+  - R_BUILD_ARGS="--no-build-vignettes"
+  - R_CHECK_ARGS="--no-build-vignettes"
   - _R_CHECK_FORCE_SUGGESTS=0
 
 # Enable a build matrix that individually tests the package against the

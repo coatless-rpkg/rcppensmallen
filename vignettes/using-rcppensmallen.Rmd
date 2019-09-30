@@ -1,0 +1,209 @@
+---
+title: "Using RcppEnsmallen"
+author: James Joseph Balamuta and Dirk Eddelbuettel
+abstract: |
+  Contained within are examples related to using RcppEnsmallen in everyday 
+  work alongside of creating an _R_ package with it. 
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using RcppEnsmallen}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Overview
+
+`RcppEnsmallen` package provides an embedded copy of the
+[`ensmallen`](https://www.ensmallen.org/docs.html) 
+C++ library of optimization functions. Optimizers contained within are state
+of the art and possess a high level of code quality. Each optimizer must be 
+accessed through _C++_ by implementing the appropriate objective functions and,
+then, surfaced into _R_ through
+[`RcppArmadillo`](https://cran.r-project.org/package=RcppArmadillo). 
+Alternatively, work has been done by Dirk Schumacher in 
+[`armacmp`](https://github.com/dirkschumacher/armacmp) to automatically create
+the underlying _C++_ code from _R_.  
+
+**Note:** Optimizers in `RcppEnsmallen` only work with [`armadillo`](http://arma.sourceforge.net/docs.html)
+data structures. Thus, if using [`Eigen`](http://eigen.tuxfamily.org/index.php?title=Main_Page) through 
+[`RcppEigen`](https://cran.r-project.org/package=RcppEigen), please consider the 
+[`RcppNumerical`](https://cran.r-project.org/package=RcppNumerical)
+package.
+
+## Linear Regression 
+
+Consider the **Residual Sum of Squares**, also known as **RSS**, defined as:
+
+$$RSS\left( \beta \right) = \left( { \mathbf{y} - \mathbf{X} \beta } \right)^{T} \left( \mathbf{y} - \mathbf{X} \beta \right)$$
+
+The objective function we wish to minimize would be defined as:
+
+$$f(\beta) = (y - X\beta)^2$$
+
+The gradient is defined as:
+
+$$\frac{\partial RSS}{\partial \beta} = -2 \mathbf{X}^{T} \left(\mathbf{y} - \mathbf{X} \beta \right)$$
+
+### Two-Step Implementation
+
+When using `ensmallen` to solve this problem, we must create a _C++_ class that 
+computes both the objective function value and its gradient value either
+together or separately under member functions named as:
+
+- `Evaluate()`: Value of the objective function under the parameters.
+- `Gradient()`: Convergence to the correct value under the given parameters. 
+- `EvaluateWithGradient()`: Perform both steps at the same time. (Optional)
+
+In the Linear Regression scenario, we will define each step separately to
+emphasize the calculation occurring. Generally, the one step `EvaluateWithGradient()` 
+function will be faster than the two step variant. More details on design can be
+found on [`ensmallen` documentation page for differentiable functions](https://www.ensmallen.org/docs.html#differentiable-functions).
+
+Before writing the class, `RcppEnsmallen` requires accessing the
+library in a standalone C++ file with the follow include and Rcpp Attribute
+declarations:
+
+```{Rcpp header, eval = FALSE}
+#include <RcppEnsmallen.h>
+// [[Rcpp::depends(RcppEnsmallen)]]
+```
+
+The overaching Linear regression class should be constructed as follows: 
+
+```{Rcpp classdef, eval = FALSE}
+#include <RcppEnsmallen.h>
+// [[Rcpp::depends(RcppEnsmallen)]]
+
+// Define a differentiable objective function by implementing both Evaluate()
+// and Gradient() separately.
+class LinearRegressionFunction
+{
+public:
+  // Construct the object with the given the design 
+  // matrix and responses.
+  LinearRegressionFunction(const arma::mat& X,
+                           const arma::vec& y) :
+  X(X), y(y) { }
+
+  // Return the objective function for model parameters beta.
+  double Evaluate(const arma::mat& beta)
+  {
+      return std::pow(arma::norm(y - X * beta), 2.0);
+  }
+
+  // Compute the gradient for model parameters beta
+  void Gradient(const arma::mat& beta, arma::mat& g)
+  {
+      g = -2 * X.t() * (y - X * beta);
+  }
+
+private:
+  // The design matrix.
+  const arma::mat& X;
+  // The responses to each data point.
+  const arma::vec& y;
+};
+```
+
+From there:
+
+1. Construct a _C++_ function that exports into _R_.
+2. Within the function, determine an appropriate optimizer for the problem. 
+3. Combine the optimizer with the linear regression class to compute 
+   the solution to the problem.
+
+**Note:** Make sure to have the definition of the Linear Regression class in 
+the same _C++_ file as the exported _C++_ function into _R_. 
+
+```{Rcpp linreg, eval = FALSE}
+// [[Rcpp::export]]
+arma::mat lin_reg_lbfgs(const arma::mat& X, const arma::vec& y) {
+
+  // Construct the first objective function.
+  LinearRegressionFunction lrf(X, y);
+
+  // Create the L_BFGS optimizer with default parameters.
+  // The ens::L_BFGS type can be replaced with any ensmallen optimizer that can
+  // handle differentiable functions.
+  ens::L_BFGS lbfgs;
+
+  lbfgs.MaxIterations() = 10;
+
+  // Create a starting point for our optimization randomly.
+  // The model has p parameters, so the shape is p x 1.
+  arma::mat beta(X.n_cols, 1, arma::fill::randn);
+
+  // Run the optimization
+  lbfgs.Optimize(lrf, beta);
+
+  return beta;
+}
+```
+
+### Verifying Results
+
+Prior to using the new optimizer in mission critical work, compare the results
+to methods already implemented in _R_. The best way to achieve this is to create
+an oracle model by specifying the parameters known to generate data and, then,
+try to recover them. Moreover, if a method is already implemented in _R_ feel
+free to try to check the result equality within an appropriate tolerance threshold.  
+
+Following with this methodology, data must be generated. 
+
+```{r data-generation}
+n <- 1e6
+beta <- c(-2, 1.5, 3, 8.2, 6.6)
+p <- length(beta)
+X <- cbind(1, matrix(rnorm(n), ncol = p - 1))
+y <- X %*% beta + rnorm(n / (p - 1))
+```
+
+Next, the optimization procedure is used to estimate the parameters of interest.
+Under this example, the results of the estimation can be compared to `lm()`. 
+That said, `lm()` may have more precise results when compared against the 
+optimizer as it is implemented with a closed-form solution to linear regression
+plus the computational is performed more rigorously.  
+
+```{r data-estimation, eval = FALSE}
+coefs_lbfgs <- lin_reg_lbfgs(X, y)
+coefs_lm <- lm.fit(X, y)$coefficients
+```
+
+```{r echo = FALSE}
+coefs_lbfgs <- RcppEnsmallen::lin_reg_lbfgs(X, y)
+coefs_lm <- lm.fit(X, y)$coefficients
+compare_coefs = cbind(coefs_lbfgs, coefs_lm)
+colnames(compare_coefs) = c("LBFGS", "LM")
+rownames(compare_coefs) = paste0("Beta", seq_len(nrow(compare_coefs)))
+knitr::kable(compare_coefs, longtable = FALSE, caption = "Comparison of Estimated Coefficients")
+```
+
+# Package Usage
+
+RcppEnsmallen is best used within an _R_ package. The setup for `RcppEnsmallen`'s
+use mirrors that of other `Rcpp`-based projects. In particular, the
+`DESCRIPTION` file requires the `LinkingTo` field to contain:
+
+```bash
+LinkingTo: Rcpp, RcppArmadillo (>= 0.8.400.0.0), RcppEnsmallen (>= 0.2.10.0.1)
+```
+
+Next, the `src/` directory must contain both a `Makevars` and `Makevars.win` 
+file with:
+
+```bash
+CXX_STD = CXX11
+PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS)
+PKG_LIBS = $(SHLIB_OPENMP_CXXFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+```
+
+The `Makevars.win` file provides the appropriate configuration for Windows
+while `Makevars` acts on Unix-alike systems like macOS, Linux, and Solaris.
+

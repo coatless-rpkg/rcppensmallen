@@ -1,3 +1,20 @@
+2019-09-30  James Balamuta  <balamut2@illinois.edu>
+
+	* vignettes/using-rcppensmallen.Rmd: Improved wording.
+
+	* .travis.yml: Disabled vignette building on TravisCI
+
+2019-09-27  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version, Date): Release 2.10.3
+
+	* NEWS.md: Update for Ensmallen release 2.10.3
+
+	* inst/include/ensmallen_bits: Upgraded to Ensmallen 2.10.3
+	* inst/include/ensmallen.hpp: ditto
+
+	* vignettes/using-rcppensmallen.Rmd: Added a vignette describing use.
+
 2019-09-07  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version, Date): Release 2.10.0 and armadillo dependency
