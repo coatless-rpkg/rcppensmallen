@@ -43,12 +43,14 @@ namespace ens {
  *
  * For more information, see the following:
  *
+ * @code
  * @techreport{storn1995,
  *   title    = {Differential Evolution—a simple and efficient adaptive scheme
  *               for global optimization over continuous spaces},
  *   author   = {Storn, Rainer and Price, Kenneth},
  *   year     = 1995
  * }
+ * @endcode
  *
  * DE can optimize arbitrary functions.  For more details, see the
  * documentation on function types included with this distribution or on the
@@ -83,7 +85,7 @@ class DE
    * starting point will be modified to store the finishing point of the
    * algorithm, and the final objective value is returned.
    *
-   * @tparam DecomposableFunctionType Type of the function to be optimized.
+   * @tparam FunctionType Type of the function to be optimized.
    * @tparam MatType Type of matrix to optimize.
    * @tparam CallbackTypes Types of callback functions.
    * @param function Function to optimize.
@@ -91,10 +93,10 @@ class DE
    * @param callbacks Callback functions.
    * @return Objective value of the final point.
    */
-  template<typename DecomposableFunctionType,
+  template<typename FunctionType,
            typename MatType,
            typename... CallbackTypes>
-  typename MatType::elem_type Optimize(DecomposableFunctionType& function,
+  typename MatType::elem_type Optimize(FunctionType& function,
                                        MatType& iterate,
                                        CallbackTypes&&... callbacks);
 

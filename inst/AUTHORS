@@ -31,6 +31,8 @@ file:
   Copyright 2018, Conrad Sanderson
   Copyright 2018, Dan Timson
   Copyright 2019, Rahul Ganesh Prabhu
+  Copyright 2019, Roberto Hueso <robertohueso96@gmail.com>
+  Copyright 2019, Sayan Goswami <sayan.goswami.106@gmail.com>
 
 The RcppEnsmallen package provides an integration of Ensmallen and its dependences
 into R. RcppEnsmallen accomplishes this by linking into RcppArmadillo,
