@@ -32,11 +32,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: James Joseph Balamuta \email{balamut2@illinois.edu} (0000-0003-2826-8458) [copyright holder]
+\strong{Maintainer}: James Joseph Balamuta \email{balamut2@illinois.edu} (\href{https://orcid.org/0000-0003-2826-8458}{ORCID}) [copyright holder]
 
 Authors:
 \itemize{
-  \item Dirk Eddelbuettel \email{edd@debian.org} (0000-0001-6419-907X) [copyright holder]
+  \item Dirk Eddelbuettel \email{edd@debian.org} (\href{https://orcid.org/0000-0001-6419-907X}{ORCID}) [copyright holder]
 }
 
 }
