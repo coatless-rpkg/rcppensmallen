@@ -1,3 +1,7 @@
+# RcppEnsmallen 0.2.y.z.1
+
+- Switched deployment from TravisCI to GitHub Actions.
+
 # RcppEnsmallen 0.2.10.3.1
 
 - Upgraded to ensmallen 2.10.3: "Fried Chicken" (2019-09-26)

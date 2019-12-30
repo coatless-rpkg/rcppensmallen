@@ -1,6 +1,6 @@
 Package: RcppEnsmallen
 Title: Header-Only C++ Mathematical Optimization Library for 'Armadillo'
-Version: 0.2.10.3.1
+Version: 0.2.10.3.2
 Authors@R: c(
     person("James Joseph", "Balamuta", email = "balamut2@illinois.edu", 
            role = c("aut", "cre", "cph"), 
