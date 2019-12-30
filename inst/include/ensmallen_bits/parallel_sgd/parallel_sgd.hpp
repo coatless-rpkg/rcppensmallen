@@ -22,6 +22,8 @@ namespace ens {
  * HOGWILD! approach.
  *
  * For more information, see the following.
+ *
+ * @code
  * @misc{1106.5730,
  *   Author = {Feng Niu and Benjamin Recht and Christopher Re and Stephen J.
  *             Wright},
@@ -30,6 +32,7 @@ namespace ens {
  *   Year   = {2011},
  *   Eprint = {arXiv:1106.5730},
  * }
+ * @endcode
  *
  * ParallelSGD can optimize sparse differentiable separable functions.  For more
  * details, see the documentation on function types included with this
@@ -92,14 +95,14 @@ class ParallelSGD
            CallbackTypes&&... callbacks);
 
   //! Forward arma::SpMat<typename MatType::elem_type> as GradType.
-  template<typename DecomposableFunctionType,
+  template<typename SeparableFunctionType,
            typename MatType,
            typename... CallbackTypes>
-  typename MatType::elem_type Optimize(DecomposableFunctionType& function,
+  typename MatType::elem_type Optimize(SeparableFunctionType& function,
                                        MatType& iterate,
                                        CallbackTypes&&... callbacks)
   {
-    return Optimize<DecomposableFunctionType, MatType,
+    return Optimize<SeparableFunctionType, MatType,
         arma::SpMat<typename MatType::elem_type>, CallbackTypes...>(
         function, iterate, std::forward<CallbackTypes>(callbacks)...);
   }

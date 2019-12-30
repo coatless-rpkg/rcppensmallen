@@ -39,6 +39,12 @@ ENS_HAS_EXACT_METHOD_FORM(GradientConstraint, HasGradientConstraint)
 ENS_HAS_EXACT_METHOD_FORM(NumFeatures, HasNumFeatures)
 //! Detect a PartialGradient() method.
 ENS_HAS_EXACT_METHOD_FORM(PartialGradient, HasPartialGradient)
+//! Detect an MaxIterations() method.
+ENS_HAS_EXACT_METHOD_FORM(MaxIterations, HasMaxIterations)
+//! Detect an ResetPolicy() method.
+ENS_HAS_EXACT_METHOD_FORM(ResetPolicy, HasResetPolicy)
+//! Detect an BatchSize() method.
+ENS_HAS_EXACT_METHOD_FORM(BatchSize, HasBatchSize)
 
 template<typename MatType, typename GradType>
 struct TypedForms
@@ -115,60 +121,60 @@ struct TypedForms
   template<typename FunctionType>
   using ShuffleStaticForm = void(*)();
 
-  //! This is the form of a decomposable Evaluate() method.
+  //! This is the form of a separable Evaluate() method.
   template<typename FunctionType>
-  using DecomposableEvaluateForm =
+  using SeparableEvaluateForm =
       typename BaseMatType::elem_type(FunctionType::*)(const BaseMatType&,
                                                        const size_t,
                                                        const size_t);
 
-  //! This is the form of a decomposable const Evaluate() method.
+  //! This is the form of a separable const Evaluate() method.
   template<typename FunctionType>
-  using DecomposableEvaluateConstForm =
+  using SeparableEvaluateConstForm =
       typename BaseMatType::elem_type(FunctionType::*)(const BaseMatType&,
                                                        const size_t,
                                                        const size_t) const;
 
-  //! This is the form of a decomposable static Evaluate() method.
+  //! This is the form of a separable static Evaluate() method.
   template<typename FunctionType>
-  using DecomposableEvaluateStaticForm = typename BaseMatType::elem_type(*)(
+  using SeparableEvaluateStaticForm = typename BaseMatType::elem_type(*)(
         const BaseMatType&, const size_t, const size_t);
 
-  //! This is the form of a decomposable non-const Gradient() method.
+  //! This is the form of a separable non-const Gradient() method.
   template<typename FunctionType>
-  using DecomposableGradientForm = void(FunctionType::*)(
+  using SeparableGradientForm = void(FunctionType::*)(
       const BaseMatType&, const size_t, BaseGradType&, const size_t);
 
-  //! This the form of a decomposable const Gradient() method.
+  //! This the form of a separable const Gradient() method.
   template<typename FunctionType>
-  using DecomposableGradientConstForm = void(FunctionType::*)(
+  using SeparableGradientConstForm = void(FunctionType::*)(
       const BaseMatType&, const size_t, BaseGradType&, const size_t) const;
 
-  //! This is the form of a decomposable static Gradient() method.
+  //! This is the form of a separable static Gradient() method.
   template<typename FunctionType>
-  using DecomposableGradientStaticForm = void(*)(
+  using SeparableGradientStaticForm = void(*)(
       const BaseMatType&, const size_t, BaseGradType&, const size_t);
 
-  //! This is the form of a decomposable non-const EvaluateWithGradient()
+  //! This is the form of a separable non-const EvaluateWithGradient()
   //! method.
   template<typename FunctionType>
-  using DecomposableEvaluateWithGradientForm =
+  using SeparableEvaluateWithGradientForm =
       typename BaseMatType::elem_type(FunctionType::*)(const BaseMatType&,
                                                        const size_t,
                                                        BaseGradType&,
                                                        const size_t);
 
-  //! This is the form of a decomposable const EvaluateWithGradient() method.
+  //! This is the form of a separable const EvaluateWithGradient() method.
   template<typename FunctionType>
-  using DecomposableEvaluateWithGradientConstForm =
+  using SeparableEvaluateWithGradientConstForm =
       typename BaseMatType::elem_type(FunctionType::*)(const BaseMatType&,
                                                        const size_t,
                                                        BaseGradType&,
                                                        const size_t) const;
 
-  //! This is the form of a decomposable static EvaluateWithGradient() method.
+  //! This is the form of a separable static EvaluateWithGradient() method.
   template<typename FunctionType>
-  using DecomposableEvaluateWithGradientStaticForm =
+  using SeparableEvaluateWithGradientStaticForm =
       typename BaseMatType::elem_type(*)(const BaseMatType&,
                                          const size_t,
                                          BaseGradType&,
@@ -367,6 +373,60 @@ struct HasConstSignatures
       CheckerB<ClassType, ConstSignatureB, 0>::value;
 
   const static bool value = HasEitherConstForm && HasAnyFormA && HasAnyFormB;
+};
+
+//! Utility struct, check if size_t BatchSize() const or size_t BatchSize()
+//! exists.
+template<typename OptimizerType>
+struct HasBatchSizeSignature
+{
+  template<typename C>
+  using BatchSizeConstForm = size_t(C::*)(void) const;
+
+  template<typename C>
+  using BatchSizeForm = size_t(C::*)(void);
+
+  const static bool value =
+      HasBatchSize<OptimizerType, BatchSizeForm>::value ||
+      HasBatchSize<OptimizerType, BatchSizeConstForm>::value;
+};
+
+//! Utility struct, check if size_t MaxIterations() const exists.
+template<typename OptimizerType>
+struct HasMaxIterationsSignature
+{
+  template<typename C>
+  using HasMaxIterationsForm = size_t(C::*)(void) const;
+
+  const static bool value =
+      HasMaxIterations<OptimizerType, HasMaxIterationsForm>::value;
+};
+
+//! Utility struct, check if size_t NumFunctions() const or
+//! size_t NumFunctions() exists.
+template<typename OptimizerType>
+struct HasNumFunctionsSignature
+{
+  template<typename C>
+  using NumFunctionsConstForm = size_t(C::*)(void) const;
+
+  template<typename C>
+  using NumFunctionsForm = size_t(C::*)(void);
+
+  const static bool value =
+      HasNumFunctions<OptimizerType, NumFunctionsForm>::value ||
+      HasNumFunctions<OptimizerType, NumFunctionsConstForm>::value;
+};
+
+//! Utility struct, check if bool ResetPolicy() exists.
+template<typename OptimizerType>
+struct HasResetPolicySignature
+{
+  template<typename C>
+  using HasResetPolicyForm = bool&(C::*)(void);
+
+  const static bool value =
+      HasResetPolicy<OptimizerType, HasResetPolicyForm>::value;
 };
 
 } // namespace traits
