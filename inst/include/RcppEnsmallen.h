@@ -18,8 +18,10 @@
 #ifndef RcppEnsmallen__RcppEnsmallen__h
 #define RcppEnsmallen__RcppEnsmallen__h
 
-#if defined(Rcpp_hpp) && defined(RcppArmadillo__RcppArmadillo__h)
-#error "Do not include either 'Rcpp.h' or 'RcppArmadillo.h'. Please only use 'RcppEnsmallen.h'."
+#ifdef RCPPENSMALLEN_HEADER_CHECK
+  #if defined(Rcpp_hpp) && defined(RcppArmadillo__RcppArmadillo__h)
+    #error "Do not include either 'Rcpp.h' or 'RcppArmadillo.h'. Please only use 'RcppEnsmallen.h'."
+  #endif
 #endif
 
 // Enable RcppArmadillo and Rcpp
