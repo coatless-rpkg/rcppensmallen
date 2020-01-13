@@ -1,3 +1,7 @@
+2019-01-13  James Balamuta  <balamut2@illinois.edu>
+
+	* .github/workflows/pr-commands.yaml: Removed as its overly eager.
+
 2019-12-30  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version): Release 2.11.1
