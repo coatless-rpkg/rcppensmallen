@@ -17,7 +17,8 @@
     ([#141](https://github.com/mlpack/ensmallen/pull/141)).
   - Make code samples collapsible in the documentation.
     ([#140](https://github.com/mlpack/ensmallen/pull/140)).
-- Switched deployment from TravisCI to GitHub Actions.
+- Switched deployment from TravisCI to GitHub Actions. ([#17](https://github.com/coatless/rcppensmallen/pull/17), [#22](https://github.com/coatless/rcppensmallen/pull/22))
+- Removed check on header file inclusion ([#21](https://github.com/coatless/rcppensmallen/pull/21))
 
 # RcppEnsmallen 0.2.10.3.1
 
