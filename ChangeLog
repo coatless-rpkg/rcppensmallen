@@ -1,3 +1,11 @@
+2019-01-14  James Balamuta  <balamut2@illinois.edu>
+
+	* inst/include/RcppEnsmallen.h: Removed header ordering checks
+
+2020-01-11  Dirk Eddelbuettel  <edd@debian.org>
+
+	* inst/include/RcppEnsmallen.h: Protected header inclusion check
+
 2019-12-30  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version): Release 2.11.1
