@@ -1,6 +1,14 @@
+2019-01-14  James Balamuta  <balamut2@illinois.edu>
+
+	* inst/include/RcppEnsmallen.h: Removed header ordering checks
+
 2019-01-13  James Balamuta  <balamut2@illinois.edu>
 
 	* .github/workflows/pr-commands.yaml: Removed as its overly eager.
+
+2020-01-11  Dirk Eddelbuettel  <edd@debian.org>
+
+	* inst/include/RcppEnsmallen.h: Protected header inclusion check
 
 2019-12-30  James Balamuta  <balamut2@illinois.edu>
 
