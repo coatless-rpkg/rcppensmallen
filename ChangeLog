@@ -1,4 +1,13 @@
-2019-01-14  James Balamuta  <balamut2@illinois.edu>
+2020-02-19  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version): Release 2.11.3
+
+	* NEWS.md: Update for Ensmallen release 2.11.3
+
+	* inst/include/ensmallen_bits: Upgraded to Ensmallen 2.11.3
+	* inst/include/ensmallen.hpp: ditto
+
+2020-01-14  James Balamuta  <balamut2@illinois.edu>
 
 	* inst/include/RcppEnsmallen.h: Removed header ordering checks
 

@@ -1,3 +1,19 @@
+# RcppEnsmallen 0.2.11.3.1
+
+- Upgraded to ensmallen 2.13.1: "The Poster Session Is Full" (2020-02-19)
+  - Prevent spurious compiler warnings
+    ([#161](https://github.com/mlpack/ensmallen/pull/161)).
+  - Fix minor memory leaks
+    ([#167](https://github.com/mlpack/ensmallen/pull/167)).
+  - Revamp CMake configuration
+    ([#152](https://github.com/mlpack/ensmallen/pull/152)).
+  - Allow callback instantiation for SGD based optimizer 
+    ([#138](https://github.com/mlpack/ensmallen/pull/155)).
+  - Minor test stability fixes on i386
+    ([#156](https://github.com/mlpack/ensmallen/pull/156)).
+  - Fix Lookahead MaxIterations() check.
+    ([#159](https://github.com/mlpack/ensmallen/pull/159)).
+
 # RcppEnsmallen 0.2.11.1.1
 
 - Upgraded to ensmallen 2.11.1: "The Poster Session Is Full" (2019-12-28)
