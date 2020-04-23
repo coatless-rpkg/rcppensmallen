@@ -1,6 +1,21 @@
+# RcppEnsmallen 0.2.12.1.1
+
+- Upgraded to ensmallen 2.12.1: "Stir Crazy" (2020-04-20)
+ - Fix total number of epochs and time estimation for ProgressBar callback
+    ([#181](https://github.com/mlpack/ensmallen/pull/181)).
+ - Handle SpSubview_col and SpSubview_row in Armadillo 9.870
+    ([#194](https://github.com/mlpack/ensmallen/pull/194)).
+ - Minor documentation fixes
+    ([#197](https://github.com/mlpack/ensmallen/pull/197)).
+ - Correction in the formulation of sigma in CMA-ES
+    ([#183](https://github.com/mlpack/ensmallen/pull/183)).
+ - Remove deprecated methods from PrimalDualSolver implementation
+    ([#185](https://github.com/mlpack/ensmallen/pull/185).
+ - Update logo ([#186](https://github.com/mlpack/ensmallen/pull/186)).
+
 # RcppEnsmallen 0.2.11.3.1
 
-- Upgraded to ensmallen 2.13.1: "The Poster Session Is Full" (2020-02-19)
+- Upgraded to ensmallen 2.11.3: "The Poster Session Is Full" (2020-02-19)
   - Prevent spurious compiler warnings
     ([#161](https://github.com/mlpack/ensmallen/pull/161)).
   - Fix minor memory leaks
