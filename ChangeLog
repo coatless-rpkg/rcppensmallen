@@ -1,3 +1,15 @@
+2020-07-24  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version): Release 2.13.0.2
+
+	* NEWS.md: Update for GitHub Actions change
+
+	* .github/workflows/R-CMD-check.yaml: Switched to using reference tags to
+	  refer to R release information.
+	* .github/.gitignore: Disable HTML from entering staging.
+
+	* README.md: Update build status README badge.
+
 2020-07-23  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version): Release 2.13.0

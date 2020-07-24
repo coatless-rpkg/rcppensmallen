@@ -1,3 +1,9 @@
+# RcppEnsmallen 0.2.13.0.2
+
+- Switch GitHub Actions to use reference tags to always be up-to-date with 
+  CRAN's check grid (`oldrel`, `release`, `devel`).
+
+    
 # RcppEnsmallen 0.2.13.0.1
 
 - Upgraded to ensmallen 2.13.0: "Automatically Automated Automation" (2020-07-15)
