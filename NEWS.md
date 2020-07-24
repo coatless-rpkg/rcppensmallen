@@ -1,3 +1,11 @@
+# RcppEnsmallen 0.2.13.0.1
+
+- Upgraded to ensmallen 2.13.0: "Automatically Automated Automation" (2020-07-15)
+  - Fix CMake package export
+    ([#198](https://github.com/mlpack/ensmallen/pull/198)).
+  - Allow early stop callback to accept a lambda function
+    ([#165](https://github.com/mlpack/ensmallen/pull/165)).
+
 # RcppEnsmallen 0.2.12.1.1
 
 - Upgraded to ensmallen 2.12.1: "Stir Crazy" (2020-04-20)
