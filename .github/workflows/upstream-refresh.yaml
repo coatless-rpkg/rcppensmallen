@@ -39,6 +39,18 @@ jobs:
           # tar -xzf $RELEASE_TAG -C ./ --strip-components=1 ${TAR_PREFIX_DIR}/HISTORY.md
           # Update R package version
           sed -i "s/Version:.*/Version: 0.${RELEASE_TAG}.1/g" DESCRIPTION
+          # Prepend entry to ChangeLog with a heredoc
+          TAB="$(printf '\t')"
+          cat <<-EOF > ChangeLog
+          $(date +"%Y-%m-%d")  James Balamuta  <balamut2@illinois.edu>
+
+          ${TAB}* DESCRIPTION (Version): Release ${RELEASE_TAG}
+          ${TAB}* NEWS.md: Update for Ensmallen release ${RELEASE_TAG}
+          ${TAB}* inst/include/ensmallen_bits: Upgraded to Ensmallen ${RELEASE_TAG}
+          ${TAB}* inst/include/ensmallen.hpp: ditto
+
+          $(cat ChangeLog)
+          EOF
           # Remove the release tar.gz
           rm $RELEASE_TAG
       - name: Create Pull Request
