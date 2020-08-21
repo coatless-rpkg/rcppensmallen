@@ -24,7 +24,6 @@ jobs:
         if: steps.ensmallen-lib.outputs.current_tag != steps.ensmallen-lib.outputs.release_tag
         env:
           RELEASE_TAG: ${{ steps.ensmallen-lib.outputs.release_tag }}
-          SWAGGER_YAML: "swagger.yaml"
         run: |
           # Delete the dist directory and index.html
           rm -fr inst/include/ensmallen_bits inst/include/ensmallen.hpp
@@ -38,6 +37,8 @@ jobs:
           tar -xzf $RELEASE_TAG -C inst/include/ --strip-components=2 ${TAR_PREFIX_DIR}/include/ensmallen_bits ${TAR_PREFIX_DIR}/include/ensmallen.hpp
           # Strip away one-level ${TAR_PREFIX_DIR}
           # tar -xzf $RELEASE_TAG -C ./ --strip-components=1 ${TAR_PREFIX_DIR}/HISTORY.md
+          # Update R package version
+          sed -i "s/Version:.*/Version: 0.${RELEASE_TAG}.1/g" DESCRIPTION
           # Remove the release tar.gz
           rm $RELEASE_TAG
       - name: Create Pull Request
