@@ -11,7 +11,11 @@ jobs:
         id: ensmallen-lib
         run: |
           # Ping version information upstream
-          echo ::set-output name=release_tag::$(curl -sL https://api.github.com/repos/mlpack/ensmallen/releases/latest | jq -r ".tag_name")
+          ENSMALLEN_RELEASE_JSON=$(curl -sL https://api.github.com/repos/mlpack/ensmallen/releases/latest)
+          ENSMALLEN_RELEASE_VERSION=$(jq -r ".tag_name" <<< "$ENSMALLEN_RELEASE_JSON")
+          ENSMALLEN_RELEASE_DATE=$(jq -r ".published_at" <<< "$ENSMALLEN_RELEASE_JSON" | sed 's/T.*//g')
+          echo ::set-output name=release_tag::$(echo $ENSMALLEN_RELEASE_VERSION)
+          echo ::set-output name=release_date::$(echo $ENSMALLEN_RELEASE_DATE)
           # Extract out version information from git repository
           ENSMALLEN_VERSION_MAJOR=$(grep -i ".*#define ENS_VERSION_MAJOR.*" inst/include/ensmallen_bits/ens_version.hpp | grep -o "[0-9]*")
           ENSMALLEN_VERSION_MINOR=$(grep -i ".*#define ENS_VERSION_MINOR.*" inst/include/ensmallen_bits/ens_version.hpp | grep -o "[0-9]*")
@@ -24,6 +28,7 @@ jobs:
         if: steps.ensmallen-lib.outputs.current_tag != steps.ensmallen-lib.outputs.release_tag
         env:
           RELEASE_TAG: ${{ steps.ensmallen-lib.outputs.release_tag }}
+          RELEASE_DATE: ${{ steps.ensmallen-lib.outputs.release_date }}
         run: |
           # Delete the dist directory and index.html
           rm -fr inst/include/ensmallen_bits inst/include/ensmallen.hpp
@@ -35,8 +40,26 @@ jobs:
           # Extract the update files directly into the include directory.
           # Strip away two levels ${TAR_PREFIX_DIR}/include.
           tar -xzf $RELEASE_TAG -C inst/include/ --strip-components=2 ${TAR_PREFIX_DIR}/include/ensmallen_bits ${TAR_PREFIX_DIR}/include/ensmallen.hpp
+          # Extract HISTORY.md file into the tool directory for a comparison.
           # Strip away one-level ${TAR_PREFIX_DIR}
-          # tar -xzf $RELEASE_TAG -C ./ --strip-components=1 ${TAR_PREFIX_DIR}/HISTORY.md
+          tar -xzf $RELEASE_TAG -C tools/ --strip-components=1 ${TAR_PREFIX_DIR}/HISTORY.md
+          # Begin work on formatting NEWS entry
+          # Obtain the double quoted version name
+          ENSMALLEN_VERSION_NAME=$(grep -i ".*#define ENS_VERSION_NAME.*" inst/include/ensmallen_bits/ens_version.hpp | grep -o '".*"')
+          # Extract out the new changes using diff
+          # Steps: Remove blank lines, delete header, replace * with -, indent by 1
+          NEWS_UPDATE=$(diff --unchanged-group-format="" tools/HISTORY.md tools/HISTORYold.md | sed '/^$/d' | sed '1,2d' | sed 's/\*/-/' |  sed 's/^/ /')
+          # Set the new history to be old
+          mv tools/HISTORY.md tools/HISTORYold.md
+          # Prepend new update notes to NEWS.md with a heredoc
+          cat <<-EOF > NEWS.md
+          # RcppEnsmallen ${RELEASE_TAG}
+
+          - Upgraded to ensmallen ${RELEASE_TAG}: ${ENSMALLEN_VERSION_NAME} ($RELEASE_DATE)
+          $(echo ${NEWS_UPDATE})
+
+          $(cat NEWS.md)
+          EOF
           # Update R package version
           sed -i "s/Version:.*/Version: 0.${RELEASE_TAG}.1/g" DESCRIPTION
           # Prepend entry to ChangeLog with a heredoc
