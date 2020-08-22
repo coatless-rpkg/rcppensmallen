@@ -46,6 +46,7 @@ jobs:
           # Begin work on formatting NEWS entry
           # Obtain the double quoted version name
           ENSMALLEN_VERSION_NAME=$(grep -i ".*#define ENS_VERSION_NAME.*" inst/include/ensmallen_bits/ens_version.hpp | grep -o '".*"')
+          NEW_RCPPENSMALLEN_VERSION=0.${RELEASE_TAG}.1
           # Extract out the new changes using diff
           # Steps: Remove blank lines, delete header, replace * with -, indent by 1
           NEWS_UPDATE=$(diff --unchanged-group-format="" tools/HISTORY.md tools/HISTORYold.md | sed '/^$/d' | sed '/^#/d' | sed 's/\*/-/' |  sed 's/^/ /')
@@ -53,15 +54,15 @@ jobs:
           mv tools/HISTORY.md tools/HISTORYold.md
           # Prepend new update notes to NEWS.md with a heredoc
           cat <<-EOF > NEWS.md
-          # RcppEnsmallen ${RELEASE_TAG}
+          # RcppEnsmallen ${NEW_RCPPENSMALLEN_VERSION}
 
           - Upgraded to ensmallen ${RELEASE_TAG}: ${ENSMALLEN_VERSION_NAME} ($RELEASE_DATE)
-          $(echo ${NEWS_UPDATE})
+          ${NEWS_UPDATE}
 
           $(cat NEWS.md)
           EOF
           # Update R package version
-          sed -i "s/Version:.*/Version: 0.${RELEASE_TAG}.1/g" DESCRIPTION
+          sed -i "s/Version:.*/Version: ${NEW_RCPPENSMALLEN_VERSION}/g" DESCRIPTION
           # Prepend entry to ChangeLog with a heredoc
           TAB="$(printf '\t')"
           cat <<-EOF > ChangeLog
