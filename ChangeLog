@@ -1,3 +1,8 @@
+2020-08-22  James Balamuta  <balamut2@illinois.edu>
+
+	* .github/workflows/R-CMD-check.yaml: Re-enable devel build check by
+	using Linux instead of macOS to perform the check
+
 2020-07-24  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version): Release 2.13.0.2
