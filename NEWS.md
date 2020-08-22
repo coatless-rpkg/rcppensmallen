@@ -1,9 +1,20 @@
-# RcppEnsmallen 0.2.13.0.2
+# RcppEnsmallen 0.2.14.1.1
 
+- Upgraded to ensmallen 2.14.1: "No Direction Home" (2020-08-21)
+  - Fix release script (remove hardcoded information, trim leading
+    whitespaces introduced by `wc -l` in MacOS)
+    ([#216](https://github.com/mlpack/ensmallen/pull/216), [#220](https://github.com/mlpack/ensmallen/pull/220)).
+  - Adjust tolerance for AugLagrangian convergence based on element type ([#217](https://github.com/mlpack/ensmallen/pull/217)). 
+  - Add NSGA2 optimizer for multi-objective functions ([#149](https://github.com/mlpack/ensmallen/pull/149)). 
+  - Update automatic website update release script ([#207](https://github.com/mlpack/ensmallen/pull/207)). 
+  - Clarify and fix documentation for constrained optimizers ([#201](https://github.com/mlpack/ensmallen/pull/201)). 
+  - Fix L-BFGS convergence when starting from a minimum ([#201](https://github.com/mlpack/ensmallen/pull/201)).
 - Switch GitHub Actions to use reference tags to always be up-to-date with 
-  CRAN's check grid (`oldrel`, `release`, `devel`).
+  CRAN's check grid (`oldrel`, `release`, `devel`). ([#29](https://github.com/coatless/rcppensmallen/pull/29), 
+  [#32](https://github.com/coatless/rcppensmallen/pull/32))
+- Added a GitHub Action to automatically create a PR with the new version of
+  Ensmallen when a new release is detected. ([#30](https://github.com/coatless/rcppensmallen/pull/30), [#33](https://github.com/coatless/rcppensmallen/pull/33))
 
-    
 # RcppEnsmallen 0.2.13.0.1
 
 - Upgraded to ensmallen 2.13.0: "Automatically Automated Automation" (2020-07-15)
@@ -177,4 +188,3 @@
 - The crux of this package has largely been developed by 
   Ensmallen development team that consists of Conrad Sanderson, Ryan Curtin, 
   and the MLPACK developers
-

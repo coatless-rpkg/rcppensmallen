@@ -9,8 +9,8 @@
 
 ## Overview
 
-[Ensmallen](http://ensmallen.org/) is a C++ header-only mathematical optimization
-library written by developers behind [MLPACK](http://www.mlpack.org/) that 
+[Ensmallen](https://ensmallen.org/) is a C++ header-only mathematical optimization
+library written by developers behind [MLPACK](https://www.mlpack.org/) that 
 provides a simple set of abstractions for writing an objective function to 
 optimize. Provided within are various standard and cutting-edge optimizers that
 include full-batch gradient descent techniques, small-batch techniques, 
