@@ -1,7 +1,10 @@
 2020-08-22  James Balamuta  <balamut2@illinois.edu>
 
 	* .github/workflows/R-CMD-check.yaml: Re-enable devel build check by
-	using Linux instead of macOS to perform the check
+	using Linux instead of macOS to perform the check.
+
+	* .github/workflows/upstream-refresh.yaml: Fix NEWS.md entry formatting
+	issues.
 
 2020-07-24  James Balamuta  <balamut2@illinois.edu>
 
