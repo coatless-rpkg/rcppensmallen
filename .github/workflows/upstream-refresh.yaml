@@ -48,7 +48,7 @@ jobs:
           ENSMALLEN_VERSION_NAME=$(grep -i ".*#define ENS_VERSION_NAME.*" inst/include/ensmallen_bits/ens_version.hpp | grep -o '".*"')
           # Extract out the new changes using diff
           # Steps: Remove blank lines, delete header, replace * with -, indent by 1
-          NEWS_UPDATE=$(diff --unchanged-group-format="" tools/HISTORY.md tools/HISTORYold.md | sed '/^$/d' | sed '1,2d' | sed 's/\*/-/' |  sed 's/^/ /')
+          NEWS_UPDATE=$(diff --unchanged-group-format="" tools/HISTORY.md tools/HISTORYold.md | sed '/^$/d' | sed '/^#/d' | sed 's/\*/-/' |  sed 's/^/ /')
           # Set the new history to be old
           mv tools/HISTORY.md tools/HISTORYold.md
           # Prepend new update notes to NEWS.md with a heredoc
