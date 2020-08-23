@@ -13,7 +13,7 @@
   CRAN's check grid (`oldrel`, `release`, `devel`). ([#29](https://github.com/coatless/rcppensmallen/pull/29), 
   [#32](https://github.com/coatless/rcppensmallen/pull/32))
 - Added a GitHub Action to automatically create a PR with the new version of
-  Ensmallen when a new release is detected. ([#30](https://github.com/coatless/rcppensmallen/pull/30), [#33](https://github.com/coatless/rcppensmallen/pull/33))
+  Ensmallen when a new release is detected. ([#30](https://github.com/coatless/rcppensmallen/pull/30), [#33](https://github.com/coatless/rcppensmallen/pull/33), [#35](https://github.com/coatless/rcppensmallen/pull/35))
 
 # RcppEnsmallen 0.2.13.0.1
 

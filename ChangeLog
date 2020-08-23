@@ -1,3 +1,7 @@
+2020-08-23  James Balamuta  <balamut2@illinois.edu>
+
+	* .github/workflows/upstream-refresh.yaml: Fix version check failure.
+
 2020-08-22  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version): Release 2.14.1
@@ -11,7 +15,7 @@
 
 	* .github/workflows/upstream-refresh.yaml: Fix NEWS.md entry formatting
 	issues.
-  
+
 2020-08-21  James Balamuta  <balamut2@illinois.edu>
 
 	* .github/workflows/upstream-refresh.yaml: Add GitHub Action to
