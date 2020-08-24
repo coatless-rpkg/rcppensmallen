@@ -28,6 +28,7 @@ jobs:
       - name: Update Ensmallen
         if: steps.ensmallen-lib.outputs.current_tag != steps.ensmallen-lib.outputs.release_tag
         env:
+          CURRENT_TAG: ${{ steps.ensmallen-lib.outputs.current_tag }}
           RELEASE_TAG: ${{ steps.ensmallen-lib.outputs.release_tag }}
           RELEASE_DATE: ${{ steps.ensmallen-lib.outputs.release_date }}
         run: |
