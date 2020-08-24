@@ -1,6 +1,11 @@
 # RcppEnsmallen 0.2.14.1.1
 
 - Upgraded to ensmallen 2.14.1: "No Direction Home" (2020-08-21)
+
+
+# RcppEnsmallen 0.2.14.1.1
+
+- Upgraded to ensmallen 2.14.1: "No Direction Home" (2020-08-21)
   - Fix release script (remove hardcoded information, trim leading
     whitespaces introduced by `wc -l` in MacOS)
     ([#216](https://github.com/mlpack/ensmallen/pull/216), [#220](https://github.com/mlpack/ensmallen/pull/220)).
