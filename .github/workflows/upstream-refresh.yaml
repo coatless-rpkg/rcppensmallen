@@ -1,8 +1,8 @@
 name: Update Ensmallen
 on:
   workflow_dispatch:
-  schedule:
-    - cron:  '0 10 * * *'
+  #schedule:
+  #  - cron:  '0 10 * * *'
 jobs:
   updateEnsmallen:
     runs-on: ubuntu-latest
@@ -18,9 +18,9 @@ jobs:
           echo ::set-output name=release_tag::$(echo $ENSMALLEN_RELEASE_VERSION)
           echo ::set-output name=release_date::$(echo $ENSMALLEN_RELEASE_DATE)
           # Extract out version information from git repository
-          ENSMALLEN_VERSION_MAJOR=$(grep -i ".*#define ENS_VERSION_MAJOR.*" inst/include/ensmallen_bits/ens_version.hpp | sed 's/^.*#define[ ]ENS_VERSION_MAJOR[ ]*\([0-9]*\).*$/\1/')
-          ENSMALLEN_VERSION_MINOR=$(grep -i ".*#define ENS_VERSION_MINOR.*" inst/include/ensmallen_bits/ens_version.hpp | sed 's/^.*#define[ ]ENS_VERSION_MINOR[ ]*\([0-9]*\).*$/\1/')
-          ENSMALLEN_VERSION_PATCH=$(grep -i ".*#define ENS_VERSION_PATCH.*" inst/include/ensmallen_bits/ens_version.hpp | sed 's/^.*#define[ ]ENS_VERSION_PATCH[ ]*\([0-9]*\).*$/\1/')
+          ENSMALLEN_VERSION_MAJOR=$(grep -i ".*#define ENS_VERSION_MAJOR.*" inst/include/ensmallen_bits/ens_version.hpp | grep -o "[0-9]*")
+          ENSMALLEN_VERSION_MINOR=$(grep -i ".*#define ENS_VERSION_MINOR.*" inst/include/ensmallen_bits/ens_version.hpp | grep -o "[0-9]*")
+          ENSMALLEN_VERSION_PATCH=$(grep -i ".*#define ENS_VERSION_PATCH.*" inst/include/ensmallen_bits/ens_version.hpp | grep -o "[0-9]*")
           # Combine values to match release tag information
           ENSMALLEN_VERSION_VALUE=${ENSMALLEN_VERSION_MAJOR}.${ENSMALLEN_VERSION_MINOR}.${ENSMALLEN_VERSION_PATCH}
           # Set the current release tag
