@@ -1,3 +1,13 @@
+### ensmallen ?.??.?: "???"
+###### ????-??-??
+ * Make a few tests more robust
+   ([#228](https://github.com/mlpack/ensmallen/pull/228)).
+
+ * Add release date to version information. ([#226](https://github.com/mlpack/ensmallen/pull/226))
+ 
+ * Fix typo in release script
+   ([#236](https://github.com/mlpack/ensmallen/pull/236)).
+
 ### ensmallen 2.14.2: "No Direction Home"
 ###### 2020-08-31
  * Fix implementation of fonesca fleming problem function f1 and f2 
@@ -26,6 +36,9 @@
 
  * Fix L-BFGS convergence when starting from a minimum
    ([#201](https://github.com/mlpack/ensmallen/pull/201)).
+
+* Add optimizer summary report callback 
+   ([#213](https://github.com/mlpack/ensmallen/pull/213)).
 
 ### ensmallen 2.13.0: "Automatically Automated Automation"
 ###### 2020-07-15
