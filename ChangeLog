@@ -25,7 +25,7 @@
 
 	* .github/workflows/upstream-refresh.yaml: Fix NEWS.md entry formatting
 	issues.
-  
+
 2020-08-21  James Balamuta  <balamut2@illinois.edu>
 
 	* .github/workflows/upstream-refresh.yaml: Add GitHub Action to
