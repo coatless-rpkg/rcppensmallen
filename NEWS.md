@@ -4,10 +4,9 @@
   - Make a few tests more robust
     ([#228](https://github.com/mlpack/ensmallen/pull/228)).
   - Add release date to version information. ([#226](https://github.com/mlpack/ensmallen/pull/226))
-  
   - Fix typo in release script
     ([#236](https://github.com/mlpack/ensmallen/pull/236)).
- - Add optimizer summary report callback 
+  - Add optimizer summary report callback 
     ([#213](https://github.com/mlpack/ensmallen/pull/213)).
 
 # RcppEnsmallen 0.2.14.2.1
