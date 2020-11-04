@@ -1,3 +1,14 @@
+# RcppEnsmallen 0.2.15.0.1
+
+- Upgraded to ensmallen 2.15.0: "No Direction Home" (2020-11-03)
+  - Make a few tests more robust
+    ([#228](https://github.com/mlpack/ensmallen/pull/228)).
+  - Add release date to version information. ([#226](https://github.com/mlpack/ensmallen/pull/226))
+  - Fix typo in release script
+    ([#236](https://github.com/mlpack/ensmallen/pull/236)).
+  - Add optimizer summary report callback 
+    ([#213](https://github.com/mlpack/ensmallen/pull/213)).
+
 # RcppEnsmallen 0.2.14.2.1
 
 - Upgraded to ensmallen 2.14.2: "No Direction Home" (2020-09-05)
