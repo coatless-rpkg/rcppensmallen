@@ -50,7 +50,14 @@ class LevyFunctionN13
 
   //! Get the starting point.
   template<typename MatType = arma::mat>
-  MatType GetInitialPoint() const { return MatType("-10; 10"); }
+  MatType GetInitialPoint() const { return MatType("0.9; 1.1"); }
+
+  //! Get the final point.
+  template<typename MatType = arma::mat>
+  MatType GetFinalPoint() const { return MatType("1.0; 1.0"); }
+
+  //! Get the final objective.
+  const double GetFinalObjective() const { return 0.0; }
 
   /**
    * Evaluate a function for a particular batch-size.

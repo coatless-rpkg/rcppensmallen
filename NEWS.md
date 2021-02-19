@@ -1,3 +1,13 @@
+# RcppEnsmallen 0.2.16.0.1
+
+- Upgraded to ensmallen 2.16.0: "Severely Dented Can Of Polyurethane" (2021-02-19)
+  - Expand README with example installation and add simple example program
+    showing usage of the L-BFGS optimizer
+    ([#248](https://github.com/mlpack/ensmallen/pull/248)).
+  - Refactor tests to increase stability and reduce random errors
+    ([#249](https://github.com/mlpack/ensmallen/pull/249)).
+  
+
 # RcppEnsmallen 0.2.15.1.1
 
 - Upgraded to ensmallen 2.15.1: "Why Can't I Manage To Grow Any Plants?" (2020-11-05)

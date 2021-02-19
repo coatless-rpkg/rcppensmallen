@@ -54,7 +54,14 @@ class BealeFunction
 
   //! Get the starting point.
   template<typename MatType = arma::mat>
-  MatType GetInitialPoint() const { return MatType("-4.5; 4.5"); }
+  MatType GetInitialPoint() const { return MatType("2.8; 0.35"); }
+
+  //! Get the final point.
+  template<typename MatType = arma::mat>
+  MatType GetFinalPoint() const { return MatType("3.0; 0.5"); }
+
+  //! Get the final objective.
+  const double GetFinalObjective() const { return 0.0; }
 
   /**
    * Evaluate a function for a particular batch-size.

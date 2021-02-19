@@ -1,3 +1,10 @@
+2021-02-19  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version): Release 2.16.0
+	* NEWS.md: Update for Ensmallen release 2.16.0
+	* inst/include/ensmallen_bits: Upgraded to Ensmallen 2.16.0
+	* inst/include/ensmallen.hpp: ditto
+
 2020-11-06  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version): Release 2.15.1
