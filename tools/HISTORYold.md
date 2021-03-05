@@ -1,3 +1,14 @@
+### ensmallen 2.16.1: "Severely Dented Can Of Polyurethane"
+###### 2021-03-02
+ * Fix test compilation issue when `ENS_USE_OPENMP` is set
+   ([#255](https://github.com/mlpack/ensmallen/pull/255)).
+
+ * Fix CNE initial population generation to use normal distribution
+   ([#258](https://github.com/mlpack/ensmallen/pull/258)).
+
+ * Fix compilation warnings
+   ([#259](https://github.com/mlpack/ensmallen/pull/259)).
+
 ### ensmallen 2.16.0: "Severely Dented Can Of Polyurethane"
 ###### 2021-02-11
  * Expand README with example installation and add simple example program
