@@ -1,4 +1,4 @@
-# RcppEnsmallen 0.2.16.2.1
+# RcppEnsmallen 0.2.16.2.1 (GitHub-only Release)
 
 - Upgraded to ensmallen 2.16.2: "Severely Dented Can Of Polyurethane" (2021-03-25)
   - Fix CNE test trials
@@ -13,10 +13,7 @@
   - Remove `AdamSchafferFunctionN2Test` test from Adam test suite to prevent
     spurious issue on some aarch64 ([#265](https://github.com/mlpack/ensmallen/pull/259)).
   - Fix implementation of fonesca fleming problem function f1 and f2
-  - Fix implementation of fonesca fleming problem function f1 and f2 
- - Add optimizer summary report callback
- - Add optimizer summary report callback 
-
+  - Add optimizer summary report callback 
 # RcppEnsmallen 0.2.16.1.1
 
 - Upgraded to ensmallen 2.16.1: "Severely Dented Can Of Polyurethane" (2021-03-04)
