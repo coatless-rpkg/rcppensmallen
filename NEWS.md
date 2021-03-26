@@ -12,6 +12,7 @@
     ([#276](https://github.com/mlpack/ensmallen/pull/276)).
   - Remove `AdamSchafferFunctionN2Test` test from Adam test suite to prevent
     spurious issue on some aarch64 ([#265](https://github.com/mlpack/ensmallen/pull/259)).
+
 # RcppEnsmallen 0.2.16.1.1
 
 - Upgraded to ensmallen 2.16.1: "Severely Dented Can Of Polyurethane" (2021-03-04)
