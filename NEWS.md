@@ -1,3 +1,17 @@
+# RcppEnsmallen 0.2.16.2.1 (GitHub-only Release)
+
+- Upgraded to ensmallen 2.16.2: "Severely Dented Can Of Polyurethane" (2021-03-25)
+  - Fix CNE test trials
+    ([#267](https://github.com/mlpack/ensmallen/pull/267)).
+  - Update Catch2 to 2.13.4
+    ([#268](https://github.com/mlpack/ensmallen/pull/268)).
+  - Fix typos in documentation
+    ([#270](https://github.com/mlpack/ensmallen/pull/270),
+     [#271](https://github.com/mlpack/ensmallen/pull/271)).
+  - Add clarifying comments in problems/ implementations
+    ([#276](https://github.com/mlpack/ensmallen/pull/276)).
+  - Remove `AdamSchafferFunctionN2Test` test from Adam test suite to prevent
+    spurious issue on some aarch64 ([#265](https://github.com/mlpack/ensmallen/pull/259)).
 # RcppEnsmallen 0.2.16.1.1
 
 - Upgraded to ensmallen 2.16.1: "Severely Dented Can Of Polyurethane" (2021-03-04)
