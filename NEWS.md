@@ -1,3 +1,33 @@
+# RcppEnsmallen 0.2.17.0.1
+
+- Upgraded to ensmallen 2.17.0: "Pachis Din Me Pesa Double" (2021-07-06)
+  - CheckArbitraryFunctionTypeAPI extended for MOO support
+    ([#283](https://github.com/mlpack/ensmallen/pull/283)).
+  - Refactor NSGA2
+    ([#263](https://github.com/mlpack/ensmallen/pull/263),
+    [#304](https://github.com/mlpack/ensmallen/pull/304)).
+  - Add Indicators for Multiobjective optimizers
+    ([#285](https://github.com/mlpack/ensmallen/pull/285)).
+  - Make Callback flexible for MultiObjective Optimizers
+    ([#289](https://github.com/mlpack/ensmallen/pull/289)).
+  - Add ZDT Test Suite
+    ([#273](https://github.com/mlpack/ensmallen/pull/273)).
+  - Add MOEA-D/DE Optimizer
+    ([#269](https://github.com/mlpack/ensmallen/pull/269)).
+  - Introduce Policy Methods for MOEA/D-DE
+    ([#293](https://github.com/mlpack/ensmallen/pull/293)).
+  - Add Das-Dennis weight initialization method
+    ([#295](https://github.com/mlpack/ensmallen/pull/295)).
+  - Add Dirichlet Weight Initialization
+    ([#296](https://github.com/mlpack/ensmallen/pull/296)).
+  - Improved installation and compilation instructions
+    ([#300](https://github.com/mlpack/ensmallen/pull/300)).
+  - Disable building the tests by default for faster installation
+    ([#303](https://github.com/mlpack/ensmallen/pull/303)).
+  - Modify matrix initialisation to take into account
+    default element zeroing in Armadillo 10.5
+    ([#305](https://github.com/mlpack/ensmallen/pull/305)).
+
 # RcppEnsmallen 0.2.16.2.1 (GitHub-only Release)
 
 - Upgraded to ensmallen 2.16.2: "Severely Dented Can Of Polyurethane" (2021-03-25)
