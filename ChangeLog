@@ -3,7 +3,7 @@
 	* DESCRIPTION (Version): Release 2.17.0
 	* NEWS.md: Update for Ensmallen release 2.17.0
 	* inst/include/ensmallen_bits: Upgraded to Ensmallen 2.17.0
-	* inst/include/ensmallen.hpp: ditto 
+	* inst/include/ensmallen.hpp: ditto
 
 2021-03-26  James Balamuta  <balamut2@illinois.edu>
 
