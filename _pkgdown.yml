@@ -1,0 +1,12 @@
+url: https://coatless.github.io/rcppensmallen
+
+home:
+  strip_header: true
+
+authors:
+  James Joseph Balamuta:
+    href: https://thecoatlessprofessor.com
+  Dirk Eddelbuettel:
+    href: https://dirk.eddelbuettel.com/
+  Ensmallen Developers:
+    href: https://ensmallen.org/

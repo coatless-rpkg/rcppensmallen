@@ -1,3 +1,10 @@
+2021-07-24  James Balamuta  <balamut2@illinois.edu>
+
+	* .github/workflows/pkgdown.yaml: Add github actions runner for pkgdown
+	* _pkgdown.yml: Add pkgdown configuration
+	* .Rbuildignore: ditto
+	* .gitignore: ditto
+
 2021-07-06  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version): Release 2.17.0

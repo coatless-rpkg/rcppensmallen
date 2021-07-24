@@ -6,3 +6,6 @@
 ^inst/scripts/.*$
 ^\.github$
 ^tools/.*$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
