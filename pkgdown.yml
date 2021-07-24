@@ -1,0 +1,10 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  using-rcppensmallen: using-rcppensmallen.html
+last_built: 2021-07-24T17:45Z
+urls:
+  reference: https://coatless.github.io/rcppensmallen/reference
+  article: https://coatless.github.io/rcppensmallen/articles
+
