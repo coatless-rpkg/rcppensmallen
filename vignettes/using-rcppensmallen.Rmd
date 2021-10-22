@@ -41,15 +41,15 @@ package.
 
 Consider the **Residual Sum of Squares**, also known as **RSS**, defined as:
 
-$$RSS\left( \beta \right) = \left( { \mathbf{y} - \mathbf{X} \beta } \right)^{T} \left( \mathbf{y} - \mathbf{X} \beta \right)$$
+$$RSS\left( \beta \right) = \left( { \mathbf{y} - \mathbf{X} \beta } \right)^{\top} \left( \mathbf{y} - \mathbf{X} \beta \right)$$
 
 The objective function we wish to minimize would be defined as:
 
-$$f(\beta) = (y - X\beta)^2$$
+$$f(\beta) = \rVert y - X\beta\lVert_2$$
 
 The gradient is defined as:
 
-$$\frac{\partial RSS}{\partial \beta} = -2 \mathbf{X}^{T} \left(\mathbf{y} - \mathbf{X} \beta \right)$$
+$$\frac{\partial RSS}{\partial \beta} = -2 \mathbf{X}^{\top} \left(\mathbf{y} - \mathbf{X} \beta \right)$$
 
 ### Two-Step Implementation
 
@@ -192,7 +192,7 @@ use mirrors that of other `Rcpp`-based projects. In particular, the
 `DESCRIPTION` file requires the `LinkingTo` field to contain:
 
 ```bash
-LinkingTo: Rcpp, RcppArmadillo (>= 0.8.400.0.0), RcppEnsmallen (>= 0.2.10.0.1)
+LinkingTo: Rcpp, RcppArmadillo (>= 0.9.800.0.0), RcppEnsmallen (>= 0.2.18.0.1)
 ```
 
 Next, the `src/` directory must contain both a `Makevars` and `Makevars.win` 

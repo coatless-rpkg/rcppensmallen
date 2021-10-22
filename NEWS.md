@@ -1,3 +1,21 @@
+# RcppEnsmallen 0.2.18.0.1
+
+- Upgraded to ensmallen 2.18.0: "Fairmount Bagel" (2021-10-21)
+  - Add gradient value clipping and gradient norm scaling callback
+    (mlpack/ensmallen#315).
+  - Remove superfluous CMake option to build the tests
+    (mlpack/ensmallen#313).
+  - Bump minimum Armadillo version to 9.800
+    (mlpack/ensmallen#318).
+  - Update Catch2 to 2.13.7
+    (mlpack/ensmallen#322).
+  - Remove redundant template argument for C++20 compatibility
+    (mlpack/ensmallen#324).
+  - Fix MOEAD test stability
+    (mlpack/ensmallen#327).
+- Update GitHub Actions to the standard `r-lib/actions` configuration.
+  ([#45](https://github.com/coatless/rcppensmallen/pull/45))
+
 # RcppEnsmallen 0.2.17.0.1
 
 - Upgraded to ensmallen 2.17.0: "Pachis Din Me Pesa Double" (2021-07-06)

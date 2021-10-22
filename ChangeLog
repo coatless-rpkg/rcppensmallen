@@ -1,3 +1,13 @@
+2021-10-22  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version): Release 2.18.0 and increase RcppArmadillo requirement
+	* NEWS.md: Update for Ensmallen release 2.18.0
+	* inst/include/ensmallen_bits: Upgraded to Ensmallen 2.18.0
+	* inst/include/ensmallen.hpp: ditto
+	* src/RcppExports.cpp: Re-generate RcppExport
+	* vignettes/using-rcppensmallen.Rmd: Clean up notation and bump linking note.
+	* .github/workflows/r-cmd-check.yaml: Updated github actions runner for R CMD check
+
 2021-07-24  James Balamuta  <balamut2@illinois.edu>
 
 	* .github/workflows/pkgdown.yaml: Add github actions runner for pkgdown
