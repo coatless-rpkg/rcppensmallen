@@ -4,6 +4,8 @@
 	* NEWS.md: Update for Ensmallen release 2.18.0
 	* inst/include/ensmallen_bits: Upgraded to Ensmallen 2.18.0
 	* inst/include/ensmallen.hpp: ditto
+	* src/RcppExports.cpp: Re-generate RcppExport
+	* vignettes/using-rcppensmallen.Rmd: Clean up notation and bump linking note.
 
 2021-07-24  James Balamuta  <balamut2@illinois.edu>
 
