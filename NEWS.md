@@ -13,6 +13,8 @@
     ([#324](mlpack/ensmallen#324)).
   - Fix MOEAD test stability
     ([#327](mlpack/ensmallen#327)).
+- Update GitHub Actions to the standard `r-lib/actions` configuration.
+  ([#45](https://github.com/coatless/rcppensmallen/pull/45))
 
 # RcppEnsmallen 0.2.17.0.1
 

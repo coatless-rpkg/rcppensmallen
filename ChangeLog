@@ -6,6 +6,7 @@
 	* inst/include/ensmallen.hpp: ditto
 	* src/RcppExports.cpp: Re-generate RcppExport
 	* vignettes/using-rcppensmallen.Rmd: Clean up notation and bump linking note.
+	* .github/workflows/r-cmd-check.yaml: Updated github actions runner for R CMD check
 
 2021-07-24  James Balamuta  <balamut2@illinois.edu>
 
