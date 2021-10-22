@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RcppEnsmallen</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.17.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.18.0.1</span>
       </span>
     </div>
 
@@ -106,11 +106,11 @@
 <h2 class="hasAnchor">
 <a href="#linear-regression" class="anchor"></a>Linear Regression</h2>
 <p>Consider the <strong>Residual Sum of Squares</strong>, also known as <strong>RSS</strong>, defined as:</p>
-<p><span class="math display">\[RSS\left( \beta \right) = \left( { \mathbf{y} - \mathbf{X} \beta } \right)^{T} \left( \mathbf{y} - \mathbf{X} \beta \right)\]</span></p>
+<p><span class="math display">\[RSS\left( \beta \right) = \left( { \mathbf{y} - \mathbf{X} \beta } \right)^{\top} \left( \mathbf{y} - \mathbf{X} \beta \right)\]</span></p>
 <p>The objective function we wish to minimize would be defined as:</p>
-<p><span class="math display">\[f(\beta) = (y - X\beta)^2\]</span></p>
+<p><span class="math display">\[f(\beta) = \rVert y - X\beta\lVert_2\]</span></p>
 <p>The gradient is defined as:</p>
-<p><span class="math display">\[\frac{\partial RSS}{\partial \beta} = -2 \mathbf{X}^{T} \left(\mathbf{y} - \mathbf{X} \beta \right)\]</span></p>
+<p><span class="math display">\[\frac{\partial RSS}{\partial \beta} = -2 \mathbf{X}^{\top} \left(\mathbf{y} - \mathbf{X} \beta \right)\]</span></p>
 <div id="two-step-implementation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#two-step-implementation" class="anchor"></a>Two-Step Implementation</h3>
@@ -215,28 +215,28 @@
 <tbody>
 <tr class="odd">
 <td align="left">Beta1</td>
-<td align="right">-1.999013</td>
-<td align="right">-1.999013</td>
+<td align="right">-2.001841</td>
+<td align="right">-2.001841</td>
 </tr>
 <tr class="even">
 <td align="left">Beta2</td>
-<td align="right">1.499794</td>
-<td align="right">1.499794</td>
+<td align="right">1.501627</td>
+<td align="right">1.501627</td>
 </tr>
 <tr class="odd">
 <td align="left">Beta3</td>
-<td align="right">2.998006</td>
-<td align="right">2.998006</td>
+<td align="right">2.999090</td>
+<td align="right">2.999090</td>
 </tr>
 <tr class="even">
 <td align="left">Beta4</td>
-<td align="right">8.196559</td>
-<td align="right">8.196559</td>
+<td align="right">8.201523</td>
+<td align="right">8.201523</td>
 </tr>
 <tr class="odd">
 <td align="left">Beta5</td>
-<td align="right">6.598770</td>
-<td align="right">6.598770</td>
+<td align="right">6.601140</td>
+<td align="right">6.601140</td>
 </tr>
 </tbody>
 </table>
@@ -247,7 +247,7 @@
 <h1 class="hasAnchor">
 <a href="#package-usage" class="anchor"></a>Package Usage</h1>
 <p>RcppEnsmallen is best used within an <em>R</em> package. The setup for <code>RcppEnsmallen</code>’s use mirrors that of other <code>Rcpp</code>-based projects. In particular, the <code>DESCRIPTION</code> file requires the <code>LinkingTo</code> field to contain:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">LinkingTo</span>: Rcpp, RcppArmadillo (<span class="op">&gt;</span>= 0.8.400.0.0), <span class="ex">RcppEnsmallen</span> (<span class="op">&gt;</span>= 0.2.10.0.1)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">LinkingTo</span>: Rcpp, RcppArmadillo (<span class="op">&gt;</span>= 0.9.800.0.0), <span class="ex">RcppEnsmallen</span> (<span class="op">&gt;</span>= 0.2.18.0.1)</span></code></pre></div>
 <p>Next, the <code>src/</code> directory must contain both a <code>Makevars</code> and <code>Makevars.win</code> file with:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">CXX_STD</span> = CXX11</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="ex">PKG_CXXFLAGS</span> = <span class="va">$(</span><span class="ex">SHLIB_OPENMP_CXXFLAGS</span><span class="va">)</span></span>
