@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RcppEnsmallen</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.18.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.18.1.1</span>
       </span>
     </div>
 
@@ -200,7 +200,7 @@
 <span class="va">beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">1.5</span>, <span class="fl">3</span>, <span class="fl">8.2</span>, <span class="fl">6.6</span><span class="op">)</span>
 <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span>
 <span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">p</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">X</span> <span class="op">%*%</span> <span class="va">beta</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="op">(</span><span class="va">p</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">X</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">beta</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="op">(</span><span class="va">p</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Next, the optimization procedure is used to estimate the parameters of interest. Under this example, the results of the estimation can be compared to <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. That said, <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> may have more precise results when compared against the optimizer as it is implemented with a closed-form solution to linear regression plus the computational is performed more rigorously.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">coefs_lbfgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lin_reg_lbfgs.html">lin_reg_lbfgs</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span><span class="op">)</span>
@@ -215,28 +215,28 @@
 <tbody>
 <tr class="odd">
 <td align="left">Beta1</td>
-<td align="right">-2.001841</td>
-<td align="right">-2.001841</td>
+<td align="right">-2.001185</td>
+<td align="right">-2.001185</td>
 </tr>
 <tr class="even">
 <td align="left">Beta2</td>
-<td align="right">1.501627</td>
-<td align="right">1.501627</td>
+<td align="right">1.504882</td>
+<td align="right">1.504882</td>
 </tr>
 <tr class="odd">
 <td align="left">Beta3</td>
-<td align="right">2.999090</td>
-<td align="right">2.999090</td>
+<td align="right">2.998545</td>
+<td align="right">2.998545</td>
 </tr>
 <tr class="even">
 <td align="left">Beta4</td>
-<td align="right">8.201523</td>
-<td align="right">8.201523</td>
+<td align="right">8.197996</td>
+<td align="right">8.197996</td>
 </tr>
 <tr class="odd">
 <td align="left">Beta5</td>
-<td align="right">6.601140</td>
-<td align="right">6.601140</td>
+<td align="right">6.601754</td>
+<td align="right">6.601754</td>
 </tr>
 </tbody>
 </table>
