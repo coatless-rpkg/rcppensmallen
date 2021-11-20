@@ -1,3 +1,13 @@
+# RcppEnsmallen 0.2.18.1.1
+
+- Upgraded to ensmallen 2.18.1: "Fairmount Bagel" (2021-11-20)
+  - Accelerate SGD test time
+    ([#330](https://github.com/mlpack/ensmallen/pull/300)).
+  - Fix potential infinite loop in CMAES
+    ([#331](https://github.com/mlpack/ensmallen/pull/331)).
+  - Fix SCD partial gradient test
+    ([#332](https://github.com/mlpack/ensmallen/pull/332)).
+
 # RcppEnsmallen 0.2.18.0.1
 
 - Upgraded to ensmallen 2.18.0: "Fairmount Bagel" (2021-10-21)
