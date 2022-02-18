@@ -1,3 +1,11 @@
+# RcppEnsmallen 0.2.18.2.1
+
+- Upgraded to ensmallen 2.18.2: "Fairmount Bagel" (2022-02-14)
+  - Update Catch2 to 2.13.8
+   ([#336](https://github.com/mlpack/ensmallen/pull/336)).
+  - Fix epoch timing output
+   ([#337](https://github.com/mlpack/ensmallen/pull/337)).
+
 # RcppEnsmallen 0.2.18.1.1
 
 - Upgraded to ensmallen 2.18.1: "Fairmount Bagel" (2021-11-20)
