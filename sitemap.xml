@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://coatless.github.io/rcppensmallen/404.html</loc>
+  </url>
+  <url>
+    <loc>https://coatless.github.io/rcppensmallen/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://coatless.github.io/rcppensmallen/articles/using-rcppensmallen.html</loc>
+  </url>
+  <url>
+    <loc>https://coatless.github.io/rcppensmallen/authors.html</loc>
+  </url>
+  <url>
     <loc>https://coatless.github.io/rcppensmallen/index.html</loc>
+  </url>
+  <url>
+    <loc>https://coatless.github.io/rcppensmallen/news/index.html</loc>
   </url>
   <url>
     <loc>https://coatless.github.io/rcppensmallen/reference/RcppEnsmallen-package.html</loc>
   </url>
   <url>
-    <loc>https://coatless.github.io/rcppensmallen/reference/lin_reg_lbfgs.html</loc>
+    <loc>https://coatless.github.io/rcppensmallen/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://coatless.github.io/rcppensmallen/articles/using-rcppensmallen.html</loc>
+    <loc>https://coatless.github.io/rcppensmallen/reference/lin_reg_lbfgs.html</loc>
   </url>
 </urlset>

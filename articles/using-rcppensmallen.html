@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RcppEnsmallen</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.18.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.18.2.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -64,7 +60,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/coatless/rcppensmallen/">
+  <a href="https://github.com/coatless-rpkg/rcppensmallen/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -83,10 +79,10 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using RcppEnsmallen</h1>
-                        <h4 class="author">James Joseph Balamuta and Dirk Eddelbuettel</h4>
+                        <h4 data-toc-skip class="author">James Joseph Balamuta and Dirk Eddelbuettel</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/coatless/rcppensmallen/blob/master/vignettes/using-rcppensmallen.Rmd"><code>vignettes/using-rcppensmallen.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/coatless-rpkg/rcppensmallen/blob/HEAD/vignettes/using-rcppensmallen.Rmd" class="external-link"><code>vignettes/using-rcppensmallen.Rmd</code></a></small>
       <div class="hidden name"><code>using-rcppensmallen.Rmd</code></div>
 
     </div>
@@ -97,23 +93,23 @@
       <p>Contained within are examples related to using RcppEnsmallen in everyday work alongside of creating an <em>R</em> package with it.</p>
     </div>
     
-<div id="overview" class="section level1">
-<h1 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h1>
-<p><code>RcppEnsmallen</code> package provides an embedded copy of the <a href="https://www.ensmallen.org/docs.html"><code>ensmallen</code></a> C++ library of optimization functions. Optimizers contained within are state of the art and possess a high level of code quality. Each optimizer must be accessed through <em>C++</em> by implementing the appropriate objective functions and, then, surfaced into <em>R</em> through <a href="https://cran.r-project.org/package=RcppArmadillo"><code>RcppArmadillo</code></a>. Alternatively, work has been done by Dirk Schumacher in <a href="https://github.com/dirkschumacher/armacmp"><code>armacmp</code></a> to automatically create the underlying <em>C++</em> code from <em>R</em>.</p>
-<p><strong>Note:</strong> Optimizers in <code>RcppEnsmallen</code> only work with <a href="http://arma.sourceforge.net/docs.html"><code>armadillo</code></a> data structures. Thus, if using <a href="http://eigen.tuxfamily.org/index.php?title=Main_Page"><code>Eigen</code></a> through <a href="https://cran.r-project.org/package=RcppEigen"><code>RcppEigen</code></a>, please consider the <a href="https://cran.r-project.org/package=RcppNumerical"><code>RcppNumerical</code></a> package.</p>
-<div id="linear-regression" class="section level2">
-<h2 class="hasAnchor">
-<a href="#linear-regression" class="anchor"></a>Linear Regression</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p><code>RcppEnsmallen</code> package provides an embedded copy of the <a href="https://www.ensmallen.org/docs.html" class="external-link"><code>ensmallen</code></a> C++ library of optimization functions. Optimizers contained within are state of the art and possess a high level of code quality. Each optimizer must be accessed through <em>C++</em> by implementing the appropriate objective functions and, then, surfaced into <em>R</em> through <a href="https://cran.r-project.org/package=RcppArmadillo" class="external-link"><code>RcppArmadillo</code></a>. Alternatively, work has been done by Dirk Schumacher in <a href="https://github.com/dirkschumacher/armacmp" class="external-link"><code>armacmp</code></a> to automatically create the underlying <em>C++</em> code from <em>R</em>.</p>
+<p><strong>Note:</strong> Optimizers in <code>RcppEnsmallen</code> only work with <a href="http://arma.sourceforge.net/docs.html" class="external-link"><code>armadillo</code></a> data structures. Thus, if using <a href="http://eigen.tuxfamily.org/index.php?title=Main_Page" class="external-link"><code>Eigen</code></a> through <a href="https://cran.r-project.org/package=RcppEigen" class="external-link"><code>RcppEigen</code></a>, please consider the <a href="https://cran.r-project.org/package=RcppNumerical" class="external-link"><code>RcppNumerical</code></a> package.</p>
+<div class="section level3">
+<h3 id="linear-regression">Linear Regression<a class="anchor" aria-label="anchor" href="#linear-regression"></a>
+</h3>
 <p>Consider the <strong>Residual Sum of Squares</strong>, also known as <strong>RSS</strong>, defined as:</p>
 <p><span class="math display">\[RSS\left( \beta \right) = \left( { \mathbf{y} - \mathbf{X} \beta } \right)^{\top} \left( \mathbf{y} - \mathbf{X} \beta \right)\]</span></p>
 <p>The objective function we wish to minimize would be defined as:</p>
 <p><span class="math display">\[f(\beta) = \rVert y - X\beta\lVert_2\]</span></p>
 <p>The gradient is defined as:</p>
 <p><span class="math display">\[\frac{\partial RSS}{\partial \beta} = -2 \mathbf{X}^{\top} \left(\mathbf{y} - \mathbf{X} \beta \right)\]</span></p>
-<div id="two-step-implementation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#two-step-implementation" class="anchor"></a>Two-Step Implementation</h3>
+<div class="section level4">
+<h4 id="two-step-implementation">Two-Step Implementation<a class="anchor" aria-label="anchor" href="#two-step-implementation"></a>
+</h4>
 <p>When using <code>ensmallen</code> to solve this problem, we must create a <em>C++</em> class that computes both the objective function value and its gradient value either together or separately under member functions named as:</p>
 <ul>
 <li>
@@ -123,7 +119,7 @@
 <li>
 <code>EvaluateWithGradient()</code>: Perform both steps at the same time. (Optional)</li>
 </ul>
-<p>In the Linear Regression scenario, we will define each step separately to emphasize the calculation occurring. Generally, the one step <code>EvaluateWithGradient()</code> function will be faster than the two step variant. More details on design can be found on <a href="https://www.ensmallen.org/docs.html#differentiable-functions"><code>ensmallen</code> documentation page for differentiable functions</a>.</p>
+<p>In the Linear Regression scenario, we will define each step separately to emphasize the calculation occurring. Generally, the one step <code>EvaluateWithGradient()</code> function will be faster than the two step variant. More details on design can be found on <a href="https://www.ensmallen.org/docs.html#differentiable-functions" class="external-link"><code>ensmallen</code> documentation page for differentiable functions</a>.</p>
 <p>Before writing the class, <code>RcppEnsmallen</code> requires accessing the library in a standalone C++ file with the follow include and Rcpp Attribute declarations:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;RcppEnsmallen.h&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="co">// [[Rcpp::depends(RcppEnsmallen)]]</span></span></code></pre></div>
@@ -190,21 +186,21 @@
 <span id="cb3-21"><a href="#cb3-21"></a>  <span class="cf">return</span> beta;</span>
 <span id="cb3-22"><a href="#cb3-22"></a>}</span></code></pre></div>
 </div>
-<div id="verifying-results" class="section level3">
-<h3 class="hasAnchor">
-<a href="#verifying-results" class="anchor"></a>Verifying Results</h3>
+<div class="section level4">
+<h4 id="verifying-results">Verifying Results<a class="anchor" aria-label="anchor" href="#verifying-results"></a>
+</h4>
 <p>Prior to using the new optimizer in mission critical work, compare the results to methods already implemented in <em>R</em>. The best way to achieve this is to create an oracle model by specifying the parameters known to generate data and, then, try to recover them. Moreover, if a method is already implemented in <em>R</em> feel free to try to check the result equality within an appropriate tolerance threshold.</p>
 <p>Following with this methodology, data must be generated.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e6</span>
-<span class="va">beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">1.5</span>, <span class="fl">3</span>, <span class="fl">8.2</span>, <span class="fl">6.6</span><span class="op">)</span>
-<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span>
-<span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">p</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">X</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">beta</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="op">(</span><span class="va">p</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Next, the optimization procedure is used to estimate the parameters of interest. Under this example, the results of the estimation can be compared to <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. That said, <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> may have more precise results when compared against the optimizer as it is implemented with a closed-form solution to linear regression plus the computational is performed more rigorously.</p>
+<span class="va">beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">1.5</span>, <span class="fl">3</span>, <span class="fl">8.2</span>, <span class="fl">6.6</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span>
+<span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">p</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">X</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">beta</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="op">(</span><span class="va">p</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Next, the optimization procedure is used to estimate the parameters of interest. Under this example, the results of the estimation can be compared to <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>. That said, <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> may have more precise results when compared against the optimizer as it is implemented with a closed-form solution to linear regression plus the computational is performed more rigorously.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">coefs_lbfgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lin_reg_lbfgs.html">lin_reg_lbfgs</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span><span class="op">)</span>
-<span class="va">coefs_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lmfit.html">lm.fit</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></code></pre></div>
+<span class="va">coefs_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lmfit.html" class="external-link">lm.fit</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></code></pre></div>
 <table class="table">
 <caption>Comparison of Estimated Coefficients</caption>
 <thead><tr class="header">
@@ -215,37 +211,37 @@
 <tbody>
 <tr class="odd">
 <td align="left">Beta1</td>
-<td align="right">-2.001185</td>
-<td align="right">-2.001185</td>
+<td align="right">-2.002078</td>
+<td align="right">-2.002078</td>
 </tr>
 <tr class="even">
 <td align="left">Beta2</td>
-<td align="right">1.504882</td>
-<td align="right">1.504882</td>
+<td align="right">1.501388</td>
+<td align="right">1.501388</td>
 </tr>
 <tr class="odd">
 <td align="left">Beta3</td>
-<td align="right">2.998545</td>
-<td align="right">2.998545</td>
+<td align="right">3.002378</td>
+<td align="right">3.002378</td>
 </tr>
 <tr class="even">
 <td align="left">Beta4</td>
-<td align="right">8.197996</td>
-<td align="right">8.197996</td>
+<td align="right">8.193690</td>
+<td align="right">8.193690</td>
 </tr>
 <tr class="odd">
 <td align="left">Beta5</td>
-<td align="right">6.601754</td>
-<td align="right">6.601754</td>
+<td align="right">6.603188</td>
+<td align="right">6.603188</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<div id="package-usage" class="section level1">
-<h1 class="hasAnchor">
-<a href="#package-usage" class="anchor"></a>Package Usage</h1>
+<div class="section level2">
+<h2 id="package-usage">Package Usage<a class="anchor" aria-label="anchor" href="#package-usage"></a>
+</h2>
 <p>RcppEnsmallen is best used within an <em>R</em> package. The setup for <code>RcppEnsmallen</code>’s use mirrors that of other <code>Rcpp</code>-based projects. In particular, the <code>DESCRIPTION</code> file requires the <code>LinkingTo</code> field to contain:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">LinkingTo</span>: Rcpp, RcppArmadillo (<span class="op">&gt;</span>= 0.9.800.0.0), <span class="ex">RcppEnsmallen</span> (<span class="op">&gt;</span>= 0.2.18.0.1)</span></code></pre></div>
 <p>Next, the <code>src/</code> directory must contain both a <code>Makevars</code> and <code>Makevars.win</code> file with:</p>
@@ -267,11 +263,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://thecoatlessprofessor.com">James Joseph Balamuta</a>, <a href="https://dirk.eddelbuettel.com/">Dirk Eddelbuettel</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://thecoatlessprofessor.com" class="external-link">James Joseph Balamuta</a>, <a href="https://dirk.eddelbuettel.com/" class="external-link">Dirk Eddelbuettel</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -279,6 +277,8 @@
 
   
 
+
+  
 
   </body>
 </html>
