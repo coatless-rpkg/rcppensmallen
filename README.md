@@ -1,7 +1,7 @@
 # RcppEnsmallen
 
 <!-- badges: start -->
-[![R build status](https://github.com/coatless/rcppensmallen/workflows/R-CMD-check/badge.svg)](https://github.com/coatless/rcppensmallen/actions)
+[![R build status](https://github.com/coatless-rpkg/rcppensmallen/workflows/R-CMD-check/badge.svg)](https://github.com/coatless-rpkg/rcppensmallen/actions)
 [![License](https://eddelbuettel.github.io/badges/GPL2+.svg)](https://www.gnu.org/licenses/gpl-2.0.html) 
 [![CRAN](https://www.r-pkg.org/badges/version/RcppEnsmallen)](https://cran.r-project.org/package=RcppEnsmallen) 
 [![Downloads](https://cranlogs.r-pkg.org/badges/RcppEnsmallen?color=brightgreen)](https://www.r-pkg.org/pkg/RcppEnsmallen)

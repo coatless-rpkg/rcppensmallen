@@ -1,3 +1,16 @@
+2022-02-18  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION: Update URLs
+	* NEWS.md: ditto
+	* README.md: ditto
+
+2022-02-18  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version): Release 2.18.2
+	* NEWS.md: Update for Ensmallen release 2.18.2
+	* inst/include/ensmallen_bits: Upgraded to Ensmallen 2.18.2
+	* inst/include/ensmallen.hpp: ditto
+
 2021-11-20  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version): Release 2.18.1

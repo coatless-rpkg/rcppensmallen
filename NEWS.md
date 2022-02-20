@@ -1,3 +1,12 @@
+# RcppEnsmallen 0.2.18.2.1
+
+- Upgraded to ensmallen 2.18.2: "Fairmount Bagel" (2022-02-14)
+  - Update Catch2 to 2.13.8
+   ([#336](https://github.com/mlpack/ensmallen/pull/336)).
+  - Fix epoch timing output
+   ([#337](https://github.com/mlpack/ensmallen/pull/337)).
+- Update _R_ package URLs.
+
 # RcppEnsmallen 0.2.18.1.1
 
 - Upgraded to ensmallen 2.18.1: "Fairmount Bagel" (2021-11-20)
@@ -24,7 +33,7 @@
   - Fix MOEAD test stability
     (mlpack/ensmallen#327).
 - Update GitHub Actions to the standard `r-lib/actions` configuration.
-  ([#45](https://github.com/coatless/rcppensmallen/pull/45))
+  ([#45](https://github.com/coatless-rpkg/rcppensmallen/pull/45))
 
 # RcppEnsmallen 0.2.17.0.1
 
@@ -126,10 +135,10 @@
   - Clarify and fix documentation for constrained optimizers (mlpack/ensmallen#201). 
   - Fix L-BFGS convergence when starting from a minimum (mlpack/ensmallen#201).
 - Switch GitHub Actions to use reference tags to always be up-to-date with 
-  CRAN's check grid (`oldrel`, `release`, `devel`). ([#29](https://github.com/coatless/rcppensmallen/pull/29), 
-  [#32](https://github.com/coatless/rcppensmallen/pull/32))
+  CRAN's check grid (`oldrel`, `release`, `devel`). ([#29](https://github.com/coatless-rpkg/rcppensmallen/pull/29), 
+  [#32](https://github.com/coatless-rpkg/rcppensmallen/pull/32))
 - Added a GitHub Action to automatically create a PR with the new version of
-  Ensmallen when a new release is detected. ([#30](https://github.com/coatless/rcppensmallen/pull/30), [#33](https://github.com/coatless/rcppensmallen/pull/33))
+  Ensmallen when a new release is detected. ([#30](https://github.com/coatless-rpkg/rcppensmallen/pull/30), [#33](https://github.com/coatless-rpkg/rcppensmallen/pull/33))
 
 # RcppEnsmallen 0.2.13.0.1
 
@@ -189,8 +198,8 @@
  (mlpack/ensmallen#141).
   - Make code samples collapsible in the documentation.
  (mlpack/ensmallen#140).
-- Switched deployment from TravisCI to GitHub Actions. ([#17](https://github.com/coatless/rcppensmallen/pull/17), [#22](https://github.com/coatless/rcppensmallen/pull/22))
-- Removed check on header file inclusion ([#21](https://github.com/coatless/rcppensmallen/pull/21))
+- Switched deployment from TravisCI to GitHub Actions. ([#17](https://github.com/coatless-rpkg/rcppensmallen/pull/17), [#22](https://github.com/coatless-rpkg/rcppensmallen/pull/22))
+- Removed check on header file inclusion ([#21](https://github.com/coatless-rpkg/rcppensmallen/pull/21))
 
 # RcppEnsmallen 0.2.10.3.1
 
