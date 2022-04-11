@@ -1,3 +1,26 @@
+### ensmallen ?.??.?: "???"
+###### ????-??-??
+
+### ensmallen 2.19.0: "Eight Ball Deluxe"
+###### 2022-04-06
+* Added DemonSGD and DemonAdam optimizers
+   ([#211](https://github.com/mlpack/ensmallen/pull/211)).
+
+ * Fix bug with Adam-like optimizers not resetting when `resetPolicy` is `true`.
+   ([#340](https://github.com/mlpack/ensmallen/pull/340)).
+
+ * Add Yogi optimizer
+   ([#232](https://github.com/mlpack/ensmallen/pull/232)).
+
+ * Add AdaBelief optimizer
+   ([#233](https://github.com/mlpack/ensmallen/pull/233)).
+
+ * Add AdaSqrt optimizer
+   ([#234](https://github.com/mlpack/ensmallen/pull/234)).
+   
+ * Bump check for minimum supported version of Armadillo
+   ([#342](https://github.com/mlpack/ensmallen/pull/342)).
+
 ### ensmallen 2.18.2: "Fairmount Bagel"
 ###### 2022-02-13
  * Update Catch2 to 2.13.8

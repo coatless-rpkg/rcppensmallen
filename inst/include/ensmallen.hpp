@@ -29,8 +29,8 @@
   #error "please enable C++11/C++14 mode in your compiler"
 #endif
 
-#if ((ARMA_VERSION_MAJOR < 8) || ((ARMA_VERSION_MAJOR == 8) && (ARMA_VERSION_MINOR < 400)))
-  #error "need Armadillo version 8.400 or later"
+#if ((ARMA_VERSION_MAJOR < 9) || ((ARMA_VERSION_MAJOR == 9) && (ARMA_VERSION_MINOR < 800)))
+  #error "need Armadillo version 9.800 or later"
 #endif
 
 #include <cctype>
@@ -85,10 +85,14 @@
 
 #include "ensmallen_bits/problems/problems.hpp" // TODO: should move to another place
 
+#include "ensmallen_bits/ada_belief/ada_belief.hpp"
 #include "ensmallen_bits/ada_bound/ada_bound.hpp"
 #include "ensmallen_bits/ada_delta/ada_delta.hpp"
 #include "ensmallen_bits/ada_grad/ada_grad.hpp"
+#include "ensmallen_bits/ada_sqrt/ada_sqrt.hpp"
 #include "ensmallen_bits/adam/adam.hpp"
+#include "ensmallen_bits/demon_adam/demon_adam.hpp"
+#include "ensmallen_bits/demon_sgd/demon_sgd.hpp"
 #include "ensmallen_bits/qhadam/qhadam.hpp"
 #include "ensmallen_bits/aug_lagrangian/aug_lagrangian.hpp"
 #include "ensmallen_bits/bigbatch_sgd/bigbatch_sgd.hpp"
@@ -131,5 +135,6 @@
 #include "ensmallen_bits/svrg/svrg.hpp"
 #include "ensmallen_bits/swats/swats.hpp"
 #include "ensmallen_bits/wn_grad/wn_grad.hpp"
+#include "ensmallen_bits/yogi/yogi.hpp"
 
 #endif
