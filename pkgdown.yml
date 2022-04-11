@@ -3,7 +3,7 @@ pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   using-rcppensmallen: using-rcppensmallen.html
-last_built: 2022-02-20T00:14Z
+last_built: 2022-04-11T16:33Z
 urls:
   reference: https://coatless.github.io/rcppensmallen/reference
   article: https://coatless.github.io/rcppensmallen/articles
