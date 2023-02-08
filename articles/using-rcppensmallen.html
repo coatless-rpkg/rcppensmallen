@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RcppEnsmallen</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.19.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.19.1.1</span>
       </span>
     </div>
 
@@ -192,15 +192,15 @@
 <p>Prior to using the new optimizer in mission critical work, compare the results to methods already implemented in <em>R</em>. The best way to achieve this is to create an oracle model by specifying the parameters known to generate data and, then, try to recover them. Moreover, if a method is already implemented in <em>R</em> feel free to try to check the result equality within an appropriate tolerance threshold.</p>
 <p>Following with this methodology, data must be generated.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e6</span>
-<span class="va">beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">1.5</span>, <span class="fl">3</span>, <span class="fl">8.2</span>, <span class="fl">6.6</span><span class="op">)</span>
-<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span>
-<span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">p</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">X</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">beta</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="op">(</span><span class="va">p</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e6</span></span>
+<span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">1.5</span>, <span class="fl">3</span>, <span class="fl">8.2</span>, <span class="fl">6.6</span><span class="op">)</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span></span>
+<span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">p</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">X</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">beta</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="op">(</span><span class="va">p</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Next, the optimization procedure is used to estimate the parameters of interest. Under this example, the results of the estimation can be compared to <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>. That said, <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> may have more precise results when compared against the optimizer as it is implemented with a closed-form solution to linear regression plus the computational is performed more rigorously.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">coefs_lbfgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lin_reg_lbfgs.html">lin_reg_lbfgs</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span><span class="op">)</span>
-<span class="va">coefs_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lmfit.html" class="external-link">lm.fit</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">coefs_lbfgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lin_reg_lbfgs.html">lin_reg_lbfgs</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">coefs_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lmfit.html" class="external-link">lm.fit</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></span></code></pre></div>
 <table class="table">
 <caption>Comparison of Estimated Coefficients</caption>
 <thead><tr class="header">
@@ -211,28 +211,28 @@
 <tbody>
 <tr class="odd">
 <td align="left">Beta1</td>
-<td align="right">-1.999552</td>
-<td align="right">-1.999552</td>
+<td align="right">-2.001985</td>
+<td align="right">-2.001985</td>
 </tr>
 <tr class="even">
 <td align="left">Beta2</td>
-<td align="right">1.499131</td>
-<td align="right">1.499131</td>
+<td align="right">1.501531</td>
+<td align="right">1.501531</td>
 </tr>
 <tr class="odd">
 <td align="left">Beta3</td>
-<td align="right">3.000531</td>
-<td align="right">3.000531</td>
+<td align="right">2.995175</td>
+<td align="right">2.995175</td>
 </tr>
 <tr class="even">
 <td align="left">Beta4</td>
-<td align="right">8.199387</td>
-<td align="right">8.199387</td>
+<td align="right">8.200480</td>
+<td align="right">8.200480</td>
 </tr>
 <tr class="odd">
 <td align="left">Beta5</td>
-<td align="right">6.601194</td>
-<td align="right">6.601194</td>
+<td align="right">6.600924</td>
+<td align="right">6.600924</td>
 </tr>
 </tbody>
 </table>
@@ -269,7 +269,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
