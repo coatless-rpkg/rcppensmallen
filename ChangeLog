@@ -5,6 +5,8 @@
 	* inst/include/ensmallen_bits: Upgraded to Ensmallen 2.19.1
 	* inst/include/ensmallen.hpp: ditto
 
+	* .github/workflows/R-CMD-check.yaml: Updated to latest version
+
 2022-04-11  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version): Release 2.19.0
