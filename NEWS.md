@@ -1,3 +1,9 @@
+# RcppEnsmallen 0.2.19.1.1
+
+- Upgraded to ensmallen 2.19.1: "Eight Ball Deluxe" (2023-02-08)
+ - Avoid deprecation warnings in Armadillo 11.2+
+    ([#347](https://github.com/mlpack/ensmallen/pull/347)).
+
 # RcppEnsmallen 0.2.19.0.1
 
 - Upgraded to ensmallen 2.19.0: "Eight Ball Deluxe" (2022-04-11)
