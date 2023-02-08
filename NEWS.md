@@ -3,6 +3,8 @@
 - Upgraded to ensmallen 2.19.1: "Eight Ball Deluxe" (2023-02-08)
  - Avoid deprecation warnings in Armadillo 11.2+
     ([#347](https://github.com/mlpack/ensmallen/pull/347)).
+- Updated GitHub Action's runner to the latest versions 
+    ([#51](https://github.com/coatless-rpkg/rcppensmallen/51)).
 
 # RcppEnsmallen 0.2.19.0.1
 
