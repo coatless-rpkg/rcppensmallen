@@ -80,7 +80,7 @@ jobs:
           # Remove the release tar.gz
           rm $RELEASE_TAG
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v5
         with:
           commit-message: Upgrade ensmallen to ${{ steps.ensmallen-lib.outputs.release_tag }}
           title: Upgrade ensmallen to ${{ steps.ensmallen-lib.outputs.release_tag }}
