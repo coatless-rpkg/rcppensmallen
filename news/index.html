@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RcppEnsmallen</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.19.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.20.0.1</span>
       </span>
     </div>
 
@@ -58,6 +58,17 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.2.20.0.1" id="rcppensmallen-022001">RcppEnsmallen 0.2.20.0.1<a class="anchor" aria-label="anchor" href="#rcppensmallen-022001"></a></h2>
+<ul><li>Upgraded to ensmallen 2.20.0: “Eight Ball Deluxe” (2023-10-05)
+<ul><li>Implementation of Active CMAES (<a href="https://github.com/mlpack/ensmallen/pull/367" class="external-link">#367</a>).</li>
+<li>LBFGS: avoid generation of NaNs, and add checks for finite values (<a href="https://github.com/mlpack/ensmallen/pull/368" class="external-link">#368</a>).</li>
+<li>Fix CNE test tolerances (<a href="https://github.com/mlpack/ensmallen/pull/360" class="external-link">#360</a>).</li>
+<li>Rename <code>SCD</code> optimizer, to <code>CD</code> (<a href="https://github.com/mlpack/ensmallen/pull/379" class="external-link">#379</a>).</li>
+</ul></li>
+<li>Updated GitHub Action runners <code>update-ensmallen-refresh</code> and <code>pkgdown</code> to address deprecation notices. (<a href="https://github.com/coatless-rpkg/rcppensmallen/53" class="external-link">#53</a>, <a href="https://github.com/coatless-rpkg/rcppensmallen/54" class="external-link">#54</a>, <a href="https://github.com/coatless-rpkg/rcppensmallen/55" class="external-link">#55</a>).</li>
+<li>Removed explicit C++11 requirement from <code>DESCRIPTION</code> and <code>Makevars{.win}</code>.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.19.1.1" id="rcppensmallen-021911">RcppEnsmallen 0.2.19.1.1<a class="anchor" aria-label="anchor" href="#rcppensmallen-021911"></a></h2>
 <ul><li>Upgraded to ensmallen 2.19.1: “Eight Ball Deluxe” (2023-02-08)</li>
 <li>Avoid deprecation warnings in Armadillo 11.2+ (<a href="https://github.com/mlpack/ensmallen/pull/347" class="external-link">#347</a>).</li>
@@ -92,87 +103,87 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.18.0.1" id="rcppensmallen-021801">RcppEnsmallen 0.2.18.0.1<small>2021-10-22</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021801"></a></h2>
 <ul><li>Upgraded to ensmallen 2.18.0: “Fairmount Bagel” (2021-10-21)
-<ul><li>Add gradient value clipping and gradient norm scaling callback (mlpack/ensmallen#315).</li>
-<li>Remove superfluous CMake option to build the tests (mlpack/ensmallen#313).</li>
-<li>Bump minimum Armadillo version to 9.800 (mlpack/ensmallen#318).</li>
-<li>Update Catch2 to 2.13.7 (mlpack/ensmallen#322).</li>
-<li>Remove redundant template argument for C++20 compatibility (mlpack/ensmallen#324).</li>
-<li>Fix MOEAD test stability (mlpack/ensmallen#327).</li>
+<ul><li>Add gradient value clipping and gradient norm scaling callback (<a href="https://github.com/mlpack/ensmallen/pull/315" class="external-link">#315</a>).</li>
+<li>Remove superfluous CMake option to build the tests (<a href="https://github.com/mlpack/ensmallen/pull/313" class="external-link">#313</a>).</li>
+<li>Bump minimum Armadillo version to 9.800 (<a href="https://github.com/mlpack/ensmallen/pull/318" class="external-link">#318</a>).</li>
+<li>Update Catch2 to 2.13.7 (<a href="https://github.com/mlpack/ensmallen/pull/322" class="external-link">#322</a>).</li>
+<li>Remove redundant template argument for C++20 compatibility (<a href="https://github.com/mlpack/ensmallen/pull/324" class="external-link">#324</a>).</li>
+<li>Fix MOEAD test stability (<a href="https://github.com/mlpack/ensmallen/pull/327" class="external-link">#327</a>).</li>
 </ul></li>
 <li>Update GitHub Actions to the standard <code>r-lib/actions</code> configuration. (<a href="https://github.com/coatless-rpkg/rcppensmallen/pull/45" class="external-link">#45</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.17.0.1" id="rcppensmallen-021701">RcppEnsmallen 0.2.17.0.1<small>2021-07-06</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021701"></a></h2>
 <ul><li>Upgraded to ensmallen 2.17.0: “Pachis Din Me Pesa Double” (2021-07-06)
-<ul><li>CheckArbitraryFunctionTypeAPI extended for MOO support (mlpack/ensmallen#283).</li>
-<li>Refactor NSGA2 (mlpack/ensmallen#263, mlpack/ensmallen#304).</li>
-<li>Add Indicators for Multiobjective optimizers (mlpack/ensmallen#285).</li>
-<li>Make Callback flexible for MultiObjective Optimizers (mlpack/ensmallen#289).</li>
-<li>Add ZDT Test Suite (mlpack/ensmallen#273).</li>
-<li>Add MOEA-D/DE Optimizer (mlpack/ensmallen#269).</li>
-<li>Introduce Policy Methods for MOEA/D-DE (mlpack/ensmallen#293).</li>
-<li>Add Das-Dennis weight initialization method (mlpack/ensmallen#295).</li>
-<li>Add Dirichlet Weight Initialization (mlpack/ensmallen#296).</li>
-<li>Improved installation and compilation instructions (mlpack/ensmallen#300).</li>
-<li>Disable building the tests by default for faster installation (mlpack/ensmallen#303).</li>
-<li>Modify matrix initialisation to take into account default element zeroing in Armadillo 10.5 (mlpack/ensmallen#305).</li>
+<ul><li>CheckArbitraryFunctionTypeAPI extended for MOO support (<a href="https://github.com/mlpack/ensmallen/pull/283" class="external-link">#283</a>).</li>
+<li>Refactor NSGA2 (<a href="https://github.com/mlpack/ensmallen/pull/263" class="external-link">#263</a>, <a href="https://github.com/mlpack/ensmallen/pull/304" class="external-link">#304</a>).</li>
+<li>Add Indicators for Multiobjective optimizers (<a href="https://github.com/mlpack/ensmallen/pull/285" class="external-link">#285</a>).</li>
+<li>Make Callback flexible for MultiObjective Optimizers (<a href="https://github.com/mlpack/ensmallen/pull/289" class="external-link">#289</a>).</li>
+<li>Add ZDT Test Suite (<a href="https://github.com/mlpack/ensmallen/pull/273" class="external-link">#273</a>).</li>
+<li>Add MOEA-D/DE Optimizer (<a href="https://github.com/mlpack/ensmallen/pull/269" class="external-link">#269</a>).</li>
+<li>Introduce Policy Methods for MOEA/D-DE (<a href="https://github.com/mlpack/ensmallen/pull/293" class="external-link">#293</a>).</li>
+<li>Add Das-Dennis weight initialization method (<a href="https://github.com/mlpack/ensmallen/pull/295" class="external-link">#295</a>).</li>
+<li>Add Dirichlet Weight Initialization (<a href="https://github.com/mlpack/ensmallen/pull/296" class="external-link">#296</a>).</li>
+<li>Improved installation and compilation instructions (<a href="https://github.com/mlpack/ensmallen/pull/300" class="external-link">#300</a>).</li>
+<li>Disable building the tests by default for faster installation (<a href="https://github.com/mlpack/ensmallen/pull/303" class="external-link">#303</a>).</li>
+<li>Modify matrix initialisation to take into account default element zeroing in Armadillo 10.5 (<a href="https://github.com/mlpack/ensmallen/pull/305" class="external-link">#305</a>).</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.16.2.1" id="rcppensmallen-021621-github-only-release">RcppEnsmallen 0.2.16.2.1 (GitHub-only Release)<a class="anchor" aria-label="anchor" href="#rcppensmallen-021621-github-only-release"></a></h2>
 <ul><li>Upgraded to ensmallen 2.16.2: “Severely Dented Can Of Polyurethane” (2021-03-25)
-<ul><li>Fix CNE test trials (mlpack/ensmallen#267).</li>
-<li>Update Catch2 to 2.13.4 (mlpack/ensmallen#268).</li>
-<li>Fix typos in documentation (mlpack/ensmallen#270, mlpack/ensmallen#271).</li>
-<li>Add clarifying comments in problems/ implementations (mlpack/ensmallen#276).</li>
-<li>Remove <code>AdamSchafferFunctionN2Test</code> test from Adam test suite to prevent spurious issue on some aarch64 (mlpack/ensmallen#259).</li>
+<ul><li>Fix CNE test trials (<a href="https://github.com/mlpack/ensmallen/pull/267" class="external-link">#267</a>).</li>
+<li>Update Catch2 to 2.13.4 (<a href="https://github.com/mlpack/ensmallen/pull/268" class="external-link">#268</a>).</li>
+<li>Fix typos in documentation (<a href="https://github.com/mlpack/ensmallen/pull/270" class="external-link">#270</a>, <a href="https://github.com/mlpack/ensmallen/pull/271" class="external-link">#271</a>).</li>
+<li>Add clarifying comments in problems/ implementations (<a href="https://github.com/mlpack/ensmallen/pull/276" class="external-link">#276</a>).</li>
+<li>Remove <code>AdamSchafferFunctionN2Test</code> test from Adam test suite to prevent spurious issue on some aarch64 (<a href="https://github.com/mlpack/ensmallen/pull/259" class="external-link">#259</a>).</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.16.1.1" id="rcppensmallen-021611">RcppEnsmallen 0.2.16.1.1<small>2021-03-05</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021611"></a></h2>
 <ul><li>Upgraded to ensmallen 2.16.1: “Severely Dented Can Of Polyurethane” (2021-03-04)
-<ul><li>Fix test compilation issue when <code>ENS_USE_OPENMP</code> is set (mlpack/ensmallen#255).</li>
-<li>Fix CNE initial population generation to use normal distribution (mlpack/ensmallen#258).</li>
-<li>Fix compilation warnings (mlpack/ensmallen#259).</li>
+<ul><li>Fix test compilation issue when <code>ENS_USE_OPENMP</code> is set (<a href="https://github.com/mlpack/ensmallen/pull/255" class="external-link">#255</a>).</li>
+<li>Fix CNE initial population generation to use normal distribution (<a href="https://github.com/mlpack/ensmallen/pull/258" class="external-link">#258</a>).</li>
+<li>Fix compilation warnings (<a href="https://github.com/mlpack/ensmallen/pull/259" class="external-link">#259</a>).</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.16.0.1" id="rcppensmallen-021601-github-only-release">RcppEnsmallen 0.2.16.0.1 (GitHub-Only Release)<a class="anchor" aria-label="anchor" href="#rcppensmallen-021601-github-only-release"></a></h2>
 <ul><li>Upgraded to ensmallen 2.16.0: “Severely Dented Can Of Polyurethane” (2021-02-19)
-<ul><li>Expand README with example installation and add simple example program showing usage of the L-BFGS optimizer (mlpack/ensmallen#248).</li>
-<li>Refactor tests to increase stability and reduce random errors (mlpack/ensmallen#249).</li>
+<ul><li>Expand README with example installation and add simple example program showing usage of the L-BFGS optimizer (<a href="https://github.com/mlpack/ensmallen/pull/248" class="external-link">#248</a>).</li>
+<li>Refactor tests to increase stability and reduce random errors (<a href="https://github.com/mlpack/ensmallen/pull/249" class="external-link">#249</a>).</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.15.1.1" id="rcppensmallen-021511">RcppEnsmallen 0.2.15.1.1<a class="anchor" aria-label="anchor" href="#rcppensmallen-021511"></a></h2>
 <ul><li>Upgraded to ensmallen 2.15.1: “Why Can’t I Manage To Grow Any Plants?” (2020-11-05)
-<ul><li>Fix include order to ensure traits is loaded before reports (mlpack/ensmallen#239).</li>
+<ul><li>Fix include order to ensure traits is loaded before reports (<a href="https://github.com/mlpack/ensmallen/pull/239" class="external-link">#239</a>).</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.15.0.1" id="rcppensmallen-021501">RcppEnsmallen 0.2.15.0.1<small>2020-11-04</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021501"></a></h2>
 <ul><li>Upgraded to ensmallen 2.15.0: “No Direction Home” (2020-11-03)
-<ul><li>Make a few tests more robust (mlpack/ensmallen#228).</li>
-<li>Add release date to version information. (mlpack/ensmallen#226)</li>
-<li>Fix typo in release script (mlpack/ensmallen#236).</li>
-<li>Add optimizer summary report callback (mlpack/ensmallen#213).</li>
+<ul><li>Make a few tests more robust (<a href="https://github.com/mlpack/ensmallen/pull/228" class="external-link">#228</a>).</li>
+<li>Add release date to version information. (<a href="https://github.com/mlpack/ensmallen/pull/226" class="external-link">#226</a>)</li>
+<li>Fix typo in release script (<a href="https://github.com/mlpack/ensmallen/pull/236" class="external-link">#236</a>).</li>
+<li>Add optimizer summary report callback (<a href="https://github.com/mlpack/ensmallen/pull/213" class="external-link">#213</a>).</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.14.2.1" id="rcppensmallen-021421">RcppEnsmallen 0.2.14.2.1<small>2020-09-07</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021421"></a></h2>
 <ul><li>Upgraded to ensmallen 2.14.2: “No Direction Home” (2020-09-05)
-<ul><li>Fix implementation of fonesca fleming problem function f1 and f2 type usage and negative signs. (mlpack/ensmallen#223)</li>
+<ul><li>Fix implementation of fonesca fleming problem function f1 and f2 type usage and negative signs. (<a href="https://github.com/mlpack/ensmallen/pull/223" class="external-link">#223</a>)</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.14.1.1" id="rcppensmallen-021411">RcppEnsmallen 0.2.14.1.1<small>2020-08-27</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021411"></a></h2>
 <ul><li>Upgraded to ensmallen 2.14.1: “No Direction Home” (2020-08-21)
-<ul><li>Fix release script (remove hardcoded information, trim leading whitespaces introduced by <code>wc -l</code> in MacOS) (mlpack/ensmallen#216, mlpack/ensmallen#220).</li>
-<li>Adjust tolerance for AugLagrangian convergence based on element type (mlpack/ensmallen#217).</li>
-<li>Add NSGA2 optimizer for multi-objective functions (mlpack/ensmallen#149).</li>
-<li>Update automatic website update release script (mlpack/ensmallen#207).</li>
-<li>Clarify and fix documentation for constrained optimizers (mlpack/ensmallen#201).</li>
-<li>Fix L-BFGS convergence when starting from a minimum (mlpack/ensmallen#201).</li>
+<ul><li>Fix release script (remove hardcoded information, trim leading whitespaces introduced by <code>wc -l</code> in MacOS) (<a href="https://github.com/mlpack/ensmallen/pull/216" class="external-link">#216</a>, <a href="https://github.com/mlpack/ensmallen/pull/220" class="external-link">#220</a>).</li>
+<li>Adjust tolerance for AugLagrangian convergence based on element type (<a href="https://github.com/mlpack/ensmallen/pull/217" class="external-link">#217</a>).</li>
+<li>Add NSGA2 optimizer for multi-objective functions (<a href="https://github.com/mlpack/ensmallen/pull/149" class="external-link">#149</a>).</li>
+<li>Update automatic website update release script (<a href="https://github.com/mlpack/ensmallen/pull/207" class="external-link">#207</a>).</li>
+<li>Clarify and fix documentation for constrained optimizers (<a href="https://github.com/mlpack/ensmallen/pull/201" class="external-link">#201</a>).</li>
+<li>Fix L-BFGS convergence when starting from a minimum (<a href="https://github.com/mlpack/ensmallen/pull/201" class="external-link">#201</a>).</li>
 </ul></li>
 <li>Switch GitHub Actions to use reference tags to always be up-to-date with CRAN’s check grid (<code>oldrel</code>, <code>release</code>, <code>devel</code>). (<a href="https://github.com/coatless-rpkg/rcppensmallen/pull/29" class="external-link">#29</a>, <a href="https://github.com/coatless-rpkg/rcppensmallen/pull/32" class="external-link">#32</a>)</li>
 <li>Added a GitHub Action to automatically create a PR with the new version of Ensmallen when a new release is detected. (<a href="https://github.com/coatless-rpkg/rcppensmallen/pull/30" class="external-link">#30</a>, <a href="https://github.com/coatless-rpkg/rcppensmallen/pull/33" class="external-link">#33</a>)</li>
@@ -180,41 +191,41 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.13.0.1" id="rcppensmallen-021301">RcppEnsmallen 0.2.13.0.1<small>2020-07-24</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021301"></a></h2>
 <ul><li>Upgraded to ensmallen 2.13.0: “Automatically Automated Automation” (2020-07-15)
-<ul><li>Fix CMake package export (mlpack/ensmallen#198).</li>
-<li>Allow early stop callback to accept a lambda function (mlpack/ensmallen#165).</li>
+<ul><li>Fix CMake package export (<a href="https://github.com/mlpack/ensmallen/pull/198" class="external-link">#198</a>).</li>
+<li>Allow early stop callback to accept a lambda function (<a href="https://github.com/mlpack/ensmallen/pull/165" class="external-link">#165</a>).</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.12.1.1" id="rcppensmallen-021211">RcppEnsmallen 0.2.12.1.1<small>2020-04-24</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021211"></a></h2>
 <ul><li>Upgraded to ensmallen 2.12.1: “Stir Crazy” (2020-04-20)</li>
-<li>Fix total number of epochs and time estimation for ProgressBar callback (mlpack/ensmallen#181).</li>
-<li>Handle SpSubview_col and SpSubview_row in Armadillo 9.870 (mlpack/ensmallen#194).</li>
-<li>Minor documentation fixes (mlpack/ensmallen#197).</li>
-<li>Correction in the formulation of sigma in CMA-ES (mlpack/ensmallen#183).</li>
-<li>Remove deprecated methods from PrimalDualSolver implementation (mlpack/ensmallen#185). (mlpack/ensmallen#186).</li>
+<li>Fix total number of epochs and time estimation for ProgressBar callback (<a href="https://github.com/mlpack/ensmallen/pull/181" class="external-link">#181</a>).</li>
+<li>Handle SpSubview_col and SpSubview_row in Armadillo 9.870 (<a href="https://github.com/mlpack/ensmallen/pull/194" class="external-link">#194</a>).</li>
+<li>Minor documentation fixes (<a href="https://github.com/mlpack/ensmallen/pull/197" class="external-link">#197</a>).</li>
+<li>Correction in the formulation of sigma in CMA-ES (<a href="https://github.com/mlpack/ensmallen/pull/183" class="external-link">#183</a>).</li>
+<li>Remove deprecated methods from PrimalDualSolver implementation (<a href="https://github.com/mlpack/ensmallen/pull/185" class="external-link">#185</a>). (<a href="https://github.com/mlpack/ensmallen/pull/186" class="external-link">#186</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.11.3.1" id="rcppensmallen-021131">RcppEnsmallen 0.2.11.3.1<small>2020-02-20</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021131"></a></h2>
 <ul><li>Upgraded to ensmallen 2.11.3: “The Poster Session Is Full” (2020-02-19)
-<ul><li>Prevent spurious compiler warnings (mlpack/ensmallen#161).</li>
-<li>Fix minor memory leaks (mlpack/ensmallen#167).</li>
-<li>Revamp CMake configuration (mlpack/ensmallen#152).</li>
-<li>Allow callback instantiation for SGD based optimizer (mlpack/ensmallen#155).</li>
-<li>Minor test stability fixes on i386 (mlpack/ensmallen#156).</li>
-<li>Fix Lookahead MaxIterations() check. (mlpack/ensmallen#159).</li>
+<ul><li>Prevent spurious compiler warnings (<a href="https://github.com/mlpack/ensmallen/pull/161" class="external-link">#161</a>).</li>
+<li>Fix minor memory leaks (<a href="https://github.com/mlpack/ensmallen/pull/167" class="external-link">#167</a>).</li>
+<li>Revamp CMake configuration (<a href="https://github.com/mlpack/ensmallen/pull/152" class="external-link">#152</a>).</li>
+<li>Allow callback instantiation for SGD based optimizer (<a href="https://github.com/mlpack/ensmallen/pull/155" class="external-link">#155</a>).</li>
+<li>Minor test stability fixes on i386 (<a href="https://github.com/mlpack/ensmallen/pull/156" class="external-link">#156</a>).</li>
+<li>Fix Lookahead MaxIterations() check. (<a href="https://github.com/mlpack/ensmallen/pull/159" class="external-link">#159</a>).</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.11.1.1" id="rcppensmallen-021111">RcppEnsmallen 0.2.11.1.1<small>2020-01-14</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021111"></a></h2>
 <ul><li>Upgraded to ensmallen 2.11.1: “The Poster Session Is Full” (2019-12-28)
-<ul><li>Fix Lookahead Synchronization period type (mlpack/ensmallen#153).</li>
-<li>Add Lookahead (mlpack/ensmallen#138).</li>
-<li>Add AdaBound and AMSBound (mlpack/ensmallen#137).</li>
-<li>SGD callback test 32-bit safety (big number) (mlpack/ensmallen#143).</li>
-<li>Use “arbitrary” and “separable” terms in static function type checks (mlpack/ensmallen#145).</li>
-<li>Remove ‘using namespace std’ from <code>problems/</code> files (mlpack/ensmallen#147).</li>
-<li>Add optional tests building. (mlpack/ensmallen#141).</li>
-<li>Make code samples collapsible in the documentation. (mlpack/ensmallen#140).</li>
+<ul><li>Fix Lookahead Synchronization period type (<a href="https://github.com/mlpack/ensmallen/pull/153" class="external-link">#153</a>).</li>
+<li>Add Lookahead (<a href="https://github.com/mlpack/ensmallen/pull/138" class="external-link">#138</a>).</li>
+<li>Add AdaBound and AMSBound (<a href="https://github.com/mlpack/ensmallen/pull/137" class="external-link">#137</a>).</li>
+<li>SGD callback test 32-bit safety (big number) (<a href="https://github.com/mlpack/ensmallen/pull/143" class="external-link">#143</a>).</li>
+<li>Use “arbitrary” and “separable” terms in static function type checks (<a href="https://github.com/mlpack/ensmallen/pull/145" class="external-link">#145</a>).</li>
+<li>Remove ‘using namespace std’ from <code>problems/</code> files (<a href="https://github.com/mlpack/ensmallen/pull/147" class="external-link">#147</a>).</li>
+<li>Add optional tests building. (<a href="https://github.com/mlpack/ensmallen/pull/141" class="external-link">#141</a>).</li>
+<li>Make code samples collapsible in the documentation. (<a href="https://github.com/mlpack/ensmallen/pull/140" class="external-link">#140</a>).</li>
 </ul></li>
 <li>Switched deployment from TravisCI to GitHub Actions. (<a href="https://github.com/coatless-rpkg/rcppensmallen/pull/17" class="external-link">#17</a>, <a href="https://github.com/coatless-rpkg/rcppensmallen/pull/22" class="external-link">#22</a>)</li>
 <li>Removed check on header file inclusion (<a href="https://github.com/coatless-rpkg/rcppensmallen/pull/21" class="external-link">#21</a>)</li>
@@ -222,48 +233,48 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.10.3.1" id="rcppensmallen-021031">RcppEnsmallen 0.2.10.3.1<small>2019-09-30</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021031"></a></h2>
 <ul><li>Upgraded to ensmallen 2.10.3: “Fried Chicken” (2019-09-26)
-<ul><li>Add release script to rel/ for maintainers (mlpack/ensmallen#128).</li>
-<li>Fix Armadillo version check (mlpack/ensmallen#133).</li>
-<li>Documentation fix for callbacks (mlpack/ensmallen#129).</li>
-<li>Compatibility fixes for ensmallen 1.x (mlpack/ensmallen#131).</li>
-<li>Fix ParallelSGD runtime bug. (mlpack/ensmallen#135).</li>
-<li>Add additional L-BFGS convergence check (mlpack/ensmallen#136).</li>
+<ul><li>Add release script to rel/ for maintainers (<a href="https://github.com/mlpack/ensmallen/pull/128" class="external-link">#128</a>).</li>
+<li>Fix Armadillo version check (<a href="https://github.com/mlpack/ensmallen/pull/133" class="external-link">#133</a>).</li>
+<li>Documentation fix for callbacks (<a href="https://github.com/mlpack/ensmallen/pull/129" class="external-link">#129</a>).</li>
+<li>Compatibility fixes for ensmallen 1.x (<a href="https://github.com/mlpack/ensmallen/pull/131" class="external-link">#131</a>).</li>
+<li>Fix ParallelSGD runtime bug. (<a href="https://github.com/mlpack/ensmallen/pull/135" class="external-link">#135</a>).</li>
+<li>Add additional L-BFGS convergence check (<a href="https://github.com/mlpack/ensmallen/pull/136" class="external-link">#136</a>).</li>
 </ul></li>
 <li>Added vignette with worked example for linear regression and for package inclusion.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.10.0.1" id="rcppensmallen-021001">RcppEnsmallen 0.2.10.0.1<small>2019-09-07</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-021001"></a></h2>
 <ul><li>Upgraded to ensmallen 2.10.0: “Fried Chicken” (2019-09-07)
-<ul><li>All <code>Optimize()</code> functions now take any matrix type; so, e.g., <code>arma::fmat</code> or <code>arma::sp_mat</code> can be used for optimization. See the documentation for (mlpack/ensmallen#113). (mlpack/ensmallen#119).</li>
-<li>Introduce callback support. Callbacks can be appended as the last arguments of an <code>Optimize()</code> call, and can perform custom behavior at different points during the optimization. See the documentation for more details (mlpack/ensmallen#119).</li>
-<li>Slight speedups for <code>FrankWolfe</code> optimizer (mlpack/ensmallen#127).</li>
+<ul><li>All <code>Optimize()</code> functions now take any matrix type; so, e.g., <code>arma::fmat</code> or <code>arma::sp_mat</code> can be used for optimization. See the documentation for (<a href="https://github.com/mlpack/ensmallen/pull/113" class="external-link">#113</a>). (<a href="https://github.com/mlpack/ensmallen/pull/119" class="external-link">#119</a>).</li>
+<li>Introduce callback support. Callbacks can be appended as the last arguments of an <code>Optimize()</code> call, and can perform custom behavior at different points during the optimization. See the documentation for more details (<a href="https://github.com/mlpack/ensmallen/pull/119" class="external-link">#119</a>).</li>
+<li>Slight speedups for <code>FrankWolfe</code> optimizer (<a href="https://github.com/mlpack/ensmallen/pull/127" class="external-link">#127</a>).</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.16.0.1" id="rcppensmallen-011601">RcppEnsmallen 0.1.16.0.1<small>2019-08-29</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-011601"></a></h2>
 <ul><li>Upgraded to ensmallen release 1.16.0 “Loud Alarm Clock” (2019-08-09)
-<ul><li>Add option to avoid computing exact objective at the end of the optimization (mlpack/ensmallen#109). (mlpack/ensmallen#118). (mlpack/ensmallen#118).</li>
-<li>Introduce local-best particle swarm optimization, <code>LBestPSO</code>, for (mlpack/ensmallen#86).</li>
+<ul><li>Add option to avoid computing exact objective at the end of the optimization (<a href="https://github.com/mlpack/ensmallen/pull/109" class="external-link">#109</a>). (<a href="https://github.com/mlpack/ensmallen/pull/118" class="external-link">#118</a>). (<a href="https://github.com/mlpack/ensmallen/pull/118" class="external-link">#118</a>).</li>
+<li>Introduce local-best particle swarm optimization, <code>LBestPSO</code>, for (<a href="https://github.com/mlpack/ensmallen/pull/86" class="external-link">#86</a>).</li>
 </ul></li>
-<li>(mlpack/ensmallen#123).</li>
+<li>(<a href="https://github.com/mlpack/ensmallen/pull/123" class="external-link">#123</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.15.0.1" id="rcppensmallen-011501">RcppEnsmallen 0.1.15.0.1<small>2019-05-20</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-011501"></a></h2>
-<ul><li>Upgraded to ensmallen release 1.15.0 “Wrong Side Of The Road” (2019-05-14) (mlpack/ensmallen#81).</li>
-<li>(mlpack/ensmallen#115).</li>
-<li>(mlpack/ensmallen#115).</li>
+<ul><li>Upgraded to ensmallen release 1.15.0 “Wrong Side Of The Road” (2019-05-14) (<a href="https://github.com/mlpack/ensmallen/pull/81" class="external-link">#81</a>).</li>
+<li>(<a href="https://github.com/mlpack/ensmallen/pull/115" class="external-link">#115</a>).</li>
+<li>(<a href="https://github.com/mlpack/ensmallen/pull/115" class="external-link">#115</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.14.4.1" id="rcppensmallen-011441">RcppEnsmallen 0.1.14.4.1<small>2019-05-13</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-011441"></a></h2>
-<ul><li>Upgraded to ensmallen release 1.14.4 “Difficult Crimp” (2019-05-12) (mlpack/ensmallen#91). (mlpack/ensmallen#100). (mlpack/ensmallen#97). (mlpack/ensmallen#98). (mlpack/ensmallen#92).</li>
+<ul><li>Upgraded to ensmallen release 1.14.4 “Difficult Crimp” (2019-05-12) (<a href="https://github.com/mlpack/ensmallen/pull/91" class="external-link">#91</a>). (<a href="https://github.com/mlpack/ensmallen/pull/100" class="external-link">#100</a>). (<a href="https://github.com/mlpack/ensmallen/pull/97" class="external-link">#97</a>). (<a href="https://github.com/mlpack/ensmallen/pull/98" class="external-link">#98</a>). (<a href="https://github.com/mlpack/ensmallen/pull/92" class="external-link">#92</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.14.1.1" id="rcppensmallen-011411">RcppEnsmallen 0.1.14.1.1<small>2019-03-10</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-011411"></a></h2>
-<ul><li>Upgraded to ensmallen release 1.14.1 “Difficult Crimp” (2019-03-09) (mlpack/ensmallen#87). (mlpack/ensmallen#90). in CNE to be a normal distribution about the given starting point, which should accelerate convergence. (mlpack/ensmallen#77). (mlpack/ensmallen#83).</li>
+<ul><li>Upgraded to ensmallen release 1.14.1 “Difficult Crimp” (2019-03-09) (<a href="https://github.com/mlpack/ensmallen/pull/87" class="external-link">#87</a>). (<a href="https://github.com/mlpack/ensmallen/pull/90" class="external-link">#90</a>). in CNE to be a normal distribution about the given starting point, which should accelerate convergence. (<a href="https://github.com/mlpack/ensmallen/pull/77" class="external-link">#77</a>). (<a href="https://github.com/mlpack/ensmallen/pull/83" class="external-link">#83</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.13.0.1" id="rcppensmallen-011301">RcppEnsmallen 0.1.13.0.1<small>2019-01-21</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-011301"></a></h2>
-<ul><li>Upgraded to ensmallen release 1.13.0 “Coronavirus Invasion” (2019-01-14) (mlpack/ensmallen#66). (mlpack/ensmallen#69).
+<ul><li>Upgraded to ensmallen release 1.13.0 “Coronavirus Invasion” (2019-01-14) (<a href="https://github.com/mlpack/ensmallen/pull/66" class="external-link">#66</a>). (<a href="https://github.com/mlpack/ensmallen/pull/69" class="external-link">#69</a>).
 <ul><li>Fix list of contributors.</li>
 <li>Make sure all files end with newlines.</li>
 </ul></li>
@@ -273,7 +284,7 @@
 <h2 class="page-header" data-toc-text="0.1.12.0.1" id="rcppensmallen-011201">RcppEnsmallen 0.1.12.0.1<small>2019-01-04</small><a class="anchor" aria-label="anchor" href="#rcppensmallen-011201"></a></h2>
 <ul><li>Upgraded to ensmallen release 1.12.0 “New Year’s Party” (2018-12-30)
 <ul><li>Add link to ensmallen PDF to README.md.</li>
-<li>Minor documentation fixes. Remove too-verbose documentation from source for (mlpack/ensmallen#61). (mlpack/ensmallen#48). (mlpack/ensmallen#42). (mlpack/ensmallen#46). (mlpack/ensmallen#45). (mlpack/ensmallen#60).</li>
+<li>Minor documentation fixes. Remove too-verbose documentation from source for (<a href="https://github.com/mlpack/ensmallen/pull/61" class="external-link">#61</a>). (<a href="https://github.com/mlpack/ensmallen/pull/48" class="external-link">#48</a>). (<a href="https://github.com/mlpack/ensmallen/pull/42" class="external-link">#42</a>). (<a href="https://github.com/mlpack/ensmallen/pull/46" class="external-link">#46</a>). (<a href="https://github.com/mlpack/ensmallen/pull/45" class="external-link">#45</a>). (<a href="https://github.com/mlpack/ensmallen/pull/60" class="external-link">#60</a>).</li>
 </ul></li>
 <li>Updated citation information</li>
 </ul></div>
