@@ -9,7 +9,8 @@
     ([#360](https://github.com/mlpack/ensmallen/pull/360)).
   - Rename `SCD` optimizer, to `CD`
     ([#379](https://github.com/mlpack/ensmallen/pull/379)).
-  - Avoid deprecation warnings in Armadillo 11.2+
+- Updated GitHub Action runners `update-ensmallen-refresh` and `pkgdown` to address deprecation notices.
+    ([#53](https://github.com/coatless-rpkg/rcppensmallen/53), [#54](https://github.com/coatless-rpkg/rcppensmallen/54), [#55](https://github.com/coatless-rpkg/rcppensmallen/55)).
 
 # RcppEnsmallen 0.2.19.1.1
 
