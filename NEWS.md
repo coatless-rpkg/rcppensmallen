@@ -10,9 +10,6 @@
   - Rename `SCD` optimizer, to `CD`
     ([#379](https://github.com/mlpack/ensmallen/pull/379)).
   - Avoid deprecation warnings in Armadillo 11.2+
- - Avoid deprecation warnings in Armadillo 11.2+
-  - Added DemonSGD and DemonAdam optimizers
- - Added DemonSGD and DemonAdam optimizers
 
 # RcppEnsmallen 0.2.19.1.1
 
