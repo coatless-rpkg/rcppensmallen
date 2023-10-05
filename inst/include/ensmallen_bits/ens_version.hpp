@@ -23,9 +23,9 @@
 // contain the capitalized string "RC".
 #define ENS_VERSION_NAME "Eight Ball Deluxe"
 // Incorporate the date the version was released.
-#define ENS_VERSION_YEAR "2022"
-#define ENS_VERSION_MONTH "04"
-#define ENS_VERSION_DAY "06"
+#define ENS_VERSION_YEAR "2023"
+#define ENS_VERSION_MONTH "01"
+#define ENS_VERSION_DAY "30"
 
 namespace ens {
 

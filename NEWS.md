@@ -1,3 +1,18 @@
+# RcppEnsmallen 0.2.20.0.1
+
+- Upgraded to ensmallen 2.20.0: "Eight Ball Deluxe" (2023-10-05)
+  - Implementation of Active CMAES
+    ([#367](https://github.com/mlpack/ensmallen/pull/367)).
+  - LBFGS: avoid generation of NaNs, and add checks for finite values
+    ([#368](https://github.com/mlpack/ensmallen/pull/368)).
+  - Fix CNE test tolerances
+    ([#360](https://github.com/mlpack/ensmallen/pull/360)).
+  - Rename `SCD` optimizer, to `CD`
+    ([#379](https://github.com/mlpack/ensmallen/pull/379)).
+- Updated GitHub Action runners `update-ensmallen-refresh` and `pkgdown` to address deprecation notices.
+    ([#53](https://github.com/coatless-rpkg/rcppensmallen/53), [#54](https://github.com/coatless-rpkg/rcppensmallen/54), [#55](https://github.com/coatless-rpkg/rcppensmallen/55)).
+- Removed explicit C++11 requirement from `DESCRIPTION` and `Makevars{.win}`.
+
 # RcppEnsmallen 0.2.19.1.1
 
 - Upgraded to ensmallen 2.19.1: "Eight Ball Deluxe" (2023-02-08)
@@ -46,17 +61,17 @@
 
 - Upgraded to ensmallen 2.18.0: "Fairmount Bagel" (2021-10-21)
   - Add gradient value clipping and gradient norm scaling callback
-    (mlpack/ensmallen#315).
+    ([#315](https://github.com/mlpack/ensmallen/pull/315)).
   - Remove superfluous CMake option to build the tests
-    (mlpack/ensmallen#313).
+    ([#313](https://github.com/mlpack/ensmallen/pull/313)).
   - Bump minimum Armadillo version to 9.800
-    (mlpack/ensmallen#318).
+    ([#318](https://github.com/mlpack/ensmallen/pull/318)).
   - Update Catch2 to 2.13.7
-    (mlpack/ensmallen#322).
+    ([#322](https://github.com/mlpack/ensmallen/pull/322)).
   - Remove redundant template argument for C++20 compatibility
-    (mlpack/ensmallen#324).
+    ([#324](https://github.com/mlpack/ensmallen/pull/324)).
   - Fix MOEAD test stability
-    (mlpack/ensmallen#327).
+    ([#327](https://github.com/mlpack/ensmallen/pull/327)).
 - Update GitHub Actions to the standard `r-lib/actions` configuration.
   ([#45](https://github.com/coatless-rpkg/rcppensmallen/pull/45))
 
@@ -64,101 +79,101 @@
 
 - Upgraded to ensmallen 2.17.0: "Pachis Din Me Pesa Double" (2021-07-06)
   - CheckArbitraryFunctionTypeAPI extended for MOO support
-    (mlpack/ensmallen#283).
+    ([#283](https://github.com/mlpack/ensmallen/pull/283)).
   - Refactor NSGA2
-    (mlpack/ensmallen#263,
-    mlpack/ensmallen#304).
+    ([#263](https://github.com/mlpack/ensmallen/pull/263),
+    [#304](https://github.com/mlpack/ensmallen/pull/304)).
   - Add Indicators for Multiobjective optimizers
-    (mlpack/ensmallen#285).
+    ([#285](https://github.com/mlpack/ensmallen/pull/285)).
   - Make Callback flexible for MultiObjective Optimizers
-    (mlpack/ensmallen#289).
+    ([#289](https://github.com/mlpack/ensmallen/pull/289)).
   - Add ZDT Test Suite
-    (mlpack/ensmallen#273).
+    ([#273](https://github.com/mlpack/ensmallen/pull/273)).
   - Add MOEA-D/DE Optimizer
-    (mlpack/ensmallen#269).
+    ([#269](https://github.com/mlpack/ensmallen/pull/269)).
   - Introduce Policy Methods for MOEA/D-DE
-    (mlpack/ensmallen#293).
+    ([#293](https://github.com/mlpack/ensmallen/pull/293)).
   - Add Das-Dennis weight initialization method
-    (mlpack/ensmallen#295).
+    ([#295](https://github.com/mlpack/ensmallen/pull/295)).
   - Add Dirichlet Weight Initialization
-    (mlpack/ensmallen#296).
+    ([#296](https://github.com/mlpack/ensmallen/pull/296)).
   - Improved installation and compilation instructions
-    (mlpack/ensmallen#300).
+    ([#300](https://github.com/mlpack/ensmallen/pull/300)).
   - Disable building the tests by default for faster installation
-    (mlpack/ensmallen#303).
+    ([#303](https://github.com/mlpack/ensmallen/pull/303)).
   - Modify matrix initialisation to take into account
     default element zeroing in Armadillo 10.5
-    (mlpack/ensmallen#305).
+    ([#305](https://github.com/mlpack/ensmallen/pull/305)).
 
 # RcppEnsmallen 0.2.16.2.1 (GitHub-only Release)
 
 - Upgraded to ensmallen 2.16.2: "Severely Dented Can Of Polyurethane" (2021-03-25)
   - Fix CNE test trials
-    (mlpack/ensmallen#267).
+    ([#267](https://github.com/mlpack/ensmallen/pull/267)).
   - Update Catch2 to 2.13.4
-    (mlpack/ensmallen#268).
+    ([#268](https://github.com/mlpack/ensmallen/pull/268)).
   - Fix typos in documentation
-    (mlpack/ensmallen#270,
-     mlpack/ensmallen#271).
+    ([#270](https://github.com/mlpack/ensmallen/pull/270),
+     [#271](https://github.com/mlpack/ensmallen/pull/271)).
   - Add clarifying comments in problems/ implementations
-    (mlpack/ensmallen#276).
+    ([#276](https://github.com/mlpack/ensmallen/pull/276)).
   - Remove `AdamSchafferFunctionN2Test` test from Adam test suite to prevent
-    spurious issue on some aarch64 (mlpack/ensmallen#259).
+    spurious issue on some aarch64 ([#259](https://github.com/mlpack/ensmallen/pull/259)).
 
 # RcppEnsmallen 0.2.16.1.1
 
 - Upgraded to ensmallen 2.16.1: "Severely Dented Can Of Polyurethane" (2021-03-04)
   - Fix test compilation issue when `ENS_USE_OPENMP` is set
-    (mlpack/ensmallen#255).
+    ([#255](https://github.com/mlpack/ensmallen/pull/255)).
   - Fix CNE initial population generation to use normal distribution
-    (mlpack/ensmallen#258).
+    ([#258](https://github.com/mlpack/ensmallen/pull/258)).
   - Fix compilation warnings
-    (mlpack/ensmallen#259).
+    ([#259](https://github.com/mlpack/ensmallen/pull/259)).
 
 # RcppEnsmallen 0.2.16.0.1 (GitHub-Only Release)
 
 - Upgraded to ensmallen 2.16.0: "Severely Dented Can Of Polyurethane" (2021-02-19)
   - Expand README with example installation and add simple example program
     showing usage of the L-BFGS optimizer
-    (mlpack/ensmallen#248).
+    ([#248](https://github.com/mlpack/ensmallen/pull/248)).
   - Refactor tests to increase stability and reduce random errors
-    (mlpack/ensmallen#249).
+    ([#249](https://github.com/mlpack/ensmallen/pull/249)).
   
 
 # RcppEnsmallen 0.2.15.1.1
 
 - Upgraded to ensmallen 2.15.1: "Why Can't I Manage To Grow Any Plants?" (2020-11-05)
   - Fix include order to ensure traits is loaded before reports
-    (mlpack/ensmallen#239).
+    ([#239](https://github.com/mlpack/ensmallen/pull/239)).
 
 # RcppEnsmallen 0.2.15.0.1
 
 - Upgraded to ensmallen 2.15.0: "No Direction Home" (2020-11-03)
   - Make a few tests more robust
-    (mlpack/ensmallen#228).
-  - Add release date to version information. (mlpack/ensmallen#226)
+    ([#228](https://github.com/mlpack/ensmallen/pull/228)).
+  - Add release date to version information. ([#226](https://github.com/mlpack/ensmallen/pull/226))
   - Fix typo in release script
-    (mlpack/ensmallen#236).
+    ([#236](https://github.com/mlpack/ensmallen/pull/236)).
   - Add optimizer summary report callback 
-    (mlpack/ensmallen#213).
+    ([#213](https://github.com/mlpack/ensmallen/pull/213)).
 
 # RcppEnsmallen 0.2.14.2.1
 
 - Upgraded to ensmallen 2.14.2: "No Direction Home" (2020-09-05)
   - Fix implementation of fonesca fleming problem function f1 and f2 
-    type usage and negative signs. (mlpack/ensmallen#223)
+    type usage and negative signs. ([#223](https://github.com/mlpack/ensmallen/pull/223))
 
 # RcppEnsmallen 0.2.14.1.1
 
 - Upgraded to ensmallen 2.14.1: "No Direction Home" (2020-08-21)
   - Fix release script (remove hardcoded information, trim leading
     whitespaces introduced by `wc -l` in MacOS)
-    (mlpack/ensmallen#216, mlpack/ensmallen#220).
-  - Adjust tolerance for AugLagrangian convergence based on element type (mlpack/ensmallen#217). 
-  - Add NSGA2 optimizer for multi-objective functions (mlpack/ensmallen#149). 
-  - Update automatic website update release script (mlpack/ensmallen#207). 
-  - Clarify and fix documentation for constrained optimizers (mlpack/ensmallen#201). 
-  - Fix L-BFGS convergence when starting from a minimum (mlpack/ensmallen#201).
+    ([#216](https://github.com/mlpack/ensmallen/pull/216), [#220](https://github.com/mlpack/ensmallen/pull/220)).
+  - Adjust tolerance for AugLagrangian convergence based on element type ([#217](https://github.com/mlpack/ensmallen/pull/217)). 
+  - Add NSGA2 optimizer for multi-objective functions ([#149](https://github.com/mlpack/ensmallen/pull/149)). 
+  - Update automatic website update release script ([#207](https://github.com/mlpack/ensmallen/pull/207)). 
+  - Clarify and fix documentation for constrained optimizers ([#201](https://github.com/mlpack/ensmallen/pull/201)). 
+  - Fix L-BFGS convergence when starting from a minimum ([#201](https://github.com/mlpack/ensmallen/pull/201)).
 - Switch GitHub Actions to use reference tags to always be up-to-date with 
   CRAN's check grid (`oldrel`, `release`, `devel`). ([#29](https://github.com/coatless-rpkg/rcppensmallen/pull/29), 
   [#32](https://github.com/coatless-rpkg/rcppensmallen/pull/32))
@@ -169,60 +184,60 @@
 
 - Upgraded to ensmallen 2.13.0: "Automatically Automated Automation" (2020-07-15)
   - Fix CMake package export
-    (mlpack/ensmallen#198).
+    ([#198](https://github.com/mlpack/ensmallen/pull/198)).
   - Allow early stop callback to accept a lambda function
-    (mlpack/ensmallen#165).
+    ([#165](https://github.com/mlpack/ensmallen/pull/165)).
 
 # RcppEnsmallen 0.2.12.1.1
 
 - Upgraded to ensmallen 2.12.1: "Stir Crazy" (2020-04-20)
  - Fix total number of epochs and time estimation for ProgressBar callback
- (mlpack/ensmallen#181).
+ ([#181](https://github.com/mlpack/ensmallen/pull/181)).
  - Handle SpSubview_col and SpSubview_row in Armadillo 9.870
- (mlpack/ensmallen#194).
+ ([#194](https://github.com/mlpack/ensmallen/pull/194)).
  - Minor documentation fixes
- (mlpack/ensmallen#197).
+ ([#197](https://github.com/mlpack/ensmallen/pull/197)).
  - Correction in the formulation of sigma in CMA-ES
- (mlpack/ensmallen#183).
+ ([#183](https://github.com/mlpack/ensmallen/pull/183)).
  - Remove deprecated methods from PrimalDualSolver implementation
- (mlpack/ensmallen#185).
- (mlpack/ensmallen#186).
+ ([#185](https://github.com/mlpack/ensmallen/pull/185)).
+ ([#186](https://github.com/mlpack/ensmallen/pull/186)).
 
 # RcppEnsmallen 0.2.11.3.1
 
 - Upgraded to ensmallen 2.11.3: "The Poster Session Is Full" (2020-02-19)
   - Prevent spurious compiler warnings
- (mlpack/ensmallen#161).
+ ([#161](https://github.com/mlpack/ensmallen/pull/161)).
   - Fix minor memory leaks
- (mlpack/ensmallen#167).
+ ([#167](https://github.com/mlpack/ensmallen/pull/167)).
   - Revamp CMake configuration
- (mlpack/ensmallen#152).
+ ([#152](https://github.com/mlpack/ensmallen/pull/152)).
   - Allow callback instantiation for SGD based optimizer 
- (mlpack/ensmallen#155).
+ ([#155](https://github.com/mlpack/ensmallen/pull/155)).
   - Minor test stability fixes on i386
- (mlpack/ensmallen#156).
+ ([#156](https://github.com/mlpack/ensmallen/pull/156)).
   - Fix Lookahead MaxIterations() check.
- (mlpack/ensmallen#159).
+ ([#159](https://github.com/mlpack/ensmallen/pull/159)).
 
 # RcppEnsmallen 0.2.11.1.1
 
 - Upgraded to ensmallen 2.11.1: "The Poster Session Is Full" (2019-12-28)
   - Fix Lookahead Synchronization period type
- (mlpack/ensmallen#153).
+ ([#153](https://github.com/mlpack/ensmallen/pull/153)).
   - Add Lookahead
- (mlpack/ensmallen#138).
+ ([#138](https://github.com/mlpack/ensmallen/pull/138)).
   - Add AdaBound and AMSBound
- (mlpack/ensmallen#137).
+ ([#137](https://github.com/mlpack/ensmallen/pull/137)).
   - SGD callback test 32-bit safety (big number)
- (mlpack/ensmallen#143).
+ ([#143](https://github.com/mlpack/ensmallen/pull/143)).
   - Use "arbitrary" and "separable" terms in static function type checks
- (mlpack/ensmallen#145).
+ ([#145](https://github.com/mlpack/ensmallen/pull/145)).
   - Remove 'using namespace std' from `problems/` files
- (mlpack/ensmallen#147).
+ ([#147](https://github.com/mlpack/ensmallen/pull/147)).
   - Add optional tests building.
- (mlpack/ensmallen#141).
+ ([#141](https://github.com/mlpack/ensmallen/pull/141)).
   - Make code samples collapsible in the documentation.
- (mlpack/ensmallen#140).
+ ([#140](https://github.com/mlpack/ensmallen/pull/140)).
 - Switched deployment from TravisCI to GitHub Actions. ([#17](https://github.com/coatless-rpkg/rcppensmallen/pull/17), [#22](https://github.com/coatless-rpkg/rcppensmallen/pull/22))
 - Removed check on header file inclusion ([#21](https://github.com/coatless-rpkg/rcppensmallen/pull/21))
 
@@ -230,17 +245,17 @@
 
 - Upgraded to ensmallen 2.10.3: "Fried Chicken" (2019-09-26)
   - Add release script to rel/ for maintainers
- (mlpack/ensmallen#128).
+ ([#128](https://github.com/mlpack/ensmallen/pull/128)).
   - Fix Armadillo version check
- (mlpack/ensmallen#133).
+ ([#133](https://github.com/mlpack/ensmallen/pull/133)).
   - Documentation fix for callbacks
- (mlpack/ensmallen#129).
+ ([#129](https://github.com/mlpack/ensmallen/pull/129)).
   - Compatibility fixes for ensmallen 1.x
- (mlpack/ensmallen#131).
+ ([#131](https://github.com/mlpack/ensmallen/pull/131)).
   - Fix ParallelSGD runtime bug.
- (mlpack/ensmallen#135).
+ ([#135](https://github.com/mlpack/ensmallen/pull/135)).
   - Add additional L-BFGS convergence check
- (mlpack/ensmallen#136).
+ ([#136](https://github.com/mlpack/ensmallen/pull/136)).
 - Added vignette with worked example for linear regression and for package 
   inclusion.
 
@@ -249,57 +264,57 @@
 - Upgraded to ensmallen 2.10.0: "Fried Chicken" (2019-09-07)
   - All `Optimize()` functions now take any matrix type; so, e.g., `arma::fmat`
     or `arma::sp_mat` can be used for optimization.  See the documentation for
- (mlpack/ensmallen#113).
- (mlpack/ensmallen#119).
+ ([#113](https://github.com/mlpack/ensmallen/pull/113)).
+ ([#119](https://github.com/mlpack/ensmallen/pull/119)).
   - Introduce callback support.  Callbacks can be appended as the last arguments
     of an `Optimize()` call, and can perform custom behavior at different points
     during the optimization.  See the documentation for more details
- (mlpack/ensmallen#119).
+ ([#119](https://github.com/mlpack/ensmallen/pull/119)).
   - Slight speedups for `FrankWolfe` optimizer
- (mlpack/ensmallen#127).
+ ([#127](https://github.com/mlpack/ensmallen/pull/127)).
 
 # RcppEnsmallen 0.1.16.0.1
 
 - Upgraded to ensmallen release 1.16.0 "Loud Alarm Clock" (2019-08-09)
   - Add option to avoid computing exact objective at the end of the optimization
- (mlpack/ensmallen#109).
- (mlpack/ensmallen#118).
- (mlpack/ensmallen#118).
+ ([#109](https://github.com/mlpack/ensmallen/pull/109)).
+ ([#118](https://github.com/mlpack/ensmallen/pull/118)).
+ ([#118](https://github.com/mlpack/ensmallen/pull/118)).
   - Introduce local-best particle swarm optimization, `LBestPSO`, for
- (mlpack/ensmallen#86).
-- (mlpack/ensmallen#123).
+ ([#86](https://github.com/mlpack/ensmallen/pull/86)).
+- ([#123](https://github.com/mlpack/ensmallen/pull/123)).
 
 # RcppEnsmallen 0.1.15.0.1
 
 - Upgraded to ensmallen release 1.15.0 "Wrong Side Of The Road" (2019-05-14)
- (mlpack/ensmallen#81).
-- (mlpack/ensmallen#115).
-- (mlpack/ensmallen#115).
+ ([#81](https://github.com/mlpack/ensmallen/pull/81)).
+- ([#115](https://github.com/mlpack/ensmallen/pull/115)).
+- ([#115](https://github.com/mlpack/ensmallen/pull/115)).
 
 # RcppEnsmallen 0.1.14.4.1
 
 - Upgraded to ensmallen release 1.14.4 "Difficult Crimp" (2019-05-12)
- (mlpack/ensmallen#91).
- (mlpack/ensmallen#100).
- (mlpack/ensmallen#97).
- (mlpack/ensmallen#98).
- (mlpack/ensmallen#92).
+ ([#91](https://github.com/mlpack/ensmallen/pull/91)).
+ ([#100](https://github.com/mlpack/ensmallen/pull/100)).
+ ([#97](https://github.com/mlpack/ensmallen/pull/97)).
+ ([#98](https://github.com/mlpack/ensmallen/pull/98)).
+ ([#92](https://github.com/mlpack/ensmallen/pull/92)).
 
 # RcppEnsmallen 0.1.14.1.1
 
 - Upgraded to ensmallen release 1.14.1 "Difficult Crimp" (2019-03-09)
- (mlpack/ensmallen#87).
- (mlpack/ensmallen#90).
+ ([#87](https://github.com/mlpack/ensmallen/pull/87)).
+ ([#90](https://github.com/mlpack/ensmallen/pull/90)).
      in CNE to be a normal distribution about the given starting point, 
      which should accelerate convergence.
- (mlpack/ensmallen#77).
- (mlpack/ensmallen#83).
+ ([#77](https://github.com/mlpack/ensmallen/pull/77)).
+ ([#83](https://github.com/mlpack/ensmallen/pull/83)).
 
 # RcppEnsmallen 0.1.13.0.1
 
 - Upgraded to ensmallen release 1.13.0 "Coronavirus Invasion" (2019-01-14)
- (mlpack/ensmallen#66).
- (mlpack/ensmallen#69).
+ ([#66](https://github.com/mlpack/ensmallen/pull/66)).
+ ([#69](https://github.com/mlpack/ensmallen/pull/69)).
    - Fix list of contributors.
    - Make sure all files end with newlines.
 - Reordered SPSA parameters to quiet initialization error surfaced with `-Wreorder`.
@@ -309,12 +324,12 @@
 - Upgraded to ensmallen release 1.12.0 "New Year's Party" (2018-12-30)
    - Add link to ensmallen PDF to README.md.
    - Minor documentation fixes.  Remove too-verbose documentation from source for
- (mlpack/ensmallen#61).
- (mlpack/ensmallen#48).
- (mlpack/ensmallen#42).
- (mlpack/ensmallen#46).
- (mlpack/ensmallen#45).
- (mlpack/ensmallen#60).
+ ([#61](https://github.com/mlpack/ensmallen/pull/61)).
+ ([#48](https://github.com/mlpack/ensmallen/pull/48)).
+ ([#42](https://github.com/mlpack/ensmallen/pull/42)).
+ ([#46](https://github.com/mlpack/ensmallen/pull/46)).
+ ([#45](https://github.com/mlpack/ensmallen/pull/45)).
+ ([#60](https://github.com/mlpack/ensmallen/pull/60)).
 - Updated citation information
 
 # RcppEnsmallen 0.1.11.1.1
