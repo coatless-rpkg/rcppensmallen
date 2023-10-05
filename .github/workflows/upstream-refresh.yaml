@@ -15,8 +15,8 @@ jobs:
           ENSMALLEN_RELEASE_JSON=$(curl -sL https://api.github.com/repos/mlpack/ensmallen/releases/latest)
           ENSMALLEN_RELEASE_VERSION=$(jq -r ".tag_name" <<< "$ENSMALLEN_RELEASE_JSON")
           ENSMALLEN_RELEASE_DATE=$(jq -r ".published_at" <<< "$ENSMALLEN_RELEASE_JSON" | sed 's/T.*//g')
-          echo ::set-output name=release_tag::$(echo $ENSMALLEN_RELEASE_VERSION)
-          echo ::set-output name=release_date::$(echo $ENSMALLEN_RELEASE_DATE)
+          echo "release_tag=$(echo $ENSMALLEN_RELEASE_VERSION)" >> $GITHUB_OUTPUT
+          echo "release_date=$(echo $ENSMALLEN_RELEASE_DATE)" >> $GITHUB_OUTPUT
           # Extract out version information from git repository
           ENSMALLEN_VERSION_MAJOR=$(grep -i ".*#define ENS_VERSION_MAJOR.*" inst/include/ensmallen_bits/ens_version.hpp | grep -o "[0-9]*")
           ENSMALLEN_VERSION_MINOR=$(grep -i ".*#define ENS_VERSION_MINOR.*" inst/include/ensmallen_bits/ens_version.hpp | grep -o "[0-9]*")
@@ -24,7 +24,7 @@ jobs:
           # Combine values to match release tag information
           ENSMALLEN_VERSION_VALUE=${ENSMALLEN_VERSION_MAJOR}.${ENSMALLEN_VERSION_MINOR}.${ENSMALLEN_VERSION_PATCH}
           # Set the current release tag
-          echo ::set-output name=current_tag::$(echo $ENSMALLEN_VERSION_VALUE)
+          echo "current_tag=$(echo $ENSMALLEN_VERSION_VALUE)" >> $GITHUB_OUTPUT
       - name: Update Ensmallen
         if: steps.ensmallen-lib.outputs.current_tag != steps.ensmallen-lib.outputs.release_tag
         env:
