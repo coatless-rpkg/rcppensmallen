@@ -32,7 +32,6 @@ LinkingTo: Rcpp, RcppArmadillo (>= 0.9.800.0.0)
 Imports: Rcpp
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
-SystemRequirements: C++11
 Suggests: 
     knitr,
     rmarkdown
