@@ -1,5 +1,5 @@
-### ensmallen 2.20.0: "Stripped Bolt Head"
-###### 2023-10-02
+### ensmallen ?.??.?: "???"
+###### ????-??-??
  * Implementation of Active CMAES
    ([#367](https://github.com/mlpack/ensmallen/pull/367)).
 
