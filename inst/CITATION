@@ -1,6 +1,6 @@
 citHeader("To cite the 'RcppEnsmallen' R package and 'Ensmallen' libray in publications, please use:")
 
-citEntry(entry = "Manual",
+bibentry(bibtype = "Manual",
          title        = "{RcppEnsmallen: Header-Only C++ Mathematical Optimization Library for 'Armadillo'}",
          author       = c(as.person("James Joseph Balamuta"),
                           as.person("Dirk Eddelbuettel")
@@ -11,7 +11,7 @@ citEntry(entry = "Manual",
                               "URL https://cran.r-project.org/package=RcppEnsmallen.")
 )
 
-citEntry(entry = "Article",
+bibentry(bibtype = "Article",
          title        = "{ensmallen: a flexible C++ library for efficient function optimization}",
          author       = c(as.person("Shikhar Bhardwaj"),
                           as.person("Ryan R. Curtin"),
