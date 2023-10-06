@@ -1,8 +1,12 @@
 2023-10-05  James Balamuta  <balamut2@illinois.edu>
 
+	* NEWS.md: Fixed redirected HTTP to HTTPS urls
+	* DESCRIPTION: ditto
+	* vignettes/using-rcppensmallen.Rmd: ditto
+
 	* NEWS.md: Restored mlpack/ensmallen URLs
 
-	* DESCRIPTION: Removed CXX11 requirement
+	* DESCRIPTION: Removed CXX11 requirement and bumped R version required to 4.0
 	* src/Makevars: ditto
 	* src/Makevars.win: ditto
 

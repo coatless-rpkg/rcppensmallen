@@ -31,8 +31,8 @@ Alternatively, work has been done by Dirk Schumacher in
 [`armacmp`](https://github.com/dirkschumacher/armacmp) to automatically create
 the underlying _C++_ code from _R_.  
 
-**Note:** Optimizers in `RcppEnsmallen` only work with [`armadillo`](http://arma.sourceforge.net/docs.html)
-data structures. Thus, if using [`Eigen`](http://eigen.tuxfamily.org/index.php?title=Main_Page) through 
+**Note:** Optimizers in `RcppEnsmallen` only work with [`armadillo`](https://arma.sourceforge.net/docs.html)
+data structures. Thus, if using [`Eigen`](https://eigen.tuxfamily.org/index.php?title=Main_Page) through 
 [`RcppEigen`](https://cran.r-project.org/package=RcppEigen), please consider the 
 [`RcppNumerical`](https://cran.r-project.org/package=RcppNumerical)
 package.
