@@ -10,8 +10,10 @@
   - Rename `SCD` optimizer, to `CD`
     ([#379](https://github.com/mlpack/ensmallen/pull/379)).
 - Updated GitHub Action runners `update-ensmallen-refresh` and `pkgdown` to address deprecation notices.
-    ([#53](https://github.com/coatless-rpkg/rcppensmallen/53), [#54](https://github.com/coatless-rpkg/rcppensmallen/54), [#55](https://github.com/coatless-rpkg/rcppensmallen/55)).
+    ([#53](https://github.com/coatless-rpkg/rcppensmallen/pull/53), [#54](https://github.com/coatless-rpkg/rcppensmallen/pull/54), [#55](https://github.com/coatless-rpkg/rcppensmallen/pull/55)).
 - Removed explicit C++11 requirement from `DESCRIPTION` and `Makevars{.win}`.
+- Increased the R version required to R 4.0 to ensure a compiler with
+  C++11 is available.
 
 # RcppEnsmallen 0.2.19.1.1
 
@@ -19,7 +21,7 @@
  - Avoid deprecation warnings in Armadillo 11.2+
     ([#347](https://github.com/mlpack/ensmallen/pull/347)).
 - Updated GitHub Action's runner to the latest versions 
-    ([#51](https://github.com/coatless-rpkg/rcppensmallen/51)).
+    ([#51](https://github.com/coatless-rpkg/rcppensmallen/pull/51)).
 
 # RcppEnsmallen 0.2.19.0.1
 
@@ -345,7 +347,7 @@
 ## New
 
 - Support for compiling via _R_ the mathematical optimizers in the _C++_
-  [ensmallen](http://ensmallen.org/docs.html) library.
+  [ensmallen](https://ensmallen.org/docs.html) library.
 - Includes ensmallen release 1.10.0 "Corporate Catabolism" (2018-10-19)
 
 ## Special Thanks

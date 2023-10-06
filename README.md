@@ -18,7 +18,7 @@ gradient-free optimizers, and constrained optimization.
 
 The RcppEnsmallen package includes the header files from the Ensmallen library
 and pairs the appropriate header files from 
-[Armadillo](http://arma.sourceforge.net/) through the 
+[Armadillo](https://arma.sourceforge.net/) through the 
 [RcppArmadillo](https://cran.r-project.org/package=RcppArmadillo) package. 
 Therefore, users do not need to install Ensmallen nor Armadillo to use RcppEnsmallen. 
 
