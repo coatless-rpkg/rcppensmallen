@@ -1,6 +1,11 @@
 # RcppEnsmallen 0.2.20.0.1
 
 - Upgraded to ensmallen 2.20.0: "Eight Ball Deluxe" (2023-10-05)
+
+
+# RcppEnsmallen 0.2.20.0.1
+
+- Upgraded to ensmallen 2.20.0: "Eight Ball Deluxe" (2023-10-05)
   - Implementation of Active CMAES
     ([#367](https://github.com/mlpack/ensmallen/pull/367)).
   - LBFGS: avoid generation of NaNs, and add checks for finite values
