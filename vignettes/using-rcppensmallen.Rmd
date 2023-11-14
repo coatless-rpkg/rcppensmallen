@@ -1,12 +1,12 @@
 ---
-title: "Using RcppEnsmallen"
+title: "Solving Linear Regression using Numeric Optimization"
 author: James Joseph Balamuta and Dirk Eddelbuettel
 abstract: |
-  Contained within are examples related to using RcppEnsmallen in everyday 
-  work alongside of creating an _R_ package with it. 
+  In this vignette, we describe how to use RcppEnsmallen in a standalone 
+  C++ file. 
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using RcppEnsmallen}
+  %\VignetteIndexEntry{Solving Linear Regression using Numeric Optimization}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -45,7 +45,7 @@ $$RSS\left( \beta \right) = \left( { \mathbf{y} - \mathbf{X} \beta } \right)^{\t
 
 The objective function we wish to minimize would be defined as:
 
-$$f(\beta) = \rVert y - X\beta\lVert_2$$
+$$f(\beta) = \rVert \mathbf{y} - \mathbf{X}\beta\lVert_2$$
 
 The gradient is defined as:
 
@@ -184,26 +184,4 @@ colnames(compare_coefs) = c("LBFGS", "LM")
 rownames(compare_coefs) = paste0("Beta", seq_len(nrow(compare_coefs)))
 knitr::kable(compare_coefs, longtable = FALSE, caption = "Comparison of Estimated Coefficients")
 ```
-
-# Package Usage
-
-RcppEnsmallen is best used within an _R_ package. The setup for `RcppEnsmallen`'s
-use mirrors that of other `Rcpp`-based projects. In particular, the
-`DESCRIPTION` file requires the `LinkingTo` field to contain:
-
-```bash
-LinkingTo: Rcpp, RcppArmadillo (>= 0.9.800.0.0), RcppEnsmallen (>= 0.2.18.0.1)
-```
-
-Next, the `src/` directory must contain both a `Makevars` and `Makevars.win` 
-file with:
-
-```bash
-CXX_STD = CXX11
-PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS)
-PKG_LIBS = $(SHLIB_OPENMP_CXXFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
-```
-
-The `Makevars.win` file provides the appropriate configuration for Windows
-while `Makevars` acts on Unix-alike systems like macOS, Linux, and Solaris.
 
