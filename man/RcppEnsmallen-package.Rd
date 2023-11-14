@@ -12,6 +12,7 @@
 Useful links:
 \itemize{
   \item \url{https://github.com/coatless-rpkg/rcppensmallen}
+  \item \url{https://r-pkg.thecoatlessprofessor.com/rcppensmallen/}
   \item \url{https://github.com/mlpack/ensmallen}
   \item \url{https://ensmallen.org/}
   \item Report bugs at \url{https://github.com/coatless-rpkg/rcppensmallen/issues}

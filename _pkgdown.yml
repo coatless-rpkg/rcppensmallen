@@ -1,7 +1,6 @@
 url: https://coatless.github.io/rcppensmallen
-
-home:
-  strip_header: true
+template:
+  bootstrap: 5
 
 authors:
   James Joseph Balamuta:
