@@ -33,7 +33,10 @@ optimizer."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/using-rcppensmallen.html">Using RcppEnsmallen</a>
+      <a href="../articles/package-usage.html">Using RcppEnsmallen in Your Own R Package</a>
+    </li>
+    <li>
+      <a href="../articles/using-rcppensmallen.html">Solving Linear Regression using Numeric Optimization</a>
     </li>
   </ul></li>
 <li>
@@ -120,11 +123,11 @@ $$\frac{\partial RSS}{\partial \beta} = -2 \mathbf{X}^{T} \left(\mathbf{y} - \ma
 <span class="r-in"><span><span class="co"># Verify parameters were recovered</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>actual <span class="op">=</span> <span class="va">beta</span>, estimated <span class="op">=</span> <span class="va">theta_hat</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      actual          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   -2.0 -1.929776</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    1.5  1.433537</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    3.0  2.990122</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]    8.2  8.131336</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]    6.6  6.523442</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   -2.0 -1.959463</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    1.5  1.381017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    3.0  2.954200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]    8.2  8.139115</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]    6.6  6.644348</span>
 </code></pre></div>
     </div>
   </div>
