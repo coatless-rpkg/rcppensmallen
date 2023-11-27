@@ -1,3 +1,14 @@
+# RcppEnsmallen 0.2.21.0.1
+
+- Upgraded to ensmallen 2.21.0: "Stripped Bolt Head" (2023-11-27)
+  - Clarify return values for different callback types
+    ([#383](https://github.com/mlpack/ensmallen/pull/383)).
+  - Fix return types of callbacks
+    ([#382](https://github.com/mlpack/ensmallen/pull/382)).
+  - Minor cleanup for printing optimization reports via `Report()`
+    ([#385](https://github.com/mlpack/ensmallen/pull/385)).
+    
+
 # RcppEnsmallen 0.2.20.0.1
 
 - Upgraded to ensmallen 2.20.0: "Eight Ball Deluxe" (2023-10-05)
