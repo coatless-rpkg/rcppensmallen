@@ -1,6 +1,11 @@
 # RcppEnsmallen 0.2.21.0.1
 
 - Upgraded to ensmallen 2.21.0: "Stripped Bolt Head" (2023-11-27)
+
+
+# RcppEnsmallen 0.2.21.0.1
+
+- Upgraded to ensmallen 2.21.0: "Stripped Bolt Head" (2023-11-27)
   - Clarify return values for different callback types
     ([#383](https://github.com/mlpack/ensmallen/pull/383)).
   - Fix return types of callbacks
