@@ -31,6 +31,16 @@ about once a month.
 
 James Balamuta and Dirk Eddelbuettel
 
+## Citing the `RcppEnsmallen` package
+
+To ensure future development of the package, please cite `RcppEnsmallen` package
+if used during an analysis or simulation study. Citation information for
+the package may be acquired by using in *R*:
+
+``` r
+citation("RcppEnsmallen")
+```
+
 ### License
 
 GPL (>= 2)
