@@ -1,3 +1,11 @@
+# RcppEnsmallen 0.2.21.1.1
+
+- Upgraded to ensmallen 2.21.1: "Bent Antenna" (2024-02-16)
+  - Fix numerical precision issues for small-gradient L-BFGS scaling factor
+    computations ([#392](https://github.com/mlpack/ensmallen/pull/392)).
+  - Ensure the tests are built with optimisation enabled
+    ([#394](https://github.com/mlpack/ensmallen/pull/394)).
+
 # RcppEnsmallen 0.2.21.0.1
 
 - Upgraded to ensmallen 2.21.0: "Stripped Bolt Head" (2023-11-27)
