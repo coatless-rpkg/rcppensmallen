@@ -1,5 +1,14 @@
 2024-11-29  James Balamuta  <balamut2@illinois.edu>
 
+    * inst/include/ensmallen_bits/agemoea/agemoea.hpp: removed unused private field variable
+    * inst/include/problems/dtlz/dtlz2_function.hpp: removed unused variable.
+    * inst/include/problems/dtlz/dtlz4_function.hpp: ditto
+    * inst/include/problems/dtlz/dtlz5_function.hpp: ditto
+    * inst/include/problems/dtlz/dtlz6_function.hpp: ditto
+    * inst/include/problems/dtlz/dtlz7_function.hpp: ditto
+    * inst/include/problems/maf/maf5_function.hpp: ditto
+    * inst/include/problems/maf/maf6_function.hpp: ditto
+
 	* DESCRIPTION (Version): Release 2.22.0
 	* NEWS.md: Update for Ensmallen release 2.22.0
 	* inst/include/ensmallen_bits: Upgraded to Ensmallen 2.22.0

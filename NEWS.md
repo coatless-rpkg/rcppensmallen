@@ -9,6 +9,8 @@
     ([#409](https://github.com/mlpack/ensmallen/pull/409)).
   - Added IPOP and BIPOP restart mechanisms for CMA-ES.
     ([#403](https://github.com/mlpack/ensmallen/pull/403)).
+- Addressed uninitialized variable and private field warnings 
+    ([#65](https://github.com/coatless-rpkg/rcppensmallen/pull/65))
 
 # RcppEnsmallen 0.2.21.1.1
 
