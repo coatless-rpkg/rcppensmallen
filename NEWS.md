@@ -3,6 +3,9 @@
 - Upgraded to ensmallen 2.22.1: "E-Bike Excitement" (2024-12-03)
   - Remove unused variables to fix compiler warnings
     ([#413](https://github.com/mlpack/ensmallen/pull/413)).
+- DESCRIPTION now emphasizes a C++14 or greater compiler and a requirement for
+  Armadillo 10.8.2 or higher library. 
+    ([#68](https://github.com/coatless-rpkg/rcppensmallen/pull/68)).
 
 # RcppEnsmallen 0.2.22.0.1
 
