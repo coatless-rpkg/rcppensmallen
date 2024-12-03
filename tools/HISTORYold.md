@@ -1,3 +1,8 @@
+### ensmallen 2.22.1: "E-Bike Excitement"
+###### 2024-12-02
+ * Remove unused variables to fix compiler warnings
+   ([#413](https://github.com/mlpack/ensmallen/pull/413)).
+
 ### ensmallen 2.22.0: "E-Bike Excitement"
 ###### 2024-11-29
  * Update to C++14 standard

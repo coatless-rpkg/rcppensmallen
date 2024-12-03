@@ -347,7 +347,7 @@ class AGEMOEA
       size_t idxQ,
       const std::vector<size_t>& ranks,
       const std::vector<typename MatType::elem_type>& survivalScore);
-
+  
  /**
   * Normalizes the front given the extreme points in the current front.
   *
@@ -363,7 +363,7 @@ class AGEMOEA
      arma::Col<typename MatType::elem_type>& normalization,
      const std::vector<size_t>& front,
      const arma::Row<size_t>& extreme);
-
+ 
  /**
   * Get the geometry information p of Lp norm (p > 0).
   *
@@ -377,7 +377,7 @@ class AGEMOEA
       std::vector<arma::Col<typename MatType::elem_type> >& calculatedObjectives,
       const std::vector<size_t>& front,
       const arma::Row<size_t>& extreme);
-
+  
   /**
    * Finds the pairwise Lp distance between all the points in the front.
    *
@@ -395,7 +395,7 @@ class AGEMOEA
 
   /**
    * Finding the indexes of the extreme points in the front.
-   *
+   *  
    * @param indexes vector containing the slected indexes.
    * @param calculatedObjectives The current population objectives.
    * @param front The front of the current generation.
@@ -405,11 +405,11 @@ class AGEMOEA
       arma::Row<size_t>& indexes,
       std::vector<arma::Col<typename MatType::elem_type> >& calculatedObjectives,
       const std::vector<size_t>& front);
-
+  
   /**
    * Finding the distance of each point in the front from the line formed
    * by pointA and pointB.
-   *
+   * 
    * @param distance The vector containing the distances of the points in the fron from the line.
    * @param calculatedObjectives Reference to the current population evaluated Objectives.
    * @param front The front of the current generation(indices of population).
@@ -423,10 +423,10 @@ class AGEMOEA
       const std::vector<size_t>& front,
       const arma::Col<typename MatType::elem_type>& pointA,
       const arma::Col<typename MatType::elem_type>& pointB);
-
+  
   /**
    * Find the Diversity score corresponding the solution S using the selected set.
-   *
+   * 
    * @param selected The current selected set.
    * @param pairwiseDistance The current pairwise distance for the whole front.
    * @param S The relative index of S being considered within the front.
