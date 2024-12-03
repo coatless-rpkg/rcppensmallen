@@ -1,3 +1,10 @@
+2024-12-03  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version): Release 2.22.1
+	* NEWS.md: Update for Ensmallen release 2.22.1
+	* inst/include/ensmallen_bits: Upgraded to Ensmallen 2.22.1
+	* inst/include/ensmallen.hpp: ditto
+
 2024-11-29  James Balamuta  <balamut2@illinois.edu>
 
     * inst/include/ensmallen_bits/agemoea/agemoea.hpp: removed unused private field variable
