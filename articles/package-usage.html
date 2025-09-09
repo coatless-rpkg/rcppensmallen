@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">RcppEnsmallen</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.22.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.22.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@ modifications.</p>
 </h3>
 <p>Open your R package’s <code>DESCRIPTION</code> file. Ensure that the
 <code>LinkingTo</code> directive is present and contains:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">LinkingTo:</span> Rcpp, RcppArmadillo <span class="er">(</span><span class="op">&gt;</span>= <span class="ex">0.9.800.0.0</span><span class="kw">)</span><span class="ex">,</span> RcppEnsmallen <span class="er">(</span><span class="op">&gt;</span>= <span class="ex">0.2.20.0.1</span><span class="kw">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">LinkingTo:</span> Rcpp, RcppArmadillo <span class="er">(</span><span class="op">&gt;</span>= <span class="ex">15.0.2-1</span><span class="kw">)</span><span class="ex">,</span> RcppEnsmallen <span class="er">(</span><span class="op">&gt;</span>= <span class="ex">0.2.22.1.2</span><span class="kw">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="makevars-inside-the-src-directory">Makevars inside the src/ Directory<a class="anchor" aria-label="anchor" href="#makevars-inside-the-src-directory"></a>
@@ -96,11 +96,13 @@ modifications.</p>
 <p>Next, the <code>src/</code> directory must contain both a
 <code>Makevars</code> and <code>Makevars.win</code> file. Each file must
 have the same contents of:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">PKG_CXXFLAGS</span> = <span class="va">$(</span><span class="ex">SHLIB_OPENMP_CXXFLAGS</span><span class="va">)</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">PKG_CXXFLAGS</span> = <span class="va">$(</span><span class="ex">SHLIB_OPENMP_CXXFLAGS</span><span class="va">)</span> <span class="at">-DARMA_USE_CURRENT</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">PKG_LIBS</span> = <span class="va">$(</span><span class="ex">SHLIB_OPENMP_CXXFLAGS</span><span class="va">)</span> <span class="va">$(</span><span class="ex">LAPACK_LIBS</span><span class="va">)</span> <span class="va">$(</span><span class="ex">BLAS_LIBS</span><span class="va">)</span> <span class="va">$(</span><span class="ex">FLIBS</span><span class="va">)</span></span></code></pre></div>
 <p>The <code>Makevars.win</code> file provides the appropriate
 configuration for Windows while <code>Makevars</code> acts on Unix-alike
 systems like macOS, Linux, and Solaris.</p>
+<p><strong>Note:</strong> The <code>-DARMA_USE_CURRENT</code> define is
+required to use 15.0.2 of Armadillo library.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
