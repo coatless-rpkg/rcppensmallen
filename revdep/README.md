@@ -1,30 +1,25 @@
 # Platform
 
-|field    |value                                      |
-|:--------|:------------------------------------------|
-|version  |R version 4.4.2 (2024-10-31)               |
-|os       |macOS Sequoia 15.1.1                       |
-|system   |aarch64, darwin20                          |
-|ui       |RStudio                                    |
-|language |(EN)                                       |
-|collate  |en_US.UTF-8                                |
-|ctype    |en_US.UTF-8                                |
-|tz       |America/Chicago                            |
-|date     |2024-11-30                                 |
-|rstudio  |2024.09.1+394 Cranberry Hibiscus (desktop) |
-|pandoc   |3.5 @ /opt/homebrew/bin/pandoc             |
+|field    |value                                        |
+|:--------|:--------------------------------------------|
+|version  |R version 4.5.1 (2025-06-13)                 |
+|os       |macOS Sequoia 15.6.1                         |
+|system   |aarch64, darwin20                            |
+|ui       |RStudio                                      |
+|language |(EN)                                         |
+|collate  |en_US.UTF-8                                  |
+|ctype    |en_US.UTF-8                                  |
+|tz       |America/Chicago                              |
+|date     |2025-09-09                                   |
+|rstudio  |2025.05.1+513 Mariposa Orchid (desktop)      |
+|pandoc   |3.7.0.2 @ /opt/homebrew/bin/ (via rmarkdown) |
+|quarto   |1.7.34 @ /usr/local/bin/quarto               |
 
 # Dependencies
 
 |package       |old        |new        |Δ  |
 |:-------------|:----------|:----------|:--|
-|RcppEnsmallen |0.2.21.1.1 |0.2.22.0.1 |*  |
+|RcppEnsmallen |0.2.22.1.1 |0.2.22.1.2 |*  |
 
 # Revdeps
-
-## Failed to check (1)
-
-|package  |version |error  |warning |note |
-|:--------|:-------|:------|:-------|:----|
-|[sparsevb](failures.md#sparsevb)|0.1.0   |__+1__ |        |-1   |
 

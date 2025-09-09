@@ -1,3 +1,9 @@
+# RcppEnsmallen 0.2.22.1.2
+
+- `-DARMA_USE_CURRENT` added to `PKG_CXXFLAGS` to use Armadillo 15.0.2 or higher
+  ([#69](https://github.com/coatless-rpkg/rcppensmallen/pull/69)).
+- `DESCRIPTION` now emphasizes R 4.3.0 or higher for a higher C++ standard by default.
+
 # RcppEnsmallen 0.2.22.1.1
 
 - Upgraded to ensmallen 2.22.1: "E-Bike Excitement" (2024-12-03)

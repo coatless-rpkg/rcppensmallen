@@ -1,3 +1,16 @@
+2025-09-09  James Balamuta  <balamut2@illinois.edu>
+
+    * DESCRIPTION: Updated requirements for RcppArmadillo
+    * vignettes/package-usage.Rmd: Add define requirement
+
+    * DESCRIPTION (Version): Release 2.22.1-2
+    * NEWS.md: Update for release 2.22.1-2
+
+2025-09-08  Dirk Eddelbuettel  <edd@debian.org>
+
+    * src/Makevars: Added define to opt-in to current armadillo version
+    * src/Makevars.win: ditto
+
 2024-12-03  James Balamuta  <balamut2@illinois.edu>
 
     * DESCRIPTION: Updated requirements for Armadillo and C++ compiler
