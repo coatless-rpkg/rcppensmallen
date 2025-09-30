@@ -58,6 +58,7 @@
   - Set cmake version range to 3.5...4.0
     ([#422](https://github.com/mlpack/ensmallen/pull/422)).
 
+
 # RcppEnsmallen 0.2.22.1.2
 
 - `-DARMA_USE_CURRENT` added to `PKG_CXXFLAGS` to use Armadillo 15.0.2 or higher
