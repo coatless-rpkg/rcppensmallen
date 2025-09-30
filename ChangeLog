@@ -1,3 +1,10 @@
+2025-09-30  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version): Release 3.10.0
+	* NEWS.md: Update for Ensmallen release 3.10.0
+	* inst/include/ensmallen_bits: Upgraded to Ensmallen 3.10.0
+	* inst/include/ensmallen.hpp: ditto
+
 2025-09-09  James Balamuta  <balamut2@illinois.edu>
 
     * DESCRIPTION: Updated requirements for RcppArmadillo

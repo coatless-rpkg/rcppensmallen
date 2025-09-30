@@ -1,3 +1,63 @@
+# RcppEnsmallen 0.3.10.0.1
+
+- Upgraded to ensmallen 3.10.0: "Unexpected Rain" (2025-09-30)
+  - SGD-like optimizers now all divide the step size by the batch size so that
+    step sizes don't need to be tuned in addition to batch sizes.  If you require
+    behavior from ensmallen 2, define the `ENS_OLD_SEPARABLE_STEP_BEHAVIOR` macro
+    before including `ensmallen.hpp`
+    ([#431](https://github.com/mlpack/ensmallen/pull/431)).
+  - Remove deprecated `ParetoFront()` and `ParetoSet()` from multi-objective
+    optimizers ([#435](https://github.com/mlpack/ensmallen/pull/435)).  Instead,
+    pass objects to the `Optimize()` function; see the documentation for each
+    multi-objective optimizer for more details.  A typical transition will change
+    code like:
+     ```c++
+     optimizer.Optimize(objectives, coordinates);
+     arma::cube paretoFront = optimizer.ParetoFront();
+     arma::cube paretoSet = optimizer.ParetoSet();
+     ```
+    to instead gather the Pareto front and set in the call:
+     ```c++
+     arma::cube paretoFront, paretoSet;
+     optimizer.Optimize(objectives, coordinates, paretoFront, paretoSet);
+     ```
+  - Remove deprecated constructor for Active CMA-ES that takes `lowerBound` and
+    `upperBound` ([#435](https://github.com/mlpack/ensmallen/pull/435)).
+    Instead, pass an instantiated `BoundaryBoxConstraint` to the constructor.  A
+    typical transition will change code like:
+     ```c++
+     ActiveCMAES<FullSelection, BoundaryBoxConstraint> opt(lambda,
+         lowerBound, upperBound, ...);
+     ```
+    into
+     ```c++
+     ActiveCMAES<FullSelection, BoundaryBoxConstraint> opt(lambda,
+         BoundaryBoxConstraint(lowerBound, upperBound), ...);
+     ```
+  - Add proximal gradient optimizers for L1-constrained and other related
+    problems: `FBS`, `FISTA`, and `FASTA`
+    ([#427](https://github.com/mlpack/ensmallen/pull/427)).  See the
+    documentation for more details.
+  - The `Lambda()` and `Sigma()` functions of the `AugLagrangian` optimizer,
+    which could be used to retrieve the Lagrange multipliers and penalty
+    parameter after optimization, are now deprecated
+    ([#439](https://github.com/mlpack/ensmallen/pull/439)).  Instead, pass a
+    vector and a double to the `Optimize()` function directly:
+     ```c++
+     augLag.Optimize(function, coordinates, lambda, sigma)
+     ```
+    and these will be filled with the final Lagrange multiplier estimates and
+    penalty parameters.
+  - Fix include statement in `tests/de_test.cpp`
+    ([#419](https://github.com/mlpack/ensmallen/pull/419)).
+  - Fix `exactObjective` output for SGD-like optimizers when the number of
+    iterations is an even number of epochs
+    ([#417](https://github.com/mlpack/ensmallen/pull/417)).
+  - Increase tolerance in `demon_sgd_test.cpp`
+    ([#420](https://github.com/mlpack/ensmallen/pull/420)).
+  - Set cmake version range to 3.5...4.0
+    ([#422](https://github.com/mlpack/ensmallen/pull/422)).
+
 # RcppEnsmallen 0.2.22.1.2
 
 - `-DARMA_USE_CURRENT` added to `PKG_CXXFLAGS` to use Armadillo 15.0.2 or higher
