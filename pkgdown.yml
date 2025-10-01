@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   package-usage: package-usage.html
   using-rcppensmallen: using-rcppensmallen.html
-last_built: 2025-09-11T03:35Z
+last_built: 2025-10-01T01:40Z
 urls:
   reference: https://coatless.github.io/rcppensmallen/reference
   article: https://coatless.github.io/rcppensmallen/articles
