@@ -19,70 +19,90 @@
 
 namespace ens {
 
-inline AugLagrangian::AugLagrangian(const size_t maxIterations,
-                                    const double penaltyThresholdFactor,
-                                    const double sigmaUpdateFactor,
-                                    const L_BFGS& lbfgs) :
+template<typename VecType>
+inline AugLagrangianType<VecType>::AugLagrangianType(
+    const size_t maxIterations,
+    const double penaltyThresholdFactor,
+    const double sigmaUpdateFactor,
+    const L_BFGS& lbfgs) :
     maxIterations(maxIterations),
     penaltyThresholdFactor(penaltyThresholdFactor),
     sigmaUpdateFactor(sigmaUpdateFactor),
     lbfgs(lbfgs),
     terminate(false),
-    sigma(0.0)
+    deprecatedSigma(0.0)
 {
 }
 
+template<typename VecType>
 template<typename LagrangianFunctionType,
          typename MatType,
+         typename InVecType,
          typename GradType,
          typename... CallbackTypes>
-typename std::enable_if<IsArmaType<GradType>::value, bool>::type
-AugLagrangian::Optimize(LagrangianFunctionType& function,
-                        MatType& coordinates,
-                        const arma::vec& initLambda,
-                        const double initSigma,
-                        CallbackTypes&&... callbacks)
+typename std::enable_if<IsMatrixType<GradType>::value, bool>::type
+AugLagrangianType<VecType>::Optimize(
+    LagrangianFunctionType& function,
+    MatType& coordinates,
+    InVecType& lambda,
+    double& sigma,
+    CallbackTypes&&... callbacks)
 {
-  lambda = initLambda;
-  sigma = initSigma;
-
-  AugLagrangianFunction<LagrangianFunctionType> augfunc(function,
-      lambda, sigma);
+  AugLagrangianFunction<LagrangianFunctionType, InVecType> augfunc(
+      function, lambda, sigma);
 
   return Optimize(augfunc, coordinates, callbacks...);
 }
 
+template<typename VecType>
 template<typename LagrangianFunctionType,
          typename MatType,
          typename GradType,
          typename... CallbackTypes>
-typename std::enable_if<IsArmaType<GradType>::value, bool>::type
-AugLagrangian::Optimize(LagrangianFunctionType& function,
-                        MatType& coordinates,
-                        CallbackTypes&&... callbacks)
+typename std::enable_if<IsMatrixType<GradType>::value &&
+                        IsAllNonMatrix<CallbackTypes...>::value, bool>::type
+AugLagrangianType<VecType>::Optimize(LagrangianFunctionType& function,
+                                     MatType& coordinates,
+                                     CallbackTypes&&... callbacks)
 {
+  typedef typename ForwardType<MatType>::bvec InVecType;
+
   // If the user did not specify the right size for sigma and lambda, we will
   // use defaults.
-  if (!lambda.is_empty())
+  // TODO: remove this when ensmallen 4.x is released!
+  if (!deprecatedLambda.is_empty())
   {
-    AugLagrangianFunction<LagrangianFunctionType> augfunc(function, lambda,
-        sigma);
-    return Optimize(augfunc, coordinates, callbacks...);
+    InVecType lambda(conv_to<InVecType>::from(deprecatedLambda));
+
+    AugLagrangianFunction<LagrangianFunctionType, InVecType> augfunc(function,
+        lambda, deprecatedSigma);
+    const bool result = Optimize(augfunc, coordinates, callbacks...);
+    deprecatedLambda = conv_to<VecType>::from(lambda);
+
+    return result;
   }
   else
   {
-    AugLagrangianFunction<LagrangianFunctionType> augfunc(function);
+    // Use default values.
+    InVecType lambda(function.NumConstraints());
+    lambda.zeros();
+    double sigma = 10;
+
+    AugLagrangianFunction<LagrangianFunctionType, InVecType> augfunc(
+        function, lambda, sigma);
     return Optimize(augfunc, coordinates, callbacks...);
   }
 }
 
+template<typename VecType>
 template<typename LagrangianFunctionType,
          typename MatType,
+         typename InVecType,
          typename GradType,
          typename... CallbackTypes>
-typename std::enable_if<IsArmaType<GradType>::value, bool>::type
-AugLagrangian::Optimize(
-    AugLagrangianFunction<LagrangianFunctionType>& augfunc,
+typename std::enable_if<IsMatrixType<GradType>::value, bool>::type
+AugLagrangianType<VecType>::Optimize(
+    AugLagrangianFunction<LagrangianFunctionType, InVecType>& augfunc,
     MatType& coordinatesIn,
     CallbackTypes&&... callbacks)
 {
@@ -110,13 +130,14 @@ AugLagrangian::Optimize(
 
   // Convergence tolerance---depends on the epsilon of the type we are using for
   // optimization.
-  ElemType tolerance = 1e3 * std::numeric_limits<ElemType>::epsilon();
+  ElemType tolerance = 1000 * std::numeric_limits<ElemType>::epsilon();
 
   // Then, calculate the current penalty.
   ElemType penalty = 0;
   for (size_t i = 0; i < function.NumConstraints(); i++)
   {
-    const ElemType p = std::pow(function.EvaluateConstraint(i, coordinates), 2);
+    const ElemType p = std::pow(function.EvaluateConstraint(i, coordinates),
+        ElemType(2));
     terminate |= Callback::EvaluateConstraint(*this, function, coordinates, i,
         p, callbacks...);
 
@@ -149,9 +170,6 @@ AugLagrangian::Optimize(
     if (std::abs(lastObjective - objective) < tolerance &&
         augfunc.Sigma() > 500000)
     {
-      lambda = std::move(augfunc.Lambda());
-      sigma = augfunc.Sigma();
-
       Callback::EndOptimization(*this, function, coordinates, callbacks...);
       return true;
     }
@@ -167,7 +185,7 @@ AugLagrangian::Optimize(
     for (size_t i = 0; i < function.NumConstraints(); i++)
     {
       const ElemType p = std::pow(function.EvaluateConstraint(i, coordinates),
-          2);
+          ElemType(2));
       terminate |= Callback::EvaluateConstraint(*this, function, coordinates, i,
           p, callbacks...);
 
@@ -190,12 +208,12 @@ AugLagrangian::Optimize(
         terminate |= Callback::EvaluateConstraint(*this, function, coordinates,
             i, p, callbacks...);
 
-        augfunc.Lambda()[i] -= augfunc.Sigma() * p;
+        augfunc.Lambda()[i] -= ElemType(augfunc.Sigma()) * p;
       }
 
       // We also update the penalty threshold to be a factor of the current
       // penalty.
-      penaltyThreshold = penaltyThresholdFactor * penalty;
+      penaltyThreshold = ElemType(penaltyThresholdFactor) * penalty;
       Info << "Lagrange multiplier estimates updated." << std::endl;
     }
     else
@@ -208,7 +226,7 @@ AugLagrangian::Optimize(
         Warn << "AugLagrangian::Optimize(): sigma too large for element type; "
             << "terminating." << std::endl;
         Callback::EndOptimization(*this, function, coordinates, callbacks...);
-        return false;
+        return true;
       }
     }
 
