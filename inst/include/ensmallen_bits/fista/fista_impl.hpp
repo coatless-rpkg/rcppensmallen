@@ -123,8 +123,11 @@ FISTA<BackwardStepType>::Optimize(FunctionType& function,
   ElemType currentStepSize = (ElemType) maxStepSize;
   ElemType lastStepSize = (ElemType) maxStepSize;
 
+  const size_t actualMaxIterations = (maxIterations == 0) ?
+      std::numeric_limits<size_t>::max() : maxIterations;
+
   Callback::BeginOptimization(*this, f, x, callbacks...);
-  for (size_t i = 1; i != maxIterations && !terminate; ++i)
+  for (size_t i = 0; i < actualMaxIterations && !terminate; ++i)
   {
     // During this optimization, we want to optimize h(x) = f(x) + g(x).
     // f(x) is `f`, but g(x) is specified by `BackwardStepType`.

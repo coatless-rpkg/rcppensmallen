@@ -113,8 +113,11 @@ IQN::Optimize(SeparableFunctionType& functionIn,
   BaseGradType gradient(iterate.n_rows, iterate.n_cols);
   BaseMatType u = t[0];
 
+  const size_t actualMaxIterations = (maxIterations == 0) ?
+      std::numeric_limits<size_t>::max() : maxIterations;
+
   Callback::BeginOptimization(*this, function, iterate, callbacks...);
-  for (size_t i = 1; i != maxIterations && !terminate; ++i)
+  for (size_t i = 0; i < actualMaxIterations && !terminate; ++i)
   {
     for (size_t j = 0, f = 0; f < numFunctions; j++)
     {
@@ -206,8 +209,11 @@ IQN::Optimize(SeparableFunctionType& functionIn,
     }
   }
 
-  Info << "IQN: maximum iterations (" << maxIterations << ") reached; "
-      << "terminating optimization." << std::endl;
+  if (!terminate)
+  {
+    Info << "IQN: maximum iterations (" << maxIterations << ") reached; "
+        << "terminating optimization." << std::endl;
+  }
 
   Callback::EndOptimization(*this, function, iterate, callbacks...);
   return overallObjective;

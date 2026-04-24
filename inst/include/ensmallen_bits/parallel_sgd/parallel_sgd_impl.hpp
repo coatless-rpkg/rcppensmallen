@@ -95,11 +95,14 @@ typename MatType::elem_type>::type ParallelSGD<DecayPolicyType>::Optimize(
   arma::Col<size_t> visitationOrder = arma::linspace<arma::Col<size_t>>(0,
       (function.NumFunctions() - 1), function.NumFunctions());
 
+  const size_t actualMaxIterations = (maxIterations == 0) ?
+      std::numeric_limits<size_t>::max() : maxIterations;
+
   // Iterate till the objective is within tolerance or the maximum number of
   // allowed iterations is reached. If maxIterations is 0, this will iterate
   // till convergence.
   Callback::BeginOptimization(*this, function, iterate, callbacks...);
-  for (size_t i = 1; i != maxIterations && !terminate; ++i)
+  for (size_t i = 0; i < actualMaxIterations && !terminate; ++i)
   {
     // Calculate the overall objective.
     lastObjective = overallObjective;
