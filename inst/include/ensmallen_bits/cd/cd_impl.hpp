@@ -66,9 +66,12 @@ CD<DescentPolicyType>::Optimize(
   // Controls early termination of the optimization process.
   bool terminate = false;
 
+  const size_t actualMaxIterations = (maxIterations == 0) ?
+      std::numeric_limits<size_t>::max() : maxIterations;
+
   // Start iterating.
   Callback::BeginOptimization(*this, function, iterate, callbacks...);
-  for (size_t i = 1; i != maxIterations && !terminate; ++i)
+  for (size_t i = 0; i < actualMaxIterations && !terminate; ++i)
   {
     // Get the coordinate to descend on.
     size_t featureIdx = descentPolicy.template DescentFeature<
@@ -120,9 +123,12 @@ CD<DescentPolicyType>::Optimize(
     }
   }
 
-  Info << "CD: maximum iterations (" << maxIterations << ") reached; "
-      << "terminating optimization." << std::endl;
-
+  if (!terminate)
+  {
+    Info << "CD: maximum iterations (" << maxIterations << ") reached; "
+        << "terminating optimization." << std::endl;
+  }
+  
   // Calculate and return final objective.  No need to pay attention to the
   // result of the callback.
   const ElemType objective = function.Evaluate(iterate);

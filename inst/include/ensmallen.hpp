@@ -120,6 +120,8 @@
 #include "ensmallen_bits/cd/cd.hpp"
 #include "ensmallen_bits/cne/cne.hpp"
 #include "ensmallen_bits/de/de.hpp"
+#include "ensmallen_bits/delta_bar_delta/delta_bar_delta.hpp"
+#include "ensmallen_bits/delta_bar_delta/momentum_delta_bar_delta.hpp"
 #include "ensmallen_bits/eve/eve.hpp"
 #include "ensmallen_bits/fasta/fasta.hpp"
 #include "ensmallen_bits/fbs/fbs.hpp"

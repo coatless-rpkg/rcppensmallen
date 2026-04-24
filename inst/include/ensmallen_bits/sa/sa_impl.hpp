@@ -80,6 +80,9 @@ typename MatType::elem_type SA<CoolingScheduleType>::Optimize(
   BaseMatType moveSize(rows, cols, GetFillType<BaseMatType>::none);
   moveSize.fill(ElemType(initMoveCoef));
 
+  const size_t actualMaxIterations = (maxIterations == 0) ?
+      std::numeric_limits<size_t>::max() : maxIterations;
+
   Callback::BeginOptimization(*this, function, iterate, callbacks...);
 
   // Initial moves to get rid of dependency of initial states.
@@ -92,7 +95,7 @@ typename MatType::elem_type SA<CoolingScheduleType>::Optimize(
   }
 
   // Iterating and cooling.
-  for (size_t i = 0; i != maxIterations && !terminate; ++i)
+  for (size_t i = 0; i < actualMaxIterations && !terminate; ++i)
   {
     oldEnergy = energy;
     terminate |= GenerateMove(function, iterate, accept, moveSize, energy, idx,
@@ -121,8 +124,11 @@ typename MatType::elem_type SA<CoolingScheduleType>::Optimize(
     }
   }
 
-  Warn << "SA: maximum iterations (" << maxIterations << ") reached; "
-      << "terminating optimization." << std::endl;
+  if (!terminate)
+  {
+    Warn << "SA: maximum iterations (" << maxIterations << ") reached; "
+        << "terminating optimization." << std::endl;
+  }
 
   Callback::EndOptimization(*this, function, iterate, callbacks...);
   return energy;

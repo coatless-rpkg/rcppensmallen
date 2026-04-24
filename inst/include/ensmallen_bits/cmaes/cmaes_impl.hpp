@@ -156,6 +156,9 @@ typename MatType::elem_type CMAES<SelectionPolicyType,
   // The current visitation order (sorted by population objectives).
   UVecType idx = linspace<UVecType>(0, lambda - 1, lambda);
 
+  const size_t actualMaxIterations = (maxIterations == 0) ?
+      std::numeric_limits<size_t>::max() : maxIterations;
+
   // Now iterate!
   Callback::BeginOptimization(*this, function, transformedIterate,
       callbacks...);
@@ -165,11 +168,11 @@ typename MatType::elem_type CMAES<SelectionPolicyType,
   size_t patience = 10 + (30 * iterate.n_elem / lambda) + 1;
   size_t steps = 0;
 
-  for (size_t i = 1; (i != maxIterations) && !terminate; ++i)
+  for (size_t i = 0; i < actualMaxIterations && !terminate; ++i)
   {
     // To keep track of where we are.
-    const size_t idx0 = (i - 1) % 2;
-    const size_t idx1 = i % 2;
+    const size_t idx0 = i % 2;
+    const size_t idx1 = (i + 1) % 2;
 
     // Perform Cholesky decomposition. If the matrix is not positive definite,
     // add a small value and try again.
