@@ -1,0 +1,40 @@
+# Using RcppEnsmallen in Your Own R Package
+
+Abstract
+
+This vignette describes the best practices for using RcppEnsmallen in
+your own R package.
+
+## Overview
+
+RcppEnsmallen is best used within an *R* package. The setup for
+`RcppEnsmallen`’s use mirrors that of other `Rcpp`-based projects. In
+particular, the `DESCRIPTION` file requires the `LinkingTo` field and
+two files inside the `src/` to establish the necessary compilation
+options. In the next two sections, we show the modifications.
+
+### DESCRIPTION file
+
+Open your R package’s `DESCRIPTION` file. Ensure that the `LinkingTo`
+directive is present and contains:
+
+``` bash
+LinkingTo: Rcpp, RcppArmadillo (>= 15.0.2-1), RcppEnsmallen (>= 0.2.22.1.2)
+```
+
+### Makevars inside the src/ Directory
+
+Next, the `src/` directory must contain both a `Makevars` and
+`Makevars.win` file. Each file must have the same contents of:
+
+``` bash
+PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS) -DARMA_USE_CURRENT
+PKG_LIBS = $(SHLIB_OPENMP_CXXFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+```
+
+The `Makevars.win` file provides the appropriate configuration for
+Windows while `Makevars` acts on Unix-alike systems like macOS, Linux,
+and Solaris.
+
+**Note:** The `-DARMA_USE_CURRENT` define is required to use 15.0.2 of
+Armadillo library.
