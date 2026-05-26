@@ -1,10 +1,10 @@
-pandoc: 3.1.11
+pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   package-usage: package-usage.html
   using-rcppensmallen: using-rcppensmallen.html
-last_built: 2026-04-24T03:39Z
+last_built: 2026-05-26T13:24Z
 urls:
   reference: https://coatless.github.io/rcppensmallen/reference
   article: https://coatless.github.io/rcppensmallen/articles

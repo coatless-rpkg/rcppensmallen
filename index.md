@@ -33,6 +33,7 @@ package if used during an analysis or simulation study. Citation
 information for the package may be acquired by using in *R*:
 
 ``` r
+
 citation("RcppEnsmallen")
 ```
 

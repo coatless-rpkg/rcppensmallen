@@ -32,15 +32,21 @@ package.
 Consider the **Residual Sum of Squares**, also known as **RSS**, defined
 as:
 
-$$RSS(\beta) = (\mathbf{y} - \mathbf{X}\beta)^{\top}(\mathbf{y} - \mathbf{X}\beta)$$
+``` math
+RSS\left( \beta \right) = \left( { \mathbf{y} - \mathbf{X} \beta } \right)^{\top} \left( \mathbf{y} - \mathbf{X} \beta \right)
+```
 
 The objective function we wish to minimize would be defined as:
 
-$$f(\beta) = \parallel \mathbf{y} - \mathbf{X}\beta \parallel_{2}$$
+``` math
+f(\beta) = \rVert \mathbf{y} - \mathbf{X}\beta\lVert_2
+```
 
 The gradient is defined as:
 
-$$\frac{\partial RSS}{\partial\beta} = - 2\mathbf{X}^{\top}(\mathbf{y} - \mathbf{X}\beta)$$
+``` math
+\frac{\partial RSS}{\partial \beta} = -2 \mathbf{X}^{\top} \left(\mathbf{y} - \mathbf{X} \beta \right)
+```
 
 #### Two-Step Implementation
 
@@ -155,6 +161,7 @@ within an appropriate tolerance threshold.
 Following with this methodology, data must be generated.
 
 ``` r
+
 n <- 1e6
 beta <- c(-2, 1.5, 3, 8.2, 6.6)
 p <- length(beta)
@@ -171,6 +178,7 @@ closed-form solution to linear regression plus the computational is
 performed more rigorously.
 
 ``` r
+
 coefs_lbfgs <- lin_reg_lbfgs(X, y)
 coefs_lm <- lm.fit(X, y)$coefficients
 ```
@@ -183,4 +191,4 @@ coefs_lm <- lm.fit(X, y)$coefficients
 | Beta4 |  8.198827 |  8.198827 |
 | Beta5 |  6.602305 |  6.602305 |
 
-Comparison of Estimated Coefficients
+Comparison of Estimated Coefficients {.table}
