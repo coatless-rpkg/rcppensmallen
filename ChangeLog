@@ -1,3 +1,13 @@
+2026-07-18  James Balamuta  <balamut2@illinois.edu>
+
+	* inst/include/ensmallen_bits/delta_bar_delta/update_policies/momentum_dbd_update.hpp:
+	Renamed from momentum_delta_bar_delta_update.hpp to keep the packaged path
+	within the 100-byte portable-file-name limit.
+	* inst/include/ensmallen_bits/delta_bar_delta/momentum_delta_bar_delta.hpp: Update include.
+	* tools/ensmallen-path-remaps.tsv: New; manifest of bundled header path remaps.
+	* tools/apply-ensmallen-path-remaps.sh: New; apply remaps and fail if any path exceeds 100 bytes.
+	* .github/workflows/upstream-refresh.yaml: Apply path remaps after each ensmallen upgrade.
+
 2026-04-24  James Balamuta  <balamut2@illinois.edu>
 
 	* DESCRIPTION (Version): Release 3.11.0

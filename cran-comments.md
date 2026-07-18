@@ -1,32 +1,32 @@
 ## Test environments
 
-* local macOS install, R 4.4.2
-* ubuntu 20.04 (with GitHub Actions), R 4.4.2
-* win-builder (devel and release)
+* local: macOS 26.5 "Tahoe" (aarch64), R 4.6.1
+* GitHub Actions:
+  - macos-latest, R release
+  - windows-latest, R release
+  - ubuntu-latest, R devel / release / oldrel-1
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 note
+0 errors | 0 warnings | 0 notes
 
 ## Reverse dependencies
 
-With this update, only `sparsevb` failed to install due to the C++14 requirement. 
-This is due to the `RcppEnsmallen` package now requiring C++14. I have 
-contacted the maintainer of `sparsevb` to update their package to work with
-C++14 and provided a patch to do so. However, I have not received a response
-yet. 
+We checked all 5 reverse dependencies (mlpack, PJFM, Racmacs,
+rcppmlpackexamples, sparsevb), comparing R CMD check results across the CRAN
+and development versions of this package.
 
-> https://gitlab.com/gclara/varpack/-/issues/2
-> https://gitlab.com/gclara/varpack/-/merge_requests/1
-
-Per discussions with Kurt, it is fine to temporarily break `sparsevb` in order
-to allow `mlpack` to be updated to the latest version.
+ * We saw 0 new problems
+ * We failed to check 0 packages
 
 ### revdepcheck results
 
-✔ HDJM 0.1.0                             ── E: 0     | W: 0     | N: 0    
-✔ mlpack 4.5.0                           ── E: 0     | W: 1     | N: 1    
-✔ PJFM 0.1.0                             ── E: 0     | W: 0     | N: 0    
-✔ Racmacs 1.2.9                          ── E: 0     | W: 0     | N: 1    
-I sparsevb 0.1.0                         ── E: 0  +1 | W: 0     | N: 0-1  
-✔ VBJM 0.1.0                             ── E: 0     | W: 0     | N: 0   
+    ✔ mlpack 4.8.0                ── E: 0 | W: 1 | N: 0
+    ✔ PJFM 0.1.0                  ── E: 0 | W: 0 | N: 1
+    ✔ Racmacs 1.2.10              ── E: 0 | W: 0 | N: 0
+    ✔ rcppmlpackexamples 0.0.1    ── E: 0 | W: 1 | N: 1
+    ✔ sparsevb 0.1.1             ── E: 0 | W: 0 | N: 1
+
+The warnings and notes shown above are pre-existing in each reverse
+dependency (they appear identically against the CRAN and development
+versions of RcppEnsmallen) and are therefore unrelated to this update.
