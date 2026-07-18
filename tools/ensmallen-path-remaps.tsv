@@ -1,0 +1,16 @@
+# Permanent path remaps for the bundled 'ensmallen' headers.
+#
+# Some upstream header paths exceed the 100-byte limit that R CMD check enforces
+# for portable tarball file names ("checking for portable file names ... NOTE").
+# The daily "Update Ensmallen" workflow re-extracts ensmallen verbatim, so any
+# rename must be reapplied automatically after each upgrade.
+# tools/apply-ensmallen-path-remaps.sh consumes this table.
+#
+# Format: one remap per line, TAB-separated, both paths relative to inst/include/.
+#   <old-relpath><TAB><new-relpath>
+# Only the final component (file name) is shortened; directories are preserved.
+# Lines starting with '#' and blank lines are ignored. When the guard reports a
+# new >100-byte path, add a shortened mapping here.
+#
+# old-relpath	new-relpath
+ensmallen_bits/delta_bar_delta/update_policies/momentum_delta_bar_delta_update.hpp	ensmallen_bits/delta_bar_delta/update_policies/momentum_dbd_update.hpp

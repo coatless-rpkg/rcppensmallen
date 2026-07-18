@@ -42,6 +42,11 @@ jobs:
           # Extract the update files directly into the include directory.
           # Strip away two levels ${TAR_PREFIX_DIR}/include.
           tar -xzf $RELEASE_TAG -C inst/include/ --strip-components=2 ${TAR_PREFIX_DIR}/include/ensmallen_bits ${TAR_PREFIX_DIR}/include/ensmallen.hpp
+          # Shorten bundled header paths that exceed the 100-byte tarball limit
+          # (R CMD check "portable file names"). Reapplied on every upgrade; the
+          # step fails if a new upstream path exceeds the limit so a mapping can
+          # be added to tools/ensmallen-path-remaps.tsv.
+          bash tools/apply-ensmallen-path-remaps.sh
           # Extract HISTORY.md file into the tool directory for a comparison.
           # Strip away one-level ${TAR_PREFIX_DIR}
           tar -xzf $RELEASE_TAG -C tools/ --strip-components=1 ${TAR_PREFIX_DIR}/HISTORY.md
