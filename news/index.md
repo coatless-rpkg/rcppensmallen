@@ -10,6 +10,10 @@
   - Fix an off-by-one bug where the actual number of executed iterations
     was one fewer than the specified `maxIterations`
     ([\#443](https://github.com/mlpack/ensmallen/pull/443)).
+- Renamed the bundled ‘ensmallen’ `MomentumDeltaBarDelta` update header
+  so every packaged file path stays within CRAN’s 100-byte tarball
+  limit, and added an automated remap step so future ‘ensmallen’
+  upgrades keep to it.
 
 ## RcppEnsmallen 0.3.10.0.1
 
