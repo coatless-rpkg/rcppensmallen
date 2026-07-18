@@ -13,7 +13,7 @@
 #define ENSMALLEN_MOMENTUM_DELTA_BAR_DELTA_HPP
 
 #include <ensmallen_bits/gradient_descent/gradient_descent.hpp>
-#include "update_policies/momentum_delta_bar_delta_update.hpp"
+#include "update_policies/momentum_dbd_update.hpp"
 
 namespace ens {
 

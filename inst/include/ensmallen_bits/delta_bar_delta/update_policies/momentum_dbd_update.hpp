@@ -1,5 +1,5 @@
 /**
- * @file momentum_delta_bar_delta_update.hpp
+ * @file momentum_dbd_update.hpp
  * @author Ranjodh Singh
  *
  * MomentumDeltaBarDelta update policy for Gradient Descent.
