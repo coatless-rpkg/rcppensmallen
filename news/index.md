@@ -2,6 +2,8 @@
 
 ## RcppEnsmallen 0.3.11.0.1
 
+CRAN release: 2026-07-19
+
 - Upgraded to ensmallen 3.11.0: “Sunny Day” (2025-12-16)
   - Refactor `GradientDescent` into
     `GradientDescentType<UpdatePolicyType, DecayPolicyType>` and add the
