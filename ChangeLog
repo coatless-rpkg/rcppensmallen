@@ -1,3 +1,10 @@
+2026-07-30  James Balamuta  <balamut2@illinois.edu>
+
+	* DESCRIPTION (Version): Release 3.11.1
+	* NEWS.md: Update for Ensmallen release 3.11.1
+	* inst/include/ensmallen_bits: Upgraded to Ensmallen 3.11.1
+	* inst/include/ensmallen.hpp: ditto
+
 2026-07-18  James Balamuta  <balamut2@illinois.edu>
 
 	* inst/include/ensmallen_bits/delta_bar_delta/update_policies/momentum_dbd_update.hpp:
