@@ -12,7 +12,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/coatless-rpkg/rcppensmallen/blob/0.3.11.0.1/inst/CITATION)
+[`inst/CITATION`](https://github.com/coatless-rpkg/rcppensmallen/blob/main/inst/CITATION)
 
 Balamuta, J.J. and Eddelbuettel, D. (2018) RcppEnsmallen: Header-Only
 C++ Mathematical Optimization Library for 'Armadillo'. URL

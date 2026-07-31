@@ -1,5 +1,13 @@
 # Changelog
 
+## RcppEnsmallen 0.3.11.1.1
+
+- Upgraded to ensmallen 3.11.1: “Sunny Day” (2026-07-29)
+  - Loosen tolerance for Lookahead tests to prevent spurious failures
+    ([\#456](https://github.com/mlpack/ensmallen/pull/456)).
+  - Fix uninitialized gradient constraint matrix for `AugLagrangian`
+    ([\#458](https://github.com/mlpack/ensmallen/pull/458)).
+
 ## RcppEnsmallen 0.3.11.0.1
 
 CRAN release: 2026-07-19
