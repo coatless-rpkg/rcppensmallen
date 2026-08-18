@@ -54,8 +54,15 @@
 - Added a `tinytest` suite covering the new functions, `lin_reg_lbfgs()`, and
   the standalone example file, which is compiled and compared against the
   package build under `tinytest::at_home()`.
+- The gradient-free and constrained vignettes now benchmark against the
+  specialist solver for each problem, `quantreg::rq()` and `nnls::nnls()`.
+  Both reach the same optimum as `ensmallen` and both are substantially
+  faster. A general-purpose optimizer earns its place on an objective no
+  packaged solver covers. The two packages are suggested, and the comparisons
+  are skipped where they are not installed.
 - Added a package logo showing an optimizer's trace descending a loss basin:
-  - Static and animated SVGs for light and dark mode ship in `man/figures/`.
+  - Static and animated SVGs for light and dark mode are included in
+    `man/figures/`.
   - The README title line shows the animated logo, picking light or dark with
     a `<picture>` element and a `prefers-color-scheme` media query.
 

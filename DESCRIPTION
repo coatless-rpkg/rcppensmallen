@@ -34,6 +34,8 @@ Roxygen: list(markdown = TRUE)
 Suggests:
     knitr,
     rmarkdown,
-    tinytest
+    tinytest,
+    quantreg,
+    nnls
 VignetteBuilder: knitr
 Config/roxygen2/version: 8.0.0

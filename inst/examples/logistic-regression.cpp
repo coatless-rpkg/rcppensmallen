@@ -6,7 +6,7 @@
 //
 //     Rcpp::sourceCpp("logistic-regression.cpp")
 //
-// The same code ships inside this package, split across
+// The same code is included in this package, split across
 // src/example-logistic-regression-lbfgs.cpp,
 // src/example-logistic-regression-adam.cpp and
 // src/example-logistic-regression-path.cpp, as logistic_reg_lbfgs(),

@@ -4,12 +4,12 @@ author: James Joseph Balamuta
 abstract: |
   In this vignette we fit a least absolute deviations regression with a
   particle swarm optimizer. The loss has no derivative wherever a residual is
-  zero, which is where its minimum sits, so the differentiable objective the
+  zero, and that is where its minimum sits. The differentiable objective the
   other vignettes write cannot be written here. We build a C++ class that
-  supplies `Evaluate()` and nothing else, read the compiler error that appears
-  when an optimizer asks for more than that, check the fit against
-  `optim(method = "Nelder-Mead")`, and compare five gradient-free optimizers
-  on the same problem.
+  supplies `Evaluate()` and nothing else, then read the compiler error an
+  optimizer raises when it asks for more. We check the fit against
+  `optim(method = "Nelder-Mead")` and compare five gradient-free optimizers on
+  the same problem.
 lang: en
 output: rmarkdown::html_vignette
 vignette: >
@@ -19,10 +19,19 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+library(RcppEnsmallen)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+# Chunks carrying a parset option have those graphics parameters applied
+# before the chunk runs. knitr opens a fresh device per chunk, so nothing
+# needs restoring afterwards.
+knitr::knit_hooks$set(parset = function(before, options) {
+  if (before) do.call(graphics::par, options$parset)
+})
 ```
 
 # Overview
@@ -31,25 +40,19 @@ The [linear regression vignette](using-rcppensmallen.html) and the
 [logistic regression vignette](logistic-regression.html) both hand
 [`ensmallen`](https://www.ensmallen.org/docs.html) a class carrying
 `Evaluate()` and `Gradient()`. Their objectives are differentiable everywhere,
-so the gradient is available in closed form and the optimizer can be chosen for
-speed.
+so the gradient comes in closed form and the optimizer can be chosen for speed.
 
 Least absolute deviations regression removes that choice. Its objective is a
-sum of absolute values, and an absolute value has no derivative at zero. The
-zeros are not an edge case to be routed around: a least absolute deviations fit
-puts residuals exactly on zero, so the objective has no gradient at the point
-the optimizer is looking for. What follows from that is which member functions
-the C++ class can supply, and which optimizers will accept it.
+sum of absolute values, and an absolute value has no derivative at zero. A
+least absolute deviations fit puts residuals exactly on zero, so the objective
+has no gradient at the very point the optimizer is looking for. That settles
+which member functions the C++ class can supply, and which optimizers will
+accept it.
 
-The C++ below is a fragment of one file, which ships with the package as
-`src/example-lad-gradient-free.cpp` and is compiled into it as
-`lad_reg_pso()`. Because compiling C++ is slow, this vignette displays the
-source without rebuilding it and calls the precompiled function to produce the
-numbers.
-
-```{r setup}
-library(RcppEnsmallen)
-```
+The C++ below is a fragment of one file, which is included in the package as
+`src/example-lad-gradient-free.cpp` and compiled into it as `lad_reg_pso()`.
+Because compiling C++ is slow, this vignette displays the source without
+rebuilding it and calls the precompiled function to produce the numbers.
 
 # The objective
 
@@ -65,19 +68,18 @@ fit:
 $$r(\beta) = \mathbf{y} - \mathbf{X}\beta \in \mathbb{R}^{n}, \qquad r_i(\beta) = y_i - \sum_{j=1}^{p} X_{ij}\,\beta_j$$
 
 Least squares sums the squares of those residuals. Least absolute deviations
-sums their absolute values, which collapses the $n$ of them to one number the
-same way:
+sums their absolute values, collapsing the $n$ of them to one number the same
+way:
 
 $$f(\beta) = \sum_{i=1}^{n} \lvert r_i(\beta) \rvert = \lVert \mathbf{y} - \mathbf{X}\beta \rVert_1 \in \mathbb{R}$$
 
-The two losses treat a distant point differently. Doubling a residual doubles
-its contribution to $f$ and quadruples its contribution to the residual sum of
-squares, so a response far from the fitted line pulls a least squares fit
-toward itself with a force that grows as it moves away, and pulls a least
-absolute deviations fit with a force that does not. That is the reason to
-minimize $f$ at all: it is the fit for data whose errors have heavy tails.
+Doubling a residual doubles its contribution to $f$ and quadruples its
+contribution to the residual sum of squares. A response far from the fitted
+line therefore pulls a least squares fit toward itself with a force that grows
+as it moves away, and pulls a least absolute deviations fit with a force that
+does not. That is why $f$ is the fit for data whose errors have heavy tails.
 
-# Where the derivative goes missing
+# The missing gradient
 
 The absolute value has derivative $\mathrm{sign}(u)$ for $u \neq 0$ and no
 derivative at $u = 0$, where the left and right slopes are $-1$ and $+1$. At a
@@ -88,18 +90,17 @@ $$\frac{\partial f}{\partial \beta_j} = -\sum_{i=1}^{n} X_{ij}\,\mathrm{sign}\le
 
 $$\nabla f(\beta) = -\mathbf{X}^{\top}\mathrm{sign}\left(r(\beta)\right) \in \mathbb{R}^{p}$$
 
-That expression is defined on a set that excludes the answer. A least absolute
-deviations fit for a design with $p$ columns passes exactly through $p$ of the
-observations, so $p$ of its residuals are zero and the gradient above is
-undefined there. The [verification](#verifying-the-result) below counts those
-residuals on the fitted model, and the second panel of the figure shows the
-kink they produce.
+A least absolute deviations fit for a design with $p$ columns passes exactly
+through $p$ of the observations, so $p$ residuals are zero and the expression
+above is undefined at the answer it is meant to find. The
+[verification](#verifying-the-result) below counts those residuals, and the
+second panel of the figure shows the kink they produce.
 
-A `Gradient()` written from that formula would be undefined at the solution,
-and away from it would return a vector whose length does not shrink as the fit
-improves: $\mathrm{sign}$ reports plus or minus one however small a residual
-gets. A gradient method reads a vanishing gradient as convergence, and this one
-does not vanish. The class therefore supplies the objective and stops.
+Away from the solution the formula is no better behaved. $\mathrm{sign}$
+reports plus or minus one however small a residual gets, so the vector it
+returns never shrinks as the fit improves, and a gradient method reads a
+vanishing gradient as convergence. The class therefore supplies the objective
+and stops.
 
 # The arbitrary function contract
 
@@ -116,14 +117,13 @@ optimizer states which of those sets it can work with. A class carrying
 | Constrained | `Evaluate()`, `Gradient()`, `NumConstraints()`, `EvaluateConstraint()`, `GradientConstraint()` |
 
 Reading down the table, the contracts get more demanding and the set of
-optimizers that accept them gets smaller. The first row asks for the least and
-is the row this vignette sits on; the [logistic regression
-vignette](logistic-regression.html) writes the second and third, and the
-[constrained optimization vignette](constrained-optimization.html) writes the
-fourth.
+optimizers that accept them gets smaller. This vignette sits on the first row;
+the [logistic regression vignette](logistic-regression.html) writes the second
+and third, and the [constrained optimization
+vignette](constrained-optimization.html) the fourth.
 
-Every standalone file using `RcppEnsmallen` opens with the same two lines. The
-attribute tells `Rcpp::sourceCpp()` where to find the headers.
+Every standalone file using `RcppEnsmallen` opens with the same two lines, the
+attribute telling `Rcpp::sourceCpp()` where to find the headers.
 
 ```{Rcpp header, eval = FALSE}
 #include <RcppEnsmallen.h>
@@ -157,19 +157,19 @@ private:
 };
 ```
 
-`y - X * beta` is the $n \times 1$ residual vector, `arma::abs()` acts on it
-elementwise, and `arma::accu()` sums the result to the single number
-`Evaluate()` returns. `beta` arrives as a $p \times 1$ matrix, one entry per
-column of `X`, as it does in the differentiable classes.
+`y - X * beta` is the $n \times 1$ residual vector, and `arma::abs()` acts on
+it elementwise. `arma::accu()` sums the result to the one number `Evaluate()`
+returns. `beta` arrives as a $p \times 1$ matrix, one entry per column of `X`,
+as it does in the differentiable classes.
 
-# What the compiler says when the contract is wrong
+# A contract mismatch
 
 The pairing between a class and an optimizer is checked when the file is
 compiled, not when it runs. Substituting
 [`ens::CMAES<>`](https://www.ensmallen.org/docs.html#cma-es) for the optimizer
 used below and rebuilding gives three errors, of which these two carry the
-information. File paths, line numbers and the instantiation traces between
-them are cut, and the long lines are wrapped:
+information. Paths, line numbers and instantiation traces are cut, and long
+lines wrapped:
 
 ```
 error: no member named 'NumFunctions' in 'LADFunction'
@@ -183,16 +183,15 @@ the requirements of the ArbitrarySeparableFunctionType API; see the optimizer
 tutorial for more details.
 ```
 
-The second message names the contract CMA-ES wants, which is the arbitrary
-*separable* one: `Evaluate()` taken over a batch of data points, plus a
+The second message names the contract CMA-ES wants, the arbitrary *separable*
+one, which asks for `Evaluate()` over a batch of data points and a
 `NumFunctions()` reporting how many there are. That is a different row of the
-table above from the one `LADFunction` sits on, and the first message is the
-missing member function stated outright.
+table above, and the first message names the missing member function outright.
 
 The static checks live in
-`inst/include/ensmallen_bits/function/static_checks.hpp`, and each contract has
-its own message there naming itself. A build failure therefore identifies the
-API the optimizer expects without any need to look the optimizer up first.
+`inst/include/ensmallen_bits/function/static_checks.hpp`, where each contract
+carries a message naming itself, so a build failure identifies the API the
+optimizer expects without looking the optimizer up first.
 
 # Running the optimizer
 
@@ -228,21 +227,22 @@ arma::vec lad_reg_pso(const arma::mat& X, const arma::vec& y) {
 }
 ```
 
-Only the shape of `beta` reaches the optimizer. The swarm is initialized at
-random, so the zeros are read for their dimensions and then overwritten, which
-is a departure from the L-BFGS examples where the starting values are the point
-the search begins at.
+The zeros are read for their dimensions and then overwritten, a departure from
+the L-BFGS examples where the starting values are the point the search begins
+at.
 
-The file shipped with the package adds a block of `Rcpp::stop()` argument
-checks at the top of this function, omitted here so the optimizer setup stays
-in view. Those checks reject a non-finite `X` or `y`, since a single `NA` makes
-the objective non-finite for every particle, leaving the swarm with nothing to
-move toward and the untouched starting point coming back as if it were a fit.
-The response is continuous here, so the check on `y` is finiteness rather than
-the membership in $\{0, 1\}$ the logistic examples require.
+The included file adds a block of `Rcpp::stop()` argument checks at the top of
+this function, omitted here so the optimizer setup stays in view. They reject a
+non-finite `X` or `y`, since a single `NA` makes the objective non-finite for
+every particle, leaving the swarm nothing to move toward and returning the
+untouched starting point as if it were a fit. The response is continuous, so
+the check on `y` is finiteness rather than the membership in $\{0, 1\}$ the
+logistic examples require.
 
-**Note:** the class definition and the exported function must live in the same
-C++ file.
+**Note:** the `// [[Rcpp::export]]` attribute has to appear in the `.cpp` file
+Rcpp compiles, but the class does not have to. Moving the class into a header
+beside it and including it with `#include` works under both `sourceCpp()` and a
+package build.
 
 # Verifying the result
 
@@ -264,9 +264,9 @@ X <- cbind(1, matrix(rnorm(n * (p - 1)), ncol = p - 1))
 y <- as.vector(X %*% beta + rt(n, df = 2))
 ```
 
-`optim(method = "Nelder-Mead")` is the base R comparison. It is the natural
-one: like the particle swarm it never asks for a derivative, so both solvers
-are working with the same information about the same surface.
+`optim(method = "Nelder-Mead")` is the base R comparison. Like the particle
+swarm it never asks for a derivative, so both solvers work from the same
+information about the same surface.
 
 ```{r estimation}
 obj <- function(b) sum(abs(y - X %*% b))
@@ -287,9 +287,8 @@ knitr::kable(compare_coefs, digits = 6, longtable = FALSE,
 ```
 
 The two solvers agree to three decimal places, and each sits further from the
-truth than from the other, which is the expected outcome: the gap to the
-generating parameters is sampling error at $n = 400$ with $t_2$ noise, not
-optimizer error.
+truth than from the other. The gap to the generating parameters is sampling
+error at $n = 400$ with $t_2$ noise, not optimizer error.
 
 ```{r agreement}
 max(abs(as.vector(fit) - nm$par))
@@ -298,8 +297,7 @@ max(abs(as.vector(fit) - nm$par))
 Coefficients are the loose measure here. A piecewise linear surface is flat
 along the directions that move a coefficient without moving any residual across
 zero, so two solvers can stop at visibly different points of the same flat
-region. The objective is the tight measure, and it is also the one being
-minimized:
+region. The objective is the tight measure, and the one being minimized:
 
 ```{r objective}
 c(LBestPSO = obj(fit), NelderMead = nm$value)
@@ -324,9 +322,9 @@ larger than the third by seven orders of magnitude. The fitted plane passes
 through three of the four hundred points exactly, and the objective has no
 derivative there.
 
-The formula that a `Gradient()` would have used behaves as described. Its
-length at the fit is of order one rather than of order zero, and stepping a
-millionth of a unit away does not shrink it.
+The formula a `Gradient()` would have used has length of order one at the fit
+rather than of order zero, and stepping a millionth of a unit away does not
+shrink it.
 
 ```{r nonvanishing}
 grad <- function(b) -as.vector(t(X) %*% sign(as.vector(y - X %*% b)))
@@ -341,18 +339,15 @@ c(at_the_fit = sqrt(sum(grad(fit)^2)),
 
 An optimizer watching that number for a signal to stop would wait forever.
 
-Plotting the objective against one coefficient shows what that means for an
-optimizer. Holding the first and third coefficients at their fitted values and
-varying the second gives a one-dimensional slice, drawn twice: over a wide
-window beside the squared-error loss on the same data, and magnified around the
-minimum.
+Holding the first and third coefficients at their fitted values and varying the
+second gives a one-dimensional slice of the objective. It is drawn twice below,
+once over a wide window beside the squared-error loss on the same data, and
+once magnified around the minimum.
 
-```{r kink-plot, fig.width = 6.8, fig.height = 3.4, fig.alt = "Two panels. The left panel plots the absolute and squared error objectives against the second coefficient over a window three units wide, both rescaled to a common range; the two curves are bowl shaped and nearly indistinguishable near the bottom. The right panel magnifies the absolute error objective around its minimum, where it is a chain of straight segments joined at marked breakpoints, with a sharp corner at the minimum rather than a smooth turn."}
+```{r kink-plot, fig.width = 6.8, fig.height = 3.4, parset = list(mfrow = c(1, 2), mar = c(4.1, 4.3, 3.1, 1.1)), fig.alt = "Two panels. The left panel plots the absolute and squared error objectives against the second coefficient over a window three units wide, both rescaled to a common range; the two curves are bowl shaped and nearly indistinguishable near the bottom. The right panel magnifies the absolute error objective around its minimum, where it is a chain of straight segments joined at marked breakpoints, with a sharp corner at the minimum rather than a smooth turn."}
 hold <- X[, 1] * fit[1] + X[, 3] * fit[3]
 l1 <- function(b2) sum(abs(y - hold - X[, 2] * b2))
 sse <- function(b2) sum((y - hold - X[, 2] * b2)^2)
-
-op <- par(mfrow = c(1, 2), mar = c(4.1, 4.3, 3.1, 1.1))
 
 # Left: both losses over a wide window, each shifted to its own minimum and
 # scaled to a common range so they share an axis.
@@ -377,26 +372,22 @@ abline(v = near, col = "grey80", lty = 3)
 lines(zoom, vapply(zoom, l1, 0), lwd = 2, col = "#1b6ca8")
 points(near, vapply(near, l1, 0), pch = 16, cex = 0.7, col = "#1b6ca8")
 points(fit[2], l1(fit[2]), pch = 4, cex = 1.7, lwd = 2, col = "#c0392b")
-par(op)
 ```
 
-At the scale of the left panel both curves look like smooth bowls that meet at
-the bottom, and either one looks like something a gradient method could
-descend.
-The right panel covers a window a few percent as wide. The absolute loss there
-is a
-chain of straight segments whose slope changes at each dotted line, and each
-dotted line is a value of $\beta_2$ that sends one residual through zero. The
-minimum, marked with a cross, is a corner rather than a smooth turn: the slope
-arrives negative and leaves positive with nothing in between. Each break
-changes the slope by $2\lvert X_{i2} \rvert$, which is why the breaks
-belonging to small entries of the second column are hard to see.
+At the scale of the left panel both curves look like smooth bowls that a
+gradient method could descend. The right panel covers a window a few percent as
+wide. There the absolute loss is a chain of straight segments whose slope
+changes at each dotted line. Each dotted line is a value of $\beta_2$ that sends
+one residual through zero. The minimum, marked with a cross, is a corner
+rather than a smooth turn, the slope arriving negative and leaving positive
+with nothing in between. Each break changes the slope by
+$2\lvert X_{i2} \rvert$, which is why the breaks belonging to small entries of
+the second column are hard to see.
 
-# Choosing among the gradient-free optimizers
+# Choosing an optimizer
 
 Five optimizers in `ensmallen` accept a class shaped like `LADFunction`.
-Swapping the type on one line of `lad_reg_pso()` is the whole change, since the
-class and the call are untouched:
+Swapping the type on one line of `lad_reg_pso()` is the whole change:
 
 ```{Rcpp swap, eval = FALSE}
     ens::LBestPSO pso;   // ens::SA<>, ens::CNE, ens::SPSA and ens::DE also
@@ -417,34 +408,92 @@ how far above that each optimizer stopped.
 | `ens::SPSA` | 658.023219 | 1.1e-01 |
 | `ens::DE` | 662.798752 | 4.9e+00 |
 
-The swarm is the reason `lad_reg_pso()` uses it: it matches the reference to
-2e-10 on the objective and to 3.5e-10 on the worst coefficient. Simulated
-annealing lands close behind. Conventional neural evolution and simultaneous
-perturbation stochastic approximation stop at points that are visibly worse but
-still recognizable as the fit.
+The swarm matches the reference to 2e-10 on the objective and to 3.5e-10 on the
+worst coefficient, which is why `lad_reg_pso()` uses it. Simulated annealing
+lands close behind. Conventional neural evolution and simultaneous perturbation
+stochastic approximation stop at points that are visibly worse but still
+recognizable as the fit.
 
 Differential evolution at its defaults misses badly, by roughly five units of
 objective and 0.23 in the worst coefficient. Its own header says as much. The
 constructor takes a population size, a maximum number of generations, a
-crossover rate and a differential weight, and the comment above it reads that
-"the default values provided over here are not necessarily suitable for a given
-function" and that adjusting them to the problem is highly recommended.
+crossover rate and a differential weight. The comment above it warns that "the
+default values provided over here are not necessarily suitable for a given
+function" and recommends adjusting them to the problem.
 
 Nothing in the vector it returns announces the failure. The coefficients have
 the right signs and roughly the right magnitudes, and a gradient-free optimizer
-leaves behind no gradient to test for flatness at the point where it stopped.
-What catches it is the comparison the table performs: a second solver on the
-same data, measured on the objective.
+leaves behind no gradient to test for flatness where it stopped. The table
+catches it by running a second solver on the same data and comparing
+objectives.
 
-These numbers are one run on one data set, and the ordering is not a general
-ranking of the five. What generalizes is the method: hold the data, the seed
-and the starting point fixed, change one type, and compare the objective rather
-than the coefficients.
+These numbers are one run on one data set. Hold the data, the seed and the
+starting point fixed, change one type, and compare the objective rather than
+the coefficients.
+
+# The specialist solver
+
+Nelder-Mead is another general purpose search. The check below is against the
+solver built for this problem. Least absolute deviations is median regression,
+the $\tau = 0.5$ case of quantile regression, and `quantreg::rq()` is the
+established R implementation. It does not search at all. It writes the fit as a
+linear program and solves that exactly. The swarm walks toward the corner of
+the objective; `rq` computes which corner it is.
+
+```{r quantreg-fit, eval = requireNamespace("quantreg", quietly = TRUE)}
+rq_beta <- as.vector(coef(quantreg::rq(y ~ X - 1, tau = 0.5)))
+
+c(LBestPSO = obj(fit), rq = obj(rq_beta))
+
+obj(fit) - obj(rq_beta)
+
+max(abs(as.vector(fit) - rq_beta))
+```
+
+Both reach an objective of 657.916218. The swarm sits 1.9e-10 above the exact
+solution, and the two coefficient vectors differ by at most 3.5e-10. On this
+data the swarm found the right point.
+
+Agreement is half a benchmark. The other half is what each answer cost. The
+swarm is timed with its seed reset every repetition, so each measured call does
+the same work as the one in the fit above.
+
+```{r quantreg-timing, eval = requireNamespace("quantreg", quietly = TRUE)}
+pso_reps <- 10
+rq_reps <- 200
+
+pso_time <- system.time(
+  for (i in seq_len(pso_reps)) {
+    set.seed(512)
+    lad_reg_pso(X, y)
+  }
+)[["elapsed"]] / pso_reps
+
+rq_time <- system.time(
+  for (i in seq_len(rq_reps)) quantreg::rq(y ~ X - 1, tau = 0.5)
+)[["elapsed"]] / rq_reps
+
+c(LBestPSO = pso_time, rq = rq_time)
+
+pso_time / rq_time
+```
+
+The ratio ran into the hundreds on every run measured here. `ens::LBestPSO`
+defaults to 64 particles and up to 3000 iterations, and evaluates the objective
+once per particle per iteration. A simplex method on a linear program of this
+size does far less arithmetic.
+
+A general purpose optimizer reached the answer a specialist solver reaches, and
+paid two orders of magnitude in time to get there. When a specialist solver
+exists for your objective, use the specialist. `ensmallen` earns its place on
+the objectives that have no specialist, or the ones you wrote yourself and
+nobody has solved before. `LADFunction` is twenty lines and required no
+knowledge of linear programming.
 
 # Seeding
 
 The swarm is drawn through Armadillo's random number generator, which
-`RcppArmadillo` routes onto R's own stream. A fixed seed therefore makes a run
+`RcppArmadillo` routes onto R's own stream, so a fixed seed makes a run
 reproducible exactly as it does for the mini-batch optimizer in the logistic
 regression vignette:
 
@@ -456,17 +505,16 @@ identical(first, second)
 
 The same mechanism means a call consumes random numbers from R's stream and
 shifts whatever draws follow it. Unseeded runs land at slightly different
-points on the surface, and the spread widens as `X` gains columns, so every
-call whose result is compared against a fixed number should be seeded.
+points on the surface, and the spread widens as `X` gains columns, so seed
+every call whose result is compared against a fixed number.
 
-# Where the code lives
+# The included file
 
-The class and the exported function are in
-`src/example-lad-gradient-free.cpp` in the package sources, together with the
-argument checks omitted above and the roxygen block that produces
-`?lad_reg_pso`. The [logistic regression
-vignette](logistic-regression.html#moving-this-into-an-r-package) covers what
-moving a standalone file into a package involves.
+`src/example-lad-gradient-free.cpp` holds the class, the exported function, the
+argument checks omitted above, and the roxygen block behind `?lad_reg_pso`. The
+[logistic regression
+vignette](logistic-regression.html#moving-this-into-an-r-package) covers moving
+a standalone file into a package.
 
 The [constrained optimization vignette](constrained-optimization.html) takes
 the last row of the contract table, where the class supplies `Evaluate()` and

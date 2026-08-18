@@ -16,10 +16,19 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+library(RcppEnsmallen)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+# Apply par() settings from the chunk option of the same name, so the
+# boilerplate stays out of the displayed code. knitr opens a fresh device per
+# chunk, so nothing needs restoring afterwards.
+knitr::knit_hooks$set(parset = function(before, options) {
+  if (before) do.call(graphics::par, options$parset)
+})
 ```
 
 # Overview
@@ -32,7 +41,7 @@ which is the problem [`ensmallen`](https://www.ensmallen.org/docs.html) is
 built to solve.
 
 This vignette develops the solver step by step. Each piece of C++ shown below is
-a fragment of one file, and the finished file ships with the package:
+a fragment of one file, and the finished file is included with the package:
 
 ```{r example-path, eval = FALSE}
 system.file("examples", "logistic-regression.cpp", package = "RcppEnsmallen")
@@ -45,10 +54,6 @@ produce the numbers. A third function built on the same objective,
 `logistic_reg_lbfgs_path()`, records the points the optimizer passes through
 and is developed in
 [Watching an Optimizer Run with Callbacks](watching-an-optimizer.html).
-
-```{r setup}
-library(RcppEnsmallen)
-```
 
 # The objective function
 
@@ -140,7 +145,7 @@ max(eta, 0) + log1p(exp(-abs(eta)))   # stable
 An `Inf` here is not usually fatal. The L-BFGS line search fails its acceptance
 test on an infinite objective and shrinks the step, so the optimizer backs off
 rather than crashing; a `NaN` is the one that stops the search. What you lose is
-the *information* in that region: an objective that reports `Inf` instead of 800
+the *information* in that region. An objective that reports `Inf` instead of 800
 cannot tell a line search which of two bad points is less bad, so the search is
 steered by a value that no longer separates them. Whether that changes the final
 answer depends on the data and the starting point.
@@ -253,8 +258,8 @@ twice. Adding `EvaluateWithGradient()` shares one pass between them, and
     }
 ```
 
-Supplying all three functions is allowed and is what the shipped file does. More
-detail is available on the
+Supplying all three functions is allowed and is what the included file does.
+More detail is available on the
 [`ensmallen` documentation page for differentiable functions](https://www.ensmallen.org/docs.html#differentiable-functions).
 
 With the class in place, the exported function picks an optimizer and runs it.
@@ -292,10 +297,14 @@ logistic regression is convex: there is a single optimum, every starting point
 reaches it, and starting from a fixed one makes the result reproducible. A
 two-dimensional slice of this objective, contoured in
 [Watching an Optimizer Run with Callbacks](watching-an-optimizer.html), shows
-the nested level sets around one interior minimum that this shape implies.
+level sets nested around a single interior minimum.
 
-**Note:** the class definition and the exported function must live in the same
-C++ file.
+**Note:** the `// [[Rcpp::export]]` attribute has to appear in the `.cpp` file
+Rcpp compiles, but the class does not have to. Moving the class into a header
+beside it and including it with `#include` works under both `sourceCpp()` and a
+package build. A class used by more than one optimizer usually belongs in a
+header. The examples here keep each file self contained so that one file can be
+read on its own.
 
 # Running it standalone
 
@@ -308,10 +317,10 @@ Rcpp::sourceCpp("logistic-regression.cpp")
 
 That defines `logistic_reg_lbfgs()` in the global environment. The remainder of
 this vignette instead calls the copy already compiled into `RcppEnsmallen`. The
-objective classes there carry the same code as the ones shown here; what the
-shipped files add is scaffolding around them, chiefly a block of `Rcpp::stop()`
-argument checks at the top of each exported function, omitted above so the
-optimizer setup stays in view.
+objective classes there carry the same code as the ones shown here. What the
+included files add is scaffolding around them, chiefly a block of `Rcpp::stop()`
+argument checks at the top of each exported function. Those checks are omitted
+above so the optimizer setup stays in view.
 
 # Verifying the result
 
@@ -347,10 +356,9 @@ knitr::kable(compare_coefs, longtable = FALSE,
              caption = "Comparison of Estimated Coefficients")
 ```
 
-The two estimates agree far more tightly than either agrees with the truth,
-which is the expected outcome: both are computing the same maximum likelihood
-estimate, and the gap to the true parameters is sampling error, not optimizer
-error.
+The two estimates agree far more tightly than either agrees with the truth. Both
+are computing the same maximum likelihood estimate, and the gap to the true
+parameters is sampling error, not optimizer error.
 
 ```{r agreement}
 max(abs(as.vector(coefs_ens) - coefs_glm))
@@ -424,10 +432,8 @@ knitr::kable(ridge_tbl, digits = 4, longtable = FALSE,
 The same numbers read more directly as paths. Each coefficient is pulled toward
 zero as the penalty grows, and none of them crosses it:
 
-```{r ridge-plot, fig.width = 6.5, fig.height = 4.2, fig.alt = "Four coefficient paths plotted against lambda on an index axis. Every path moves toward zero as lambda grows from 0 to 1000, with the two positive coefficients falling and the two negative ones rising, and none crossing zero."}
+```{r ridge-plot, parset = list(mar = c(4.1, 4.1, 2.1, 6.4)), fig.width = 6.5, fig.height = 4.2, fig.alt = "Four coefficient paths plotted against lambda on an index axis. Every path moves toward zero as lambda grows from 0 to 1000, with the two positive coefficients falling and the two negative ones rising, and none crossing zero."}
 cols <- c("#1b6ca8", "#c0392b", "#2e8b57", "#8e44ad")
-# Widen the right margin so the legend can sit outside the plotting region.
-op <- par(mar = c(4.1, 4.1, 2.1, 6.4))
 matplot(seq_along(lambdas), t(ridge_fits), type = "b", pch = 16, lty = 1,
         col = cols, xaxt = "n", xlab = expression(lambda),
         ylab = "Coefficient", main = "Ridge shrinkage")
@@ -436,7 +442,6 @@ abline(h = 0, col = "grey70", lty = 3)
 legend(par("usr")[2], par("usr")[4], xpd = NA, bty = "n", cex = 0.85,
        legend = paste0("Beta", seq_len(nrow(ridge_fits))),
        col = cols, lty = 1, pch = 16)
-par(op)
 ```
 
 Lambda is drawn on an index axis rather than a logarithmic one because the
@@ -462,9 +467,7 @@ max(abs(ridge_fits[, 1] - coefs_glm))
 
 That is the same number the unpenalized comparison printed earlier, because with
 $\lambda = 0$ it is the same fit, and it is why the table rounds that column's
-deviation to zero. The rest of the table is measured against an anchor an
-independent implementation confirms, which is what makes the drift a statement
-about the penalty rather than about the optimizer.
+deviation to zero.
 
 Penalized GLMs in R normally come from the glmnet package rather than from a
 hand-written objective.
@@ -676,8 +679,7 @@ identical(first, second)
 ```
 
 The flip side is that every call consumes random numbers from R's stream, so it
-advances any `rnorm()` or `runif()` draws that follow it. Reproducibility is
-intact; what changes is the state of the stream afterwards.
+advances any `rnorm()` or `runif()` draws that follow it.
 
 The `verbose` argument in the function above switches on a callback that
 prints the loss after each pass over the data, which turns a run that stopped
@@ -743,8 +745,8 @@ everything else: `src/RcppExports.cpp`, `R/RcppExports.R`, the pages in `man/`,
 and `NAMESPACE` are all generated, so the only hand-written C++ in the tree is
 the file you moved.
 
-That is the whole difference between the standalone file and what ships in this
-package. To compare them directly, the standalone version is at
+That is the whole difference between the standalone file and what this package
+provides. To compare them directly, the standalone version is at
 `system.file("examples", "logistic-regression.cpp", package = "RcppEnsmallen")`
 and the package version is split across
 `src/example-logistic-regression-lbfgs.cpp`,
@@ -754,9 +756,9 @@ and the package version is split across
 # Derivation
 
 Everything above was asserted rather than shown; here is the algebra in one
-place. Throughout, $\eta_i = \sum_{j=1}^{p} X_{ij}\beta_j$, the vector of
+place. Throughout, $\eta_i = \sum_{j=1}^{p} X_{ij}\beta_j$, and the vector of
 fitted probabilities is $\pi = \sigma(\eta)$ with entries
-$\pi_i = \sigma(\eta_i)$, the index $i$ runs over the $n$ observations and $j$
+$\pi_i = \sigma(\eta_i)$. The index $i$ runs over the $n$ observations and $j$
 over the $p$ coefficients, and $\nabla f(\beta)$ is a column vector shaped like
 $\beta$. Results that have a matrix form are given both ways, with the shape of
 each factor carried as a subscript, so that $\mathbf{X}^{\top}_{p \times n}$
@@ -822,16 +824,15 @@ $v = \pi - \mathbf{y}$ and collecting all $p$ entries,
 
 $$\nabla f(\beta) = \mathbf{X}^{\top}\left(\pi - \mathbf{y}\right) \in \mathbb{R}^{p}$$
 
-The transpose is not a convention to memorize; it is where the sum over
-observations went.
+The transpose is where the sum over observations went.
 
 The same two steps in matrix form carry the shapes along. Write
 $\nabla_{\eta} f$ for the column of partials $\partial f / \partial \eta_i$,
 and $\nabla_{\beta} f$ for $\nabla f$ where the two need distinguishing. The
 derivative of the linear predictor with respect to the coefficients is the
-design matrix itself, and the derivative of $f$ with respect to the linear
-predictor is the residual $\pi - \mathbf{y}$ between the fitted probabilities
-and the observed responses:
+design matrix itself. The derivative of $f$ with respect to the linear predictor
+is the residual $\pi - \mathbf{y}$ between the fitted probabilities and the
+observed responses:
 
 $$\left(\frac{\partial \eta}{\partial \beta}\right)_{n \times p} \; = \; \mathbf{X}_{n \times p}, \qquad \left(\nabla_{\eta} f\right)_{n \times 1} \; = \; \left(\pi - \mathbf{y}\right)_{n \times 1}$$
 
@@ -885,6 +886,6 @@ For $\eta < 0$, $\max(\eta, 0) = 0$ and $|\eta| = -\eta$, so the right-hand side
 is $\log(1 + e^{\eta})$ with nothing to do.
 
 Both branches return the left-hand side. The difference is what a computer is
-asked to evaluate: the exponent is $-|\eta| \leq 0$ on the right, so
+asked to evaluate. On the right the exponent is $-|\eta| \leq 0$, so
 $e^{-|\eta|}$ lands in $(0, 1]$ and cannot overflow, while the $\max(\eta, 0)$
 term carries the large part of the answer exactly.
