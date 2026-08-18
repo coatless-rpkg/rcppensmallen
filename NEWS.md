@@ -36,6 +36,10 @@
 - Added a `tinytest` suite covering the new functions, `lin_reg_lbfgs()`, and
   the standalone example file, which is compiled and compared against the
   package build under `tinytest::at_home()`.
+- Added a package logo showing an optimizer's trace descending a loss basin:
+  - Static and animated SVGs for light and dark mode ship in `man/figures/`.
+  - The README title line shows the animated logo, picking light or dark with
+    a `<picture>` element and a `prefers-color-scheme` media query.
 
 # RcppEnsmallen 0.3.11.0.1
 
