@@ -30,9 +30,10 @@ BugReports: https://github.com/coatless-rpkg/rcppensmallen/issues
 Encoding: UTF-8
 LinkingTo: Rcpp, RcppArmadillo
 Imports: Rcpp
-RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
-Suggests: 
+Suggests:
     knitr,
-    rmarkdown
+    rmarkdown,
+    tinytest
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0

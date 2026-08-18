@@ -24,6 +24,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item James Joseph Balamuta \email{balamut2@illinois.edu} (\href{https://orcid.org/0000-0003-2826-8458}{ORCID}) [copyright holder]
   \item Dirk Eddelbuettel \email{edd@debian.org} (\href{https://orcid.org/0000-0001-6419-907X}{ORCID}) [copyright holder]
 }
 

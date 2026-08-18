@@ -20,6 +20,22 @@
     ([#456](https://github.com/mlpack/ensmallen/pull/456)).
   - Fix uninitialized gradient constraint matrix for `AugLagrangian`
     ([#458](https://github.com/mlpack/ensmallen/pull/458)).
+- Added a logistic regression example alongside the existing linear regression
+  one ([#5](https://github.com/coatless-rpkg/rcppensmallen/issues/5)):
+  - `logistic_reg_lbfgs()` minimizes the penalized negative log-likelihood with
+    `L_BFGS`, using a numerically stable softplus and an optional ridge penalty.
+  - `logistic_reg_adam()` expresses the same objective as a separable function
+    and fits it with mini-batch `Adam`.
+  - `logistic_reg_lbfgs_path()` runs the same `L_BFGS` fit behind a callback
+    that records the coordinates, returning a `p` by `k + 1` matrix whose first
+    column is the starting point and whose last column is the fit.
+  - A new vignette, "Solving Logistic Regression using Numeric Optimization",
+    develops the code from the likelihood through to packaging it.
+  - The complete standalone source is installed at
+    `system.file("examples", "logistic-regression.cpp", package = "RcppEnsmallen")`.
+- Added a `tinytest` suite covering the new functions, `lin_reg_lbfgs()`, and
+  the standalone example file, which is compiled and compared against the
+  package build under `tinytest::at_home()`.
 
 # RcppEnsmallen 0.3.11.0.1
 

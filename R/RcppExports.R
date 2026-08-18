@@ -47,3 +47,213 @@ lin_reg_lbfgs <- function(X, y) {
     .Call(`_RcppEnsmallen_lin_reg_lbfgs`, X, y)
 }
 
+#' Logistic Regression with Adam
+#'
+#' Solves logistic regression with the mini-batch Adam optimizer by expressing
+#' the negative log-likelihood as a separable objective function.
+#'
+#' @param X          A `matrix` that is the Design Matrix for the regression
+#'                   problem. Include a column of ones for an intercept.
+#' @param y          A `vec` of binary responses taking values 0 or 1.
+#' @param batch_size An `integer` giving the number of observations per
+#'                   mini-batch.
+#' @param max_epochs An `integer` giving the number of complete passes to make
+#'                   over the data.
+#' @param step_size  A `double` giving the Adam step size. The default of 0.05
+#'                   is deliberately larger than the 'ensmallen' Adam default
+#'                   of 0.001; see Details.
+#' @param verbose    A `logical` indicating whether to report the loss at the
+#'                   end of each epoch through an `ens::PrintLoss` callback.
+#'
+#' @return
+#' The estimated \eqn{\beta}{beta} parameter values for the logistic regression.
+#' @details
+#' The objective and gradient match those of [logistic_reg_lbfgs()] with
+#' `lambda = 0`, but are evaluated one mini-batch at a time.
+#'
+#' The optimizer's `MaxIterations()` counts *data points visited*, not batches
+#' and not epochs, so `max_epochs` is converted internally by multiplying by
+#' `nrow(X)`.
+#'
+#' As of 'ensmallen' 3.10 the SGD family divides the step size by the batch
+#' size, so a step size carried over from 'ensmallen' 2 will behave
+#' differently unless `ENS_OLD_SEPARABLE_STEP_BEHAVIOR` is defined. This is why
+#' `step_size` defaults to 0.05 rather than the 0.001 that `ens::Adam` itself
+#' uses: with a batch size of 32 the effective step is `0.001 / 32`, roughly
+#' `3e-5`, which leaves the optimizer far short of the optimum after 50 epochs.
+#'
+#' Adam shuffles the data between epochs. That shuffle draws on Armadillo's
+#' random number generator, which 'RcppArmadillo' routes to R's own stream, so
+#' the result *is* reproducible under [set.seed()]. The flip side is that each
+#' call consumes random numbers from R's stream and therefore shifts any
+#' [runif()] or [rnorm()] draws that follow it. Without an explicit seed,
+#' successive calls start from different positions in the stream and so give
+#' slightly different answers.
+#' @export
+#' @examples
+#' # Number of Points
+#' n = 5000
+#'
+#' # Select beta parameters
+#' beta = c(-1, 0.7, -0.5, 1.2)
+#'
+#' # Number of Predictors (including intercept)
+#' p = length(beta)
+#'
+#' # Generate the design matrix with an intercept
+#' X = cbind(1, matrix(rnorm(n * (p - 1)), ncol = p - 1))
+#'
+#' # Generate binary responses
+#' y = rbinom(n, size = 1, prob = 1 / (1 + exp(-X %*% beta)))
+#'
+#' # Run optimization with Adam
+#' theta_hat = logistic_reg_adam(X, y)
+#'
+#' # Compare against the full-batch L-BFGS solution
+#' cbind(actual = beta,
+#'       adam = theta_hat,
+#'       lbfgs = logistic_reg_lbfgs(X, y))
+logistic_reg_adam <- function(X, y, batch_size = 32L, max_epochs = 50L, step_size = 0.05, verbose = FALSE) {
+    .Call(`_RcppEnsmallen_logistic_reg_adam`, X, y, batch_size, max_epochs, step_size, verbose)
+}
+
+#' Logistic Regression with L-BFGS
+#'
+#' Solves logistic regression by minimizing the penalized negative
+#' log-likelihood with the L-BFGS optimizer.
+#'
+#' @param X      A `matrix` that is the Design Matrix for the regression
+#'               problem. Include a column of ones for an intercept.
+#' @param y      A `vec` of binary responses taking values 0 or 1.
+#' @param lambda A `double` giving the ridge penalty. The default of 0
+#'               yields the maximum likelihood estimate.
+#'
+#' @return
+#' The estimated \eqn{\beta}{beta} parameter values for the logistic regression.
+#' @details
+#' Writing \eqn{\eta = \mathbf{X} \beta}{eta = X * beta}, the objective is the
+#' penalized negative log-likelihood:
+#' \deqn{f(\beta) = \sum_i \left[ \log \left(1 + e^{\eta_i} \right) - y_i \eta_i \right] + \frac{\lambda}{2} \lVert \beta \rVert_2^2}{f(beta) = sum_i [log(1 + exp(eta_i)) - y_i * eta_i] + (lambda / 2) * ||beta||^2}
+#' with gradient
+#' \deqn{\nabla f(\beta) = \mathbf{X}^{T} \left( \sigma \left( \eta \right) - \mathbf{y} \right) + \lambda \beta}{grad f(beta) = X^T (sigma(eta) - y) + lambda * beta}
+#' where \eqn{\sigma}{sigma} is the logistic function.
+#'
+#' The penalty is applied to every coefficient, including the intercept. This
+#' keeps the example self-contained, since the function cannot know which
+#' column of `X` holds the intercept. Production code normally leaves the
+#' intercept unpenalized.
+#'
+#' Because the objective is convex, optimization starts from a vector of zeros
+#' rather than a random point, which makes the result reproducible.
+#' @export
+#' @examples
+#' # Number of Points
+#' n = 1000
+#'
+#' # Select beta parameters
+#' beta = c(-1, 0.7, -0.5, 1.2)
+#'
+#' # Number of Predictors (including intercept)
+#' p = length(beta)
+#'
+#' # Generate predictors from a normal distribution
+#' X_i = matrix(rnorm(n * (p - 1)), ncol = p - 1)
+#'
+#' # Add an intercept
+#' X = cbind(1, X_i)
+#'
+#' # Generate binary responses
+#' y = rbinom(n, size = 1, prob = 1 / (1 + exp(-X %*% beta)))
+#'
+#' # Run optimization with L-BFGS
+#' theta_hat = logistic_reg_lbfgs(X, y)
+#'
+#' # Compare against glm()
+#' cbind(actual = beta,
+#'       ensmallen = theta_hat,
+#'       glm = glm.fit(X, y, family = binomial())$coefficients)
+logistic_reg_lbfgs <- function(X, y, lambda = 0.0) {
+    .Call(`_RcppEnsmallen_logistic_reg_lbfgs`, X, y, lambda)
+}
+
+#' Logistic Regression with L-BFGS, Recording the Optimizer's Path
+#'
+#' Solves logistic regression as [logistic_reg_lbfgs()] does, and returns
+#' every point the optimizer visited on the way rather than the fit alone.
+#'
+#' @param X      A `matrix` that is the Design Matrix for the regression
+#'               problem. Include a column of ones for an intercept.
+#' @param y      A `vec` of binary responses taking values 0 or 1.
+#' @param lambda A `double` giving the ridge penalty. The default of 0
+#'               yields the maximum likelihood estimate.
+#'
+#' @return
+#' A `matrix` with one row per coefficient and one column per recorded point.
+#' The first column is the starting point, a vector of zeros, and each column
+#' after it holds the coordinates following one accepted step. The last column
+#' is the fit, and matches what [logistic_reg_lbfgs()] returns for the same
+#' arguments to within the optimizer's tolerance.
+#'
+#' Coefficients run down the rows and iterations run across the columns, so
+#' two coordinates can be traced against each other with
+#' `plot(path[2, ], path[4, ])`.
+#' @details
+#' The objective, its gradient, the starting point and the optimizer settings
+#' are those of [logistic_reg_lbfgs()], which documents them. The only
+#' addition is an `ens::L_BFGS` callback that copies the coordinates into a
+#' matrix each time the optimizer moves.
+#'
+#' A callback in 'ensmallen' is a plain class that defines whichever of the
+#' documented hooks it needs; the library detects them at compile time. This
+#' one uses `BeginOptimization()` for the starting point, `StepTaken()` for
+#' each accepted step, and `EndOptimization()` for the point the run finished
+#' on. Callbacks are passed as trailing arguments to `Optimize()`.
+#'
+#' The column count is not fixed. L-BFGS stops once the gradient norm falls
+#' below its tolerance or the objective stops improving, so the number of
+#' steps depends on the data. A point that repeats the previous one is not
+#' recorded twice.
+#' @export
+#' @examples
+#' # Number of Points
+#' n = 1000
+#'
+#' # Select beta parameters
+#' beta = c(-1, 0.7, -0.5, 1.2)
+#'
+#' # Number of Predictors (including intercept)
+#' p = length(beta)
+#'
+#' # Generate predictors from a normal distribution
+#' X_i = matrix(rnorm(n * (p - 1)), ncol = p - 1)
+#'
+#' # Add an intercept
+#' X = cbind(1, X_i)
+#'
+#' # Generate binary responses
+#' y = rbinom(n, size = 1, prob = 1 / (1 + exp(-X %*% beta)))
+#'
+#' # Record the path L-BFGS takes
+#' path = logistic_reg_lbfgs_path(X, y)
+#'
+#' # One row per coefficient, one column per recorded point
+#' dim(path)
+#'
+#' # The last column is the fit
+#' cbind(actual = beta,
+#'       path = path[, ncol(path)],
+#'       lbfgs = drop(logistic_reg_lbfgs(X, y)))
+#'
+#' # Trace two coefficients against each other
+#' plot(path[2, ], path[4, ], type = "b", pch = 16,
+#'      xlab = "beta 2", ylab = "beta 4",
+#'      main = "L-BFGS path through two coordinates")
+#'
+#' # Mark where the run started and where it ended
+#' points(path[2, 1], path[4, 1], col = "blue", pch = 16, cex = 1.5)
+#' points(path[2, ncol(path)], path[4, ncol(path)],
+#'        col = "red", pch = 16, cex = 1.5)
+logistic_reg_lbfgs_path <- function(X, y, lambda = 0.0) {
+    .Call(`_RcppEnsmallen_logistic_reg_lbfgs_path`, X, y, lambda)
+}
+
