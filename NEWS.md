@@ -47,6 +47,10 @@
     top of `Evaluate()` and `Gradient()`. A new vignette, "Constrained
     Optimization with Non-Negative Least Squares", works through the
     equality-only sign convention a bound has to be written in.
+- Moved the callback material out of the logistic regression vignette into a
+  new vignette, "Watching an Optimizer Run with Callbacks", which carries the
+  built-in callbacks, the custom `PathRecorder` callback and
+  `logistic_reg_lbfgs_path()`.
 - Added a `tinytest` suite covering the new functions, `lin_reg_lbfgs()`, and
   the standalone example file, which is compiled and compared against the
   package build under `tinytest::at_home()`.

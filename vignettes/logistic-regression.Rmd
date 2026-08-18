@@ -5,8 +5,8 @@ abstract: |
   In this vignette, we build a logistic regression solver with RcppEnsmallen one
   piece at a time. We start from the likelihood, write the objective function as
   a standalone C++ file, check the answer against `glm()`, add a ridge penalty,
-  switch to a mini-batch optimizer, write a callback that records the
-  optimizer's path, and finish by moving the code into an R package.
+  switch to a mini-batch optimizer, and finish by moving the code into an R
+  package.
 lang: en
 output: rmarkdown::html_vignette
 vignette: >
@@ -38,10 +38,13 @@ a fragment of one file, and the finished file ships with the package:
 system.file("examples", "logistic-regression.cpp", package = "RcppEnsmallen")
 ```
 
-The same code is also compiled into the package as `logistic_reg_lbfgs()`,
-`logistic_reg_adam()` and `logistic_reg_lbfgs_path()`. Because compiling C++ is
-slow, this vignette displays the source without rebuilding it and calls those
-precompiled functions to produce the numbers.
+The same code is also compiled into the package as `logistic_reg_lbfgs()` and
+`logistic_reg_adam()`. Because compiling C++ is slow, this vignette displays
+the source without rebuilding it and calls those precompiled functions to
+produce the numbers. A third function built on the same objective,
+`logistic_reg_lbfgs_path()`, records the points the optimizer passes through
+and is developed in
+[Watching an Optimizer Run with Callbacks](watching-an-optimizer.html).
 
 ```{r setup}
 library(RcppEnsmallen)
@@ -286,7 +289,10 @@ arma::vec logistic_reg_lbfgs(const arma::mat& X, const arma::vec& y,
 The linear regression vignette starts L-BFGS from a random draw. Here we start
 from a vector of zeros instead, because the negative log-likelihood of a
 logistic regression is convex: there is a single optimum, every starting point
-reaches it, and starting from a fixed one makes the result reproducible.
+reaches it, and starting from a fixed one makes the result reproducible. A
+two-dimensional slice of this objective, contoured in
+[Watching an Optimizer Run with Callbacks](watching-an-optimizer.html), shows
+the nested level sets around one interior minimum that this shape implies.
 
 **Note:** the class definition and the exported function must live in the same
 C++ file.
@@ -673,254 +679,12 @@ The flip side is that every call consumes random numbers from R's stream, so it
 advances any `rnorm()` or `runif()` draws that follow it. Reproducibility is
 intact; what changes is the state of the stream afterwards.
 
-# Watching convergence with callbacks
-
-[Callbacks](https://www.ensmallen.org/docs.html#callback-documentation) are
-passed as trailing arguments to `Optimize()`, and report on the run as it
-proceeds, which separates a diverging fit caused by the optimizer from one
-caused by the objective. The `verbose` branch of `logistic_reg_adam()` above
-uses one of them: `ens::PrintLoss()` prints the mean negative log-likelihood
-per observation after each pass.
-
-```{r verbose}
-set.seed(2024)
-fit <- logistic_reg_adam(X, y, max_epochs = 5, verbose = TRUE)
-max(abs(as.vector(fit) - coefs_glm))
-```
-
-A model that predicts one half for everything scores
-$\log 2 \approx 0.693$, so that is where the optimizer sets out from. The
-callback reports at the *end* of each pass, which is why the first number
-printed is already below it, and the sequence falls from there.
-
-Printing does not replace the return value: `fit` holds the coefficients, and
-the second line measures them against the maximum likelihood estimate the same
-way the last row of the step size table does. Five epochs is a tenth of the
-fifty `logistic_reg_adam()` defaults to, and the loss is still falling when the
-run stops, so that deviation comes back roughly two orders of magnitude wider
-than the `step = 0.05` column of the table, which ran the same step size for the
-full fifty passes.
-
-[`ens::PrintLoss`](https://www.ensmallen.org/docs.html#printloss) writes to
-`arma::get_cout_stream()`, which `RcppArmadillo` defines as `Rcpp::Rcout` rather
-than `std::cout`. That matters inside an R package: output goes through R's own
-connection, respects `sink()`, and does not trip the `R CMD check` warnings that
-writing to `std::cout` would.
-
-Three others come up regularly:
-
-- [`ens::StoreBestCoordinates<>()`](https://www.ensmallen.org/docs.html#storebestcoordinates)
-  keeps the best parameters seen, which matters for stochastic optimizers that
-  can wander away from a good point.
-- [`ens::EarlyStopAtMinLoss()`](https://www.ensmallen.org/docs.html#earlystopatminloss)
-  stops once the objective stops improving.
-- [`ens::ProgressBar()`](https://www.ensmallen.org/docs.html#progressbar)
-  reports progress on long runs.
-
-The [full set of built-in callbacks](https://www.ensmallen.org/docs.html#built-in-callbacks)
-is longer than this, and the same trailing-argument syntax accepts any number of
-them at once.
-
-# Writing your own callback
-
-The callbacks above report on a run while it happens. A callback of your own can
-keep what it sees instead of printing it, which is how the coordinates L-BFGS
-passes through become available in R.
-
-`ensmallen` does not ask a callback to inherit from a base class. It inspects
-the type it is handed and calls the hooks that type defines, so a callback
-implements only the hooks it needs and nothing else. The hook that records a
-path is `StepTaken(optimizer, function, coordinates)`, called once after the
-optimizer accepts a step, with `coordinates` holding the point that step
-arrived at. Two more hooks bracket the run: `BeginOptimization()` before the
-first step and `EndOptimization()` after the last, each receiving the
-coordinates as they stand at that moment. A hook may return `void` or `bool`.
-Returning `true` from a hook the optimizer calls inside its loop, `StepTaken()`
-among them, ends the run, which is how `ens::EarlyStopAtMinLoss()` stops early.
-
-The recorder appends what it is handed to a matrix the caller owns, one column
-per point:
-
-```{Rcpp recorder, eval = FALSE}
-// Records the coordinates the optimizer passes through.
-class PathRecorder
-{
-public:
-    // The matrix to fill has one row per coefficient and no columns yet.
-    explicit PathRecorder(arma::mat& path) : path(path) { }
-
-    // Called once before the first step, with the starting coordinates.
-    template<typename OptimizerType, typename FunctionType, typename MatType>
-    void BeginOptimization(OptimizerType& /* optimizer */,
-                           FunctionType& /* function */,
-                           MatType& coordinates)
-    {
-        Record(coordinates);
-    }
-
-    // Called after every accepted step, with the coordinates it reached.
-    template<typename OptimizerType, typename FunctionType, typename MatType>
-    void StepTaken(OptimizerType& /* optimizer */,
-                   FunctionType& /* function */,
-                   const MatType& coordinates)
-    {
-        Record(coordinates);
-    }
-
-    // Called once the loop ends, with the coordinates being returned.
-    template<typename OptimizerType, typename FunctionType, typename MatType>
-    void EndOptimization(OptimizerType& /* optimizer */,
-                         FunctionType& /* function */,
-                         MatType& coordinates)
-    {
-        Record(coordinates);
-    }
-
-private:
-    // Append one more column, unless it repeats the column already there.
-    void Record(const arma::mat& coordinates)
-    {
-        const arma::vec point = arma::vectorise(coordinates);
-
-        if (path.n_cols > 0 &&
-            arma::all(path.col(path.n_cols - 1) == point))
-        {
-            return;
-        }
-
-        path.insert_cols(path.n_cols, point);
-    }
-
-    // The accumulated path, owned by the caller.
-    arma::mat& path;
-};
-```
-
-The hooks are templates because the optimizer type, the objective type, and the
-matrix type are fixed by the call site rather than by the callback. The two
-parameters each hook ignores are left unnamed, which keeps unused-parameter
-warnings from firing.
-
-`StepTaken()` takes its coordinates by `const` reference and the other two do
-not, a difference the class has to reproduce exactly. `ensmallen` matches each
-hook against a signature it declares in `callbacks/traits.hpp`, and one whose
-qualifiers differ is not a hook it recognizes. Adding `const` to the
-coordinates argument of `BeginOptimization()` compiles without a warning and
-leaves that hook uncalled, so the mistake arrives as a missing column rather
-than as a compiler error.
-
-`EndOptimization()` is there because L-BFGS runs its convergence tests between
-taking a step and calling `StepTaken()`. A run that stops on the last of those
-tests never reports its final step, so the returned coordinates are recorded
-there instead. `Record()` drops them again when `StepTaken()` has already seen
-them, which is what happens when the loop exits at the top of an iteration.
-Without the hook the last column comes back a step short and matches the fit
-only to the convergence tolerance rather than exactly.
-
-The exported function pairs the recorder with the objective class from earlier
-and the same starting point `logistic_reg_lbfgs()` uses:
-
-```{Rcpp logregpath, eval = FALSE}
-// [[Rcpp::export]]
-arma::mat logistic_reg_lbfgs_path(const arma::mat& X, const arma::vec& y,
-                                  const double lambda = 0.0) {
-
-    LogisticRegressionFunction lrf(X, y, lambda);
-    ens::L_BFGS lbfgs;
-
-    // The same zero start logistic_reg_lbfgs() uses, so the two runs agree.
-    arma::mat beta(X.n_cols, 1, arma::fill::zeros);
-
-    // One row per coefficient and no columns yet, for the recorder to fill.
-    arma::mat path(X.n_cols, 0);
-
-    lbfgs.Optimize(lrf, beta, PathRecorder(path));
-
-    return path;
-}
-```
-
-Callbacks are trailing arguments to `Optimize()`, the position
-`ens::PrintLoss()` occupies in `logistic_reg_adam()` above. The recorder is
-handed over as a temporary and writes into `path`, which is declared beside it
-and outlives the call. A callback that keeps its result inside itself, such as
-`ens::StoreBestCoordinates<>`, has to be a named object instead, and is read
-after `Optimize()` returns.
-
-The package ships this as `logistic_reg_lbfgs_path()`. For a run of $k$ steps
-the result is a $p \times (k + 1)$ matrix whose first column is the vector of
-zeros the optimizer starts from and whose remaining columns hold the
-coefficients after each accepted step. Rows are coefficients and columns are
-iterations, so one row is one coefficient across the whole run.
-
-```{r path-run}
-path <- logistic_reg_lbfgs_path(X, y)
-dim(path)
-
-# The last column is the fit logistic_reg_lbfgs() returned earlier.
-mle <- as.vector(coefs_ens)
-max(abs(path[, ncol(path)] - mle))
-```
-
-With the path recorded, the surface it descends can be drawn underneath it.
-Holding the first and third coefficients at their fitted values and varying the
-second and fourth over a grid gives a two-dimensional slice of the objective,
-which `contour()` turns into level sets. The window is centered on the optimum
-and made wide enough to hold every recorded point, so the start at the origin
-falls inside the frame.
-
-```{r path-plot, fig.width = 6.5, fig.height = 4.6, fig.alt = "Contour plot of the negative log-likelihood over the second and fourth coefficients, with the other two held at their fitted values. The level sets are closed curves nested around a single interior minimum, marked with a red cross. A blue line runs from an open circle at the origin up and to the right across the level sets, joining filled points whose spacing shrinks as they approach the cross, where the line ends."}
-# Numerically stable softplus, the R counterpart of the C++ helper.
-softplus <- function(e) pmax(e, 0) + log1p(exp(-abs(e)))
-
-# Beta1 and Beta3 stay at their fitted values, so only Beta2 and Beta4 vary.
-base <- X[, 1] * mle[1] + X[, 3] * mle[3]
-
-# Grid limits: centered on the optimum, wide enough to hold the whole path.
-r2 <- 1.15 * max(abs(path[2, ] - mle[2]))
-r4 <- 1.15 * max(abs(path[4, ] - mle[4]))
-g2 <- seq(mle[2] - r2, mle[2] + r2, length.out = 55)
-g4 <- seq(mle[4] - r4, mle[4] + r4, length.out = 55)
-
-# The negative log-likelihood at every point of the grid.
-Z <- outer(g2, g4, Vectorize(function(b2, b4) {
-  eta <- base + X[, 2] * b2 + X[, 4] * b4
-  sum(softplus(eta) - y * eta)
-}))
-
-contour(g2, g4, Z, nlevels = 14, col = "grey65", labcex = 0.6,
-        xlab = expression(beta[2]), ylab = expression(beta[4]),
-        main = "L-BFGS on the negative log-likelihood")
-# The optimum goes down first so the last few steps, which land on top of it,
-# stay visible.
-points(mle[2], mle[4], col = "#c0392b", pch = 4, cex = 1.8, lwd = 2)
-lines(path[2, ], path[4, ], col = "#1b6ca8", lwd = 2)
-points(path[2, ], path[4, ], col = "#1b6ca8", pch = 16, cex = 0.7)
-points(path[2, 1], path[4, 1], col = "#1b6ca8", pch = 1, cex = 1.8)
-legend("topright", bg = "white", box.col = "grey80", cex = 0.8,
-       legend = c("Start", "L-BFGS path", "Optimum"),
-       col = c("#1b6ca8", "#1b6ca8", "#c0392b"),
-       pch = c(1, 16, 4), lty = c(NA, 1, NA))
-```
-
-The level sets are closed curves nested around one interior minimum. That is
-the [convexity used earlier](#a-standalone-implementation) to justify starting
-from zeros, in the form a two-dimensional plot can carry it: restricting a
-convex function to two of its arguments leaves a convex function, so a slice
-showing two separate basins would contradict the claim, while this one is
-consistent with it.
-
-Two qualifications come with the picture. The path runs through all $p$
-coefficients and the plot draws two of them, so points sitting close together
-here can be further apart in the coordinates not shown. The surface underneath
-also holds the first and third coefficients at their fitted values, which the
-early iterates had not reached, so the contour a point sits on is not the
-objective value the optimizer saw when it was there.
-
-The first step covers most of the distance and the later ones crowd together
-around the optimum. L-BFGS stops once the objective stops improving rather than
-after a fixed number of iterations, which is why `dim(path)` reports around a
-dozen columns instead of hundreds.
+The `verbose` argument in the function above switches on a callback that
+prints the loss after each pass over the data, which turns a run that stopped
+short of the optimum into something visible.
+[Watching an Optimizer Run with Callbacks](watching-an-optimizer.html) runs
+that branch, reads what it prints, and goes on to write a callback that
+records the points L-BFGS visits.
 
 # Moving this into an R package
 
@@ -934,9 +698,10 @@ Three changes carry it across:
    attribute is no longer needed, since `LinkingTo` in `DESCRIPTION` replaces
    it. Keep the `#include <RcppEnsmallen.h>`. This package splits the file in
    three, one exported function each, so each part carries its own copy of the
-   helpers inside an anonymous `namespace { }`. The path file keeps its copy of
-   the objective class in there too, since the L-BFGS file already defines a
-   class of that name at namespace scope.
+   helpers inside an anonymous `namespace { }`. The third of them holds the
+   callback the other vignette develops, and keeps its copy of the objective
+   class in there too, since the L-BFGS file already defines a class of that
+   name at namespace scope.
 2. **Declare the dependency and build flags.** `DESCRIPTION` needs a `LinkingTo`
    entry, and `src/` needs a `Makevars` and a `Makevars.win`. The
    [package usage vignette](package-usage.html) gives the exact contents.
@@ -957,7 +722,7 @@ RcppEnsmallen/
 |-- src/
 |   |-- example-logistic-regression-lbfgs.cpp   # the objective class and logistic_reg_lbfgs()
 |   |-- example-logistic-regression-adam.cpp    # the separable class and logistic_reg_adam()
-|   |-- example-logistic-regression-path.cpp    # the callback and logistic_reg_lbfgs_path()
+|   |-- example-logistic-regression-path.cpp    # the callback, from the callbacks vignette
 |   |-- Makevars                         # compiler and linker flags, Unix-alikes
 |   |-- Makevars.win                     # the same flags for Windows
 |   `-- RcppExports.cpp                  # generated C++ registration layer
