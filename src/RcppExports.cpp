@@ -12,6 +12,18 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// lad_reg_pso
+arma::vec lad_reg_pso(const arma::mat& X, const arma::vec& y);
+RcppExport SEXP _RcppEnsmallen_lad_reg_pso(SEXP XSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(lad_reg_pso(X, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 // lin_reg_lbfgs
 arma::mat lin_reg_lbfgs(const arma::mat& X, const arma::vec& y);
 RcppExport SEXP _RcppEnsmallen_lin_reg_lbfgs(SEXP XSEXP, SEXP ySEXP) {
@@ -66,12 +78,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// nnls_auglag
+arma::vec nnls_auglag(const arma::mat& X, const arma::vec& y);
+RcppExport SEXP _RcppEnsmallen_nnls_auglag(SEXP XSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(nnls_auglag(X, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_RcppEnsmallen_lad_reg_pso", (DL_FUNC) &_RcppEnsmallen_lad_reg_pso, 2},
     {"_RcppEnsmallen_lin_reg_lbfgs", (DL_FUNC) &_RcppEnsmallen_lin_reg_lbfgs, 2},
     {"_RcppEnsmallen_logistic_reg_adam", (DL_FUNC) &_RcppEnsmallen_logistic_reg_adam, 6},
     {"_RcppEnsmallen_logistic_reg_lbfgs", (DL_FUNC) &_RcppEnsmallen_logistic_reg_lbfgs, 3},
     {"_RcppEnsmallen_logistic_reg_lbfgs_path", (DL_FUNC) &_RcppEnsmallen_logistic_reg_lbfgs_path, 3},
+    {"_RcppEnsmallen_nnls_auglag", (DL_FUNC) &_RcppEnsmallen_nnls_auglag, 2},
     {NULL, NULL, 0}
 };
 

@@ -33,6 +33,20 @@
     develops the code from the likelihood through to packaging it.
   - The complete standalone source is installed at
     `system.file("examples", "logistic-regression.cpp", package = "RcppEnsmallen")`.
+- Added two examples that use function contracts the regression examples do
+  not:
+  - `lad_reg_pso()` fits least absolute deviations regression with `LBestPSO`.
+    The sum of absolute residuals has no derivative at the point that minimizes
+    it, so the objective class supplies `Evaluate()` alone. A new vignette,
+    "Gradient-Free Optimization with Least Absolute Deviations", reads the
+    compiler error an optimizer that wants more produces and compares five
+    gradient-free optimizers on the same fit.
+  - `nnls_auglag()` fits least squares subject to non-negative coefficients
+    with `AugLagrangian`, which asks the objective class for
+    `NumConstraints()`, `EvaluateConstraint()` and `GradientConstraint()` on
+    top of `Evaluate()` and `Gradient()`. A new vignette, "Constrained
+    Optimization with Non-Negative Least Squares", works through the
+    equality-only sign convention a bound has to be written in.
 - Added a `tinytest` suite covering the new functions, `lin_reg_lbfgs()`, and
   the standalone example file, which is compiled and compared against the
   package build under `tinytest::at_home()`.
