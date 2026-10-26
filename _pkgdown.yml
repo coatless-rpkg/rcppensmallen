@@ -9,3 +9,11 @@ authors:
     href: https://dirk.eddelbuettel.com/
   Ensmallen Developers:
     href: https://ensmallen.org/
+
+navbar:
+  structure:
+    left: [intro, reference, articles, tutorials, news, blog]
+  components:
+    blog:
+      text: Blog posts
+      href: https://blog.thecoatlessprofessor.com/projects/RcppEnsmallen/
