@@ -66,7 +66,7 @@
 Balamuta</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/coatless-rpkg/rcppensmallen/blob/main/vignettes/gradient-free-optimization.Rmd" class="external-link"><code>vignettes/gradient-free-optimization.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/coatless-rpkg/rcppensmallen/blob/0.3.11.2.1/vignettes/gradient-free-optimization.Rmd" class="external-link"><code>vignettes/gradient-free-optimization.Rmd</code></a></small>
       <div class="d-none name"><code>gradient-free-optimization.Rmd</code></div>
     </div>
 
@@ -620,10 +620,10 @@ measured call does the same work as the one in the fit above.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>LBestPSO <span class="op">=</span> <span class="va">pso_time</span>, rq <span class="op">=</span> <span class="va">rq_time</span><span class="op">)</span></span>
 <span><span class="co">#&gt; LBestPSO       rq </span></span>
-<span><span class="co">#&gt;  0.07350  0.00056</span></span>
+<span><span class="co">#&gt; 0.091700 0.000855</span></span>
 <span></span>
 <span><span class="va">pso_time</span> <span class="op">/</span> <span class="va">rq_time</span></span>
-<span><span class="co">#&gt; [1] 131.25</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 107.2515</span></span></code></pre></div>
 <p>The ratio ran into the hundreds on every run measured here.
 <code>ens::LBestPSO</code> defaults to 64 particles and up to 3000
 iterations, and evaluates the objective once per particle per iteration.

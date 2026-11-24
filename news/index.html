@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">RcppEnsmallen</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.11.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.11.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,10 +18,15 @@
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/package-usage.html">Using RcppEnsmallen in Your Own R Package</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/constrained-optimization.html">Constrained Optimization with Non-Negative Least Squares</a></li>
+    <li><a class="dropdown-item" href="../articles/gradient-free-optimization.html">Gradient-Free Optimization with Least Absolute Deviations</a></li>
+    <li><a class="dropdown-item" href="../articles/logistic-regression.html">Solving Logistic Regression using Numeric Optimization</a></li>
+    <li><a class="dropdown-item" href="../articles/package-usage.html">Using RcppEnsmallen in Your Own R Package</a></li>
     <li><a class="dropdown-item" href="../articles/using-rcppensmallen.html">Solving Linear Regression using Numeric Optimization</a></li>
+    <li><a class="dropdown-item" href="../articles/watching-an-optimizer.html">Watching an Optimizer Run with Callbacks</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://blog.thecoatlessprofessor.com/projects/RcppEnsmallen/">Blog posts</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/coatless-rpkg/rcppensmallen/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -34,9 +39,38 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/coatless-rpkg/rcppensmallen/blob/0.3.11.1.1/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/coatless-rpkg/rcppensmallen/blob/0.3.11.2.1/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.11.2.1" id="rcppensmallen-031121">RcppEnsmallen 0.3.11.2.1<a class="anchor" aria-label="anchor" href="#rcppensmallen-031121"></a></h2><p class="text-muted">CRAN release: 2026-11-24</p>
+<ul><li>Upgraded to ensmallen 3.11.2: “Sunny Day” (2026-11-23)
+<ul><li>Fix incorrect child generation computation for NSGA-II (<a href="https://github.com/mlpack/ensmallen/pull/461" class="external-link">#461</a>).</li>
+<li>Better handling of OpenMP/pthreads linking for non-Linux systems (<a href="https://github.com/mlpack/ensmallen/pull/461" class="external-link">#461</a>).</li>
+<li>Better output from ProgressBar when optimization completes in the middle of an epoch (<a href="https://github.com/mlpack/ensmallen/pull/459" class="external-link">#459</a>).</li>
+<li>Fix convergence of <code>L1Constraint</code> proximal steps on systems with extended-precision floating point (<a href="https://github.com/mlpack/ensmallen/pull/465" class="external-link">#465</a>).</li>
+<li>Fix width setting for ProgressBar callback (<a href="https://github.com/mlpack/ensmallen/pull/467" class="external-link">#467</a>).</li>
+</ul></li>
+<li>New logistic regression examples (<a href="https://github.com/coatless-rpkg/rcppensmallen/issues/5" class="external-link">#5</a>):
+<ul><li>
+<code><a href="../reference/logistic_reg_lbfgs.html">logistic_reg_lbfgs()</a></code> fits the model with <code>L_BFGS</code> and takes an optional ridge penalty.</li>
+<li>
+<code><a href="../reference/logistic_reg_adam.html">logistic_reg_adam()</a></code> fits the same model with mini-batch <code>Adam</code>.</li>
+<li>
+<code><a href="../reference/logistic_reg_lbfgs_path.html">logistic_reg_lbfgs_path()</a></code> records each step <code>L_BFGS</code> takes through a callback.</li>
+<li>The standalone source is installed at <code>system.file("examples", "logistic-regression.cpp", package = "RcppEnsmallen")</code>.</li>
+</ul></li>
+<li>New <code><a href="../reference/lad_reg_pso.html">lad_reg_pso()</a></code> fits least absolute deviations regression with <code>LBestPSO</code>, a gradient-free optimizer.</li>
+<li>New <code><a href="../reference/nnls_auglag.html">nnls_auglag()</a></code> fits non-negative least squares with <code>AugLagrangian</code>, a constrained optimizer.</li>
+<li>New vignettes work through each example:
+<ul><li>“Solving Logistic Regression using Numeric Optimization”.</li>
+<li>“Watching an Optimizer Run with Callbacks”.</li>
+<li>“Gradient-Free Optimization with Least Absolute Deviations”, compared against <code><a href="https://rdrr.io/pkg/quantreg/man/rq.html" class="external-link">quantreg::rq()</a></code>.</li>
+<li>“Constrained Optimization with Non-Negative Least Squares”, compared against <code><a href="https://rdrr.io/pkg/nnls/man/nnls.html" class="external-link">nnls::nnls()</a></code>.</li>
+</ul></li>
+<li>New <code>tinytest</code> suite covers the example functions.</li>
+<li>New package logo, shown in the README.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.11.1.1" id="rcppensmallen-031111">RcppEnsmallen 0.3.11.1.1<a class="anchor" aria-label="anchor" href="#rcppensmallen-031111"></a></h2>
 <ul><li>Upgraded to ensmallen 3.11.1: “Sunny Day” (2026-07-29)

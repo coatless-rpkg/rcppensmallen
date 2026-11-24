@@ -354,10 +354,10 @@ the objective they are both minimizing:
 ``` r
 
 max(abs(as.vector(fit) - box$par))
-#> [1] 8.529249e-09
+#> [1] 1.288124e-08
 
 rss(fit) - box$value
-#> [1] -2.548006e-11
+#> [1] -8.526513e-14
 ```
 
 Constraining the problem cannot lower the objective, since the feasible
@@ -418,10 +418,10 @@ The coefficients on the boundary are not exactly zero:
 ``` r
 
 as.vector(fit)
-#> [1]  2.055437e+00 -1.791039e-13  1.479247e+00 -3.183095e-13
+#> [1]  2.055437e+00 -6.464225e-16  1.479247e+00 -1.310395e-15
 
 min(as.vector(fit))
-#> [1] -3.183095e-13
+#> [1] -1.310395e-15
 ```
 
 The two resting coefficients come back at the size of a rounding error,
@@ -447,7 +447,7 @@ min(ols_feas)
 #> [1] 2.018974
 
 max(abs(as.vector(nnls_auglag(X_feas, y_feas)) - ols_feas))
-#> [1] 2.838529e-11
+#> [1] 2.838441e-11
 ```
 
 The smallest least squares coefficient is comfortably positive, and the
@@ -472,10 +472,10 @@ c(ensmallen = rss(fit), nnls = rss(lawson_hanson$x))
 #>  102.7226  102.7226
 
 rss(fit) - rss(lawson_hanson$x)
-#> [1] -2.548006e-11
+#> [1] -8.526513e-14
 
 max(abs(as.vector(fit) - lawson_hanson$x))
-#> [1] 8.529251e-09
+#> [1] 1.288124e-08
 ```
 
 Both fits reach a residual sum of squares of 102.722631698. The gap
@@ -490,7 +490,7 @@ lawson_hanson$x
 #> [1] 2.055437 0.000000 1.479247 0.000000
 
 as.vector(fit)
-#> [1]  2.055437e+00 -1.791039e-13  1.479247e+00 -3.183095e-13
+#> [1]  2.055437e+00 -6.464225e-16  1.479247e+00 -1.310395e-15
 ```
 
 The active set method holds the second and fourth coefficients at zero
@@ -519,7 +519,7 @@ t_nnls <- system.time(
 
 c(ensmallen = t_ens, nnls = t_nnls)
 #> ensmallen      nnls 
-#>  3.30e-04  1.35e-05
+#>  0.000765  0.000020
 ```
 
 The specialist returns the same answer in a fraction of the time, by one

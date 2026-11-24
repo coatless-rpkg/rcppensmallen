@@ -1,13 +1,22 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://coatless.github.io/rcppensmallen/404.html</loc></url>
+<url><loc>https://coatless.github.io/rcppensmallen/articles/constrained-optimization.html</loc></url>
+<url><loc>https://coatless.github.io/rcppensmallen/articles/gradient-free-optimization.html</loc></url>
 <url><loc>https://coatless.github.io/rcppensmallen/articles/index.html</loc></url>
+<url><loc>https://coatless.github.io/rcppensmallen/articles/logistic-regression.html</loc></url>
 <url><loc>https://coatless.github.io/rcppensmallen/articles/package-usage.html</loc></url>
 <url><loc>https://coatless.github.io/rcppensmallen/articles/using-rcppensmallen.html</loc></url>
+<url><loc>https://coatless.github.io/rcppensmallen/articles/watching-an-optimizer.html</loc></url>
 <url><loc>https://coatless.github.io/rcppensmallen/authors.html</loc></url>
 <url><loc>https://coatless.github.io/rcppensmallen/index.html</loc></url>
 <url><loc>https://coatless.github.io/rcppensmallen/news/index.html</loc></url>
 <url><loc>https://coatless.github.io/rcppensmallen/reference/RcppEnsmallen-package.html</loc></url>
 <url><loc>https://coatless.github.io/rcppensmallen/reference/index.html</loc></url>
+<url><loc>https://coatless.github.io/rcppensmallen/reference/lad_reg_pso.html</loc></url>
 <url><loc>https://coatless.github.io/rcppensmallen/reference/lin_reg_lbfgs.html</loc></url>
+<url><loc>https://coatless.github.io/rcppensmallen/reference/logistic_reg_adam.html</loc></url>
+<url><loc>https://coatless.github.io/rcppensmallen/reference/logistic_reg_lbfgs.html</loc></url>
+<url><loc>https://coatless.github.io/rcppensmallen/reference/logistic_reg_lbfgs_path.html</loc></url>
+<url><loc>https://coatless.github.io/rcppensmallen/reference/nnls_auglag.html</loc></url>
 </urlset>
 
