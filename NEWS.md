@@ -12,6 +12,28 @@
     ([#465](https://github.com/mlpack/ensmallen/pull/465)).
   - Fix width setting for ProgressBar callback
     ([#467](https://github.com/mlpack/ensmallen/pull/467)).
+- New logistic regression examples
+  ([#5](https://github.com/coatless-rpkg/rcppensmallen/issues/5)):
+  - `logistic_reg_lbfgs()` fits the model with `L_BFGS` and takes an optional
+    ridge penalty.
+  - `logistic_reg_adam()` fits the same model with mini-batch `Adam`.
+  - `logistic_reg_lbfgs_path()` records each step `L_BFGS` takes through a
+    callback.
+  - The standalone source is installed at
+    `system.file("examples", "logistic-regression.cpp", package = "RcppEnsmallen")`.
+- New `lad_reg_pso()` fits least absolute deviations regression with
+  `LBestPSO`, a gradient-free optimizer.
+- New `nnls_auglag()` fits non-negative least squares with `AugLagrangian`, a
+  constrained optimizer.
+- New vignettes work through each example:
+  - "Solving Logistic Regression using Numeric Optimization".
+  - "Watching an Optimizer Run with Callbacks".
+  - "Gradient-Free Optimization with Least Absolute Deviations", compared
+    against `quantreg::rq()`.
+  - "Constrained Optimization with Non-Negative Least Squares", compared
+    against `nnls::nnls()`.
+- New `tinytest` suite covers the example functions.
+- New package logo, shown in the README.
 
 # RcppEnsmallen 0.3.11.1.1
 
@@ -20,51 +42,6 @@
     ([#456](https://github.com/mlpack/ensmallen/pull/456)).
   - Fix uninitialized gradient constraint matrix for `AugLagrangian`
     ([#458](https://github.com/mlpack/ensmallen/pull/458)).
-- Added a logistic regression example alongside the existing linear regression
-  one ([#5](https://github.com/coatless-rpkg/rcppensmallen/issues/5)):
-  - `logistic_reg_lbfgs()` minimizes the penalized negative log-likelihood with
-    `L_BFGS`, using a numerically stable softplus and an optional ridge penalty.
-  - `logistic_reg_adam()` expresses the same objective as a separable function
-    and fits it with mini-batch `Adam`.
-  - `logistic_reg_lbfgs_path()` runs the same `L_BFGS` fit behind a callback
-    that records the coordinates, returning a `p` by `k + 1` matrix whose first
-    column is the starting point and whose last column is the fit.
-  - A new vignette, "Solving Logistic Regression using Numeric Optimization",
-    develops the code from the likelihood through to packaging it.
-  - The complete standalone source is installed at
-    `system.file("examples", "logistic-regression.cpp", package = "RcppEnsmallen")`.
-- Added two examples that use function contracts the regression examples do
-  not:
-  - `lad_reg_pso()` fits least absolute deviations regression with `LBestPSO`.
-    The sum of absolute residuals has no derivative at the point that minimizes
-    it, so the objective class supplies `Evaluate()` alone. A new vignette,
-    "Gradient-Free Optimization with Least Absolute Deviations", reads the
-    compiler error an optimizer that wants more produces and compares five
-    gradient-free optimizers on the same fit.
-  - `nnls_auglag()` fits least squares subject to non-negative coefficients
-    with `AugLagrangian`, which asks the objective class for
-    `NumConstraints()`, `EvaluateConstraint()` and `GradientConstraint()` on
-    top of `Evaluate()` and `Gradient()`. A new vignette, "Constrained
-    Optimization with Non-Negative Least Squares", works through the
-    equality-only sign convention a bound has to be written in.
-- Moved the callback material out of the logistic regression vignette into a
-  new vignette, "Watching an Optimizer Run with Callbacks", which carries the
-  built-in callbacks, the custom `PathRecorder` callback and
-  `logistic_reg_lbfgs_path()`.
-- Added a `tinytest` suite covering the new functions, `lin_reg_lbfgs()`, and
-  the standalone example file, which is compiled and compared against the
-  package build under `tinytest::at_home()`.
-- The gradient-free and constrained vignettes now benchmark against the
-  specialist solver for each problem, `quantreg::rq()` and `nnls::nnls()`.
-  Both reach the same optimum as `ensmallen` and both are substantially
-  faster. A general-purpose optimizer earns its place on an objective no
-  packaged solver covers. The two packages are suggested, and the comparisons
-  are skipped where they are not installed.
-- Added a package logo showing an optimizer's trace descending a loss basin:
-  - Static and animated SVGs for light and dark mode are included in
-    `man/figures/`.
-  - The README title line shows the animated logo, picking light or dark with
-    a `<picture>` element and a `prefers-color-scheme` media query.
 
 # RcppEnsmallen 0.3.11.0.1
 
