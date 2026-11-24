@@ -16,7 +16,7 @@ set -euo pipefail
 
 INCLUDE_DIR="inst/include"
 MANIFEST="tools/ensmallen-path-remaps.tsv"
-PKG_PREFIX="RcppEnsmallen"   # tarball top-level dir; paths ship as PKG_PREFIX/<relpath>
+PKG_PREFIX="RcppEnsmallen"   # tarball top-level dir; paths are PKG_PREFIX/<relpath>
 MAX_BYTES=100
 
 if [ ! -f "$MANIFEST" ]; then
@@ -68,7 +68,7 @@ while IFS=$'\t' read -r old new _rest; do
   fi
 done < "$MANIFEST"
 
-# --- Guard: no shipped path may exceed MAX_BYTES ----------------------------
+# --- Guard: no included path may exceed MAX_BYTES ---------------------------
 echo "checking inst/ paths are <= $MAX_BYTES bytes ..."
 violations=0
 while IFS= read -r f; do

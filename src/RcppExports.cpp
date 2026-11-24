@@ -12,6 +12,18 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// lad_reg_pso
+arma::vec lad_reg_pso(const arma::mat& X, const arma::vec& y);
+RcppExport SEXP _RcppEnsmallen_lad_reg_pso(SEXP XSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(lad_reg_pso(X, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 // lin_reg_lbfgs
 arma::mat lin_reg_lbfgs(const arma::mat& X, const arma::vec& y);
 RcppExport SEXP _RcppEnsmallen_lin_reg_lbfgs(SEXP XSEXP, SEXP ySEXP) {
@@ -24,9 +36,68 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// logistic_reg_adam
+arma::vec logistic_reg_adam(const arma::mat& X, const arma::vec& y, const size_t batch_size, const size_t max_epochs, const double step_size, const bool verbose);
+RcppExport SEXP _RcppEnsmallen_logistic_reg_adam(SEXP XSEXP, SEXP ySEXP, SEXP batch_sizeSEXP, SEXP max_epochsSEXP, SEXP step_sizeSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const size_t >::type batch_size(batch_sizeSEXP);
+    Rcpp::traits::input_parameter< const size_t >::type max_epochs(max_epochsSEXP);
+    Rcpp::traits::input_parameter< const double >::type step_size(step_sizeSEXP);
+    Rcpp::traits::input_parameter< const bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(logistic_reg_adam(X, y, batch_size, max_epochs, step_size, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// logistic_reg_lbfgs
+arma::vec logistic_reg_lbfgs(const arma::mat& X, const arma::vec& y, const double lambda);
+RcppExport SEXP _RcppEnsmallen_logistic_reg_lbfgs(SEXP XSEXP, SEXP ySEXP, SEXP lambdaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const double >::type lambda(lambdaSEXP);
+    rcpp_result_gen = Rcpp::wrap(logistic_reg_lbfgs(X, y, lambda));
+    return rcpp_result_gen;
+END_RCPP
+}
+// logistic_reg_lbfgs_path
+arma::mat logistic_reg_lbfgs_path(const arma::mat& X, const arma::vec& y, const double lambda);
+RcppExport SEXP _RcppEnsmallen_logistic_reg_lbfgs_path(SEXP XSEXP, SEXP ySEXP, SEXP lambdaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const double >::type lambda(lambdaSEXP);
+    rcpp_result_gen = Rcpp::wrap(logistic_reg_lbfgs_path(X, y, lambda));
+    return rcpp_result_gen;
+END_RCPP
+}
+// nnls_auglag
+arma::vec nnls_auglag(const arma::mat& X, const arma::vec& y);
+RcppExport SEXP _RcppEnsmallen_nnls_auglag(SEXP XSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(nnls_auglag(X, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_RcppEnsmallen_lad_reg_pso", (DL_FUNC) &_RcppEnsmallen_lad_reg_pso, 2},
     {"_RcppEnsmallen_lin_reg_lbfgs", (DL_FUNC) &_RcppEnsmallen_lin_reg_lbfgs, 2},
+    {"_RcppEnsmallen_logistic_reg_adam", (DL_FUNC) &_RcppEnsmallen_logistic_reg_adam, 6},
+    {"_RcppEnsmallen_logistic_reg_lbfgs", (DL_FUNC) &_RcppEnsmallen_logistic_reg_lbfgs, 3},
+    {"_RcppEnsmallen_logistic_reg_lbfgs_path", (DL_FUNC) &_RcppEnsmallen_logistic_reg_lbfgs_path, 3},
+    {"_RcppEnsmallen_nnls_auglag", (DL_FUNC) &_RcppEnsmallen_nnls_auglag, 2},
     {NULL, NULL, 0}
 };
 
