@@ -1,4 +1,4 @@
-# RcppEnsmallen
+# RcppEnsmallen ![Logo: an optimizer's trace zigzagging down a contour map of a loss basin, each stride shorter than the last, to a marked minimum.](reference/figures/rcppensmallen-logo-animated-light.svg)
 
 ## Overview
 

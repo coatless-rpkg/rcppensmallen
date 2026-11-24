@@ -18,8 +18,12 @@
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/package-usage.html">Using RcppEnsmallen in Your Own R Package</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/constrained-optimization.html">Constrained Optimization with Non-Negative Least Squares</a></li>
+    <li><a class="dropdown-item" href="../articles/gradient-free-optimization.html">Gradient-Free Optimization with Least Absolute Deviations</a></li>
+    <li><a class="dropdown-item" href="../articles/logistic-regression.html">Solving Logistic Regression using Numeric Optimization</a></li>
+    <li><a class="dropdown-item" href="../articles/package-usage.html">Using RcppEnsmallen in Your Own R Package</a></li>
     <li><a class="dropdown-item" href="../articles/using-rcppensmallen.html">Solving Linear Regression using Numeric Optimization</a></li>
+    <li><a class="dropdown-item" href="../articles/watching-an-optimizer.html">Watching an Optimizer Run with Callbacks</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://blog.thecoatlessprofessor.com/projects/RcppEnsmallen/">Blog posts</a></li>
@@ -53,6 +57,29 @@
 <ul><li>Upgraded to ensmallen 3.11.1: “Sunny Day” (2026-07-29)
 <ul><li>Loosen tolerance for Lookahead tests to prevent spurious failures (<a href="https://github.com/mlpack/ensmallen/pull/456" class="external-link">#456</a>).</li>
 <li>Fix uninitialized gradient constraint matrix for <code>AugLagrangian</code> (<a href="https://github.com/mlpack/ensmallen/pull/458" class="external-link">#458</a>).</li>
+</ul></li>
+<li>Added a logistic regression example alongside the existing linear regression one (<a href="https://github.com/coatless-rpkg/rcppensmallen/issues/5" class="external-link">#5</a>):
+<ul><li>
+<code><a href="../reference/logistic_reg_lbfgs.html">logistic_reg_lbfgs()</a></code> minimizes the penalized negative log-likelihood with <code>L_BFGS</code>, using a numerically stable softplus and an optional ridge penalty.</li>
+<li>
+<code><a href="../reference/logistic_reg_adam.html">logistic_reg_adam()</a></code> expresses the same objective as a separable function and fits it with mini-batch <code>Adam</code>.</li>
+<li>
+<code><a href="../reference/logistic_reg_lbfgs_path.html">logistic_reg_lbfgs_path()</a></code> runs the same <code>L_BFGS</code> fit behind a callback that records the coordinates, returning a <code>p</code> by <code>k + 1</code> matrix whose first column is the starting point and whose last column is the fit.</li>
+<li>A new vignette, “Solving Logistic Regression using Numeric Optimization”, develops the code from the likelihood through to packaging it.</li>
+<li>The complete standalone source is installed at <code>system.file("examples", "logistic-regression.cpp", package = "RcppEnsmallen")</code>.</li>
+</ul></li>
+<li>Added two examples that use function contracts the regression examples do not:
+<ul><li>
+<code><a href="../reference/lad_reg_pso.html">lad_reg_pso()</a></code> fits least absolute deviations regression with <code>LBestPSO</code>. The sum of absolute residuals has no derivative at the point that minimizes it, so the objective class supplies <code>Evaluate()</code> alone. A new vignette, “Gradient-Free Optimization with Least Absolute Deviations”, reads the compiler error an optimizer that wants more produces and compares five gradient-free optimizers on the same fit.</li>
+<li>
+<code><a href="../reference/nnls_auglag.html">nnls_auglag()</a></code> fits least squares subject to non-negative coefficients with <code>AugLagrangian</code>, which asks the objective class for <code>NumConstraints()</code>, <code>EvaluateConstraint()</code> and <code>GradientConstraint()</code> on top of <code>Evaluate()</code> and <code>Gradient()</code>. A new vignette, “Constrained Optimization with Non-Negative Least Squares”, works through the equality-only sign convention a bound has to be written in.</li>
+</ul></li>
+<li>Moved the callback material out of the logistic regression vignette into a new vignette, “Watching an Optimizer Run with Callbacks”, which carries the built-in callbacks, the custom <code>PathRecorder</code> callback and <code><a href="../reference/logistic_reg_lbfgs_path.html">logistic_reg_lbfgs_path()</a></code>.</li>
+<li>Added a <code>tinytest</code> suite covering the new functions, <code><a href="../reference/lin_reg_lbfgs.html">lin_reg_lbfgs()</a></code>, and the standalone example file, which is compiled and compared against the package build under <code><a href="https://rdrr.io/pkg/tinytest/man/at_home.html" class="external-link">tinytest::at_home()</a></code>.</li>
+<li>The gradient-free and constrained vignettes now benchmark against the specialist solver for each problem, <code><a href="https://rdrr.io/pkg/quantreg/man/rq.html" class="external-link">quantreg::rq()</a></code> and <code><a href="https://rdrr.io/pkg/nnls/man/nnls.html" class="external-link">nnls::nnls()</a></code>. Both reach the same optimum as <code>ensmallen</code> and both are substantially faster. A general-purpose optimizer earns its place on an objective no packaged solver covers. The two packages are suggested, and the comparisons are skipped where they are not installed.</li>
+<li>Added a package logo showing an optimizer’s trace descending a loss basin:
+<ul><li>Static and animated SVGs for light and dark mode are included in <code>man/figures/</code>.</li>
+<li>The README title line shows the animated logo, picking light or dark with a <code>&lt;picture&gt;</code> element and a <code>prefers-color-scheme</code> media query.</li>
 </ul></li>
 </ul></div>
     <div class="section level2">

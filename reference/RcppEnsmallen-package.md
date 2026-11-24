@@ -37,5 +37,8 @@ Useful links:
 
 Authors:
 
+- James Joseph Balamuta <balamut2@illinois.edu>
+  ([ORCID](https://orcid.org/0000-0003-2826-8458)) \[copyright holder\]
+
 - Dirk Eddelbuettel <edd@debian.org>
   ([ORCID](https://orcid.org/0000-0001-6419-907X)) \[copyright holder\]

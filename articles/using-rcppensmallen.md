@@ -121,8 +121,10 @@ From there:
 3.  Combine the optimizer with the linear regression class to compute
     the solution to the problem.
 
-**Note:** Make sure to have the definition of the Linear Regression
-class in the same *C++* file as the exported *C++* function into *R*.
+**Note:** the `// [[Rcpp::export]]` attribute has to appear in the
+`.cpp` file Rcpp compiles, but the class does not have to. Moving the
+class into a header beside it and including it with `#include` works
+under both `sourceCpp()` and a package build.
 
 ``` cpp
 // [[Rcpp::export]]
