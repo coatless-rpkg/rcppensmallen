@@ -1,6 +1,6 @@
 ## Test environments
 
-* local: macOS 26.5 "Tahoe" (aarch64), R 4.6.1
+* local: macOS 27.2.1 (aarch64), R 4.6.2
 * GitHub Actions:
   - macos-latest, R release
   - windows-latest, R release
@@ -21,12 +21,12 @@ and development versions of this package.
 
 ### revdepcheck results
 
-    ✔ mlpack 4.8.0                ── E: 0 | W: 1 | N: 0
+    ✔ mlpack 4.8.0-1              ── E: 0 | W: 0 | N: 1
     ✔ PJFM 0.1.0                  ── E: 0 | W: 0 | N: 1
-    ✔ Racmacs 1.2.10              ── E: 0 | W: 0 | N: 0
-    ✔ rcppmlpackexamples 0.0.1    ── E: 0 | W: 1 | N: 1
-    ✔ sparsevb 0.1.1             ── E: 0 | W: 0 | N: 1
+    ✔ Racmacs 1.2.10              ── E: 0 | W: 0 | N: 1
+    ✔ rcppmlpackexamples 0.0.1    ── E: 0 | W: 0 | N: 1
+    ✔ sparsevb 0.1.1              ── E: 0 | W: 0 | N: 1
 
-The warnings and notes shown above are pre-existing in each reverse
-dependency (they appear identically against the CRAN and development
-versions of RcppEnsmallen) and are therefore unrelated to this update.
+The note on each reverse dependency is its own CRAN incoming feasibility
+note. It appears identically against the CRAN and development versions of
+RcppEnsmallen and is therefore unrelated to this update.

@@ -1,5 +1,11 @@
 2026-11-24  James Balamuta  <balamut2@illinois.edu>
 
+	* vignettes/using-rcppensmallen.Rmd: Point the Eigen link at its current site.
+	* README.md: Remove the two r-pkg.org badges.
+	* cran-comments.md: Update for 0.3.11.2.1.
+
+2026-11-24  James Balamuta  <balamut2@illinois.edu>
+
 	* src/example-logistic-regression-lbfgs.cpp: New; logistic regression with L-BFGS.
 	* src/example-logistic-regression-adam.cpp: New; the separable objective with Adam.
 	* src/example-logistic-regression-path.cpp: New; a callback that records the path.
