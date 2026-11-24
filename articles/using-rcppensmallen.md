@@ -20,8 +20,7 @@ create the underlying *C++* code from *R*.
 
 **Note:** Optimizers in `RcppEnsmallen` only work with
 [`armadillo`](https://arma.sourceforge.net/docs.html) data structures.
-Thus, if using
-[`Eigen`](https://eigen.tuxfamily.org/index.php?title=Main_Page) through
+Thus, if using [`Eigen`](https://libeigen.gitlab.io/) through
 [`RcppEigen`](https://cran.r-project.org/package=RcppEigen), please
 consider the
 [`RcppNumerical`](https://cran.r-project.org/package=RcppNumerical)

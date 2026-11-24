@@ -519,7 +519,7 @@ t_nnls <- system.time(
 
 c(ensmallen = t_ens, nnls = t_nnls)
 #> ensmallen      nnls 
-#>   0.00043   0.00002
+#>  3.30e-04  1.35e-05
 ```
 
 The specialist returns the same answer in a fraction of the time, by one

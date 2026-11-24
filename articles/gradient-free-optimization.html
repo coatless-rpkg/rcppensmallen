@@ -620,10 +620,10 @@ measured call does the same work as the one in the fit above.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>LBestPSO <span class="op">=</span> <span class="va">pso_time</span>, rq <span class="op">=</span> <span class="va">rq_time</span><span class="op">)</span></span>
 <span><span class="co">#&gt; LBestPSO       rq </span></span>
-<span><span class="co">#&gt; 0.085600 0.000785</span></span>
+<span><span class="co">#&gt;  0.07350  0.00056</span></span>
 <span></span>
 <span><span class="va">pso_time</span> <span class="op">/</span> <span class="va">rq_time</span></span>
-<span><span class="co">#&gt; [1] 109.0446</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 131.25</span></span></code></pre></div>
 <p>The ratio ran into the hundreds on every run measured here.
 <code>ens::LBestPSO</code> defaults to 64 particles and up to 3000
 iterations, and evaluates the objective once per particle per iteration.

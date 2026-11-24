@@ -510,10 +510,10 @@ rq_time <- system.time(
 
 c(LBestPSO = pso_time, rq = rq_time)
 #> LBestPSO       rq 
-#> 0.085600 0.000785
+#>  0.07350  0.00056
 
 pso_time / rq_time
-#> [1] 109.0446
+#> [1] 131.25
 ```
 
 The ratio ran into the hundreds on every run measured here.
