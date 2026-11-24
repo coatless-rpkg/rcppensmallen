@@ -1,3 +1,21 @@
+### ensmallen 3.11.2: "Sunny Day"
+###### 2026-11-21
+ * Fix incorrect child generation computation for NSGA-II
+   ([#461](https://github.com/mlpack/ensmallen/pull/461)).
+
+ * Better handling of OpenMP/pthreads linking for non-Linux systems
+   ([#461](https://github.com/mlpack/ensmallen/pull/461)).
+
+ * Better output from ProgressBar when optimization completes in the middle of
+   an epoch ([#459](https://github.com/mlpack/ensmallen/pull/459)).
+
+ * Fix convergence of `L1Constraint` proximal steps on systems with
+   extended-precision floating point
+   ([#465](https://github.com/mlpack/ensmallen/pull/465)).
+
+ * Fix width setting for ProgressBar callback
+   ([#467](https://github.com/mlpack/ensmallen/pull/467)).
+
 ### ensmallen 3.11.1: "Sunny Day"
 ###### 2026-07-25
  * Loosen tolerance for Lookahead tests to prevent spurious failures

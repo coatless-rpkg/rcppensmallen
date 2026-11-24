@@ -32,7 +32,7 @@ class ProgressBar
    */
   ProgressBar(const size_t widthIn = 70,
               std::ostream& output = arma::get_cout_stream()) :
-      width(100.0 / widthIn),
+      width(widthIn),
       output(output),
       objective(0),
       epochs(0),
@@ -40,9 +40,17 @@ class ProgressBar
       step(1),
       steps(0),
       newEpoch(false),
-      epoch(1)
+      epoch(1),
+      epochStarted(false),
+      epochCompleted(false)
 
-  { /* Nothing to do here. */ }
+  {
+    if (widthIn == 0)
+    {
+      throw std::invalid_argument(
+          "ProgressBar(): width must be greater than zero!");
+    }
+  }
 
   /**
    * Callback function called at the begin of the optimization process.
@@ -113,6 +121,8 @@ class ProgressBar
 
     epoch = epochIn;
     newEpoch = true;
+    epochStarted = true;
+    epochCompleted = false;
 
     return false;
   }
@@ -141,15 +151,19 @@ class ProgressBar
       newEpoch = false;
     }
 
-    const size_t progress = ((double) step / epochSize) * 100;
+    const double progress = ((double) step / epochSize);
     output << step++ << "/" << epochSize << " [";
-    for (size_t i = 0; i < 100; i += width)
+    for (size_t i = 0; i < width; ++i)
     {
-      if (i < progress)
+      // Compute the "beginning percentage" and "end percentage" of this
+      // character.
+      const double charBeginPct = double(i) / double(width);
+      const double charEndPct = double(i + 1) / double(width);
+      if (progress >= charEndPct)
       {
         output << "=";
       }
-      else if (i == progress)
+      else if (progress >= charBeginPct && progress < charEndPct)
       {
         output << ">";
       }
@@ -159,9 +173,13 @@ class ProgressBar
       }
     }
 
-    output << "] " << progress << "% - ETA: " << (size_t) (stepTimer.toc() *
-        (epochSize - step + 1)) % 60 << "s - loss: " <<
-        objective / (double) step <<  "\r";
+    size_t progressPrintPct = size_t(progress * 100);
+    output << "] ";
+    if (progressPrintPct < 100)
+      output << " "; // leading space for lower than 100%
+    output << progressPrintPct << "% - ETA: "
+        << (size_t) (stepTimer.toc() * (epochSize - step + 1)) % 60
+        << "s - loss: " << (objective / (double) step) <<  "\r";
     output.flush();
 
     stepTimer.tic();
@@ -204,63 +222,76 @@ class ProgressBar
                 const size_t /* epoch */,
                 const double objective)
   {
-    const size_t progress = ((double) (step - 1) / epochSize) * 100;
-    output << step - 1 << "/" << epochSize << " [";
-    for (size_t i = 0; i < 100; i += width)
-    {
-      if (i < progress)
-      {
-        output << "=";
-      }
-      else if (i == progress)
-      {
-        output << ">";
-      }
-      else
-      {
-        output << ".";
-      }
-    }
+    epochCompleted = true;
+
+    // Print the entire row of '='s.
+    output << step - 1 << "/" << epochSize << " [" << std::string(width, '=');
+
     const double epochTimerElapsed = epochTimer.toc();
     const size_t stepTime = epochTimerElapsed / (double) epochSize * 1000;
-    output << "] " << progress << "% - " << epochTimerElapsed
-        << "s/epoch; " << stepTime << "ms/step; loss: " << objective  <<  "\n";
+    output << "] 100% - " << epochTimerElapsed << "s/epoch; " << stepTime
+        << "ms/step; loss: " << objective  <<  "\n";
     output.flush();
     return false;
   }
 
- private:
-  //! Length of a single step (1%).
-  double width;
+  /**
+   * Callback function called at the end of the optimization process.
+   *
+   * @param optimizer The optimizer used to update the function.
+   * @param function Function to optimize.
+   * @param coordinates Final point.
+   */
+  template<typename OptimizerType, typename FunctionType, typename MatType>
+  void EndOptimization(OptimizerType& /* optimizer */,
+                       FunctionType& /* function */,
+                       MatType& /* coordinates */)
+  {
+    if (epochStarted && !epochCompleted && step > 1)
+    {
+      output << "\nOptimization stopped before completing the current epoch."
+          << std::endl;
+    }
+  }
 
-  //! The output stream that all data is to be sent to; example: std::cout.
+ private:
+  // Number of characters used to print the progress bar.
+  size_t width;
+
+  // The output stream that all data is to be sent to; example: std::cout.
   std::ostream& output;
 
-  //! Objective over the current epoch.
+  // Objective over the current epoch.
   double objective;
 
-  //! Total number of epochs
+  // Total number of epochs
   size_t epochs;
 
-  //! Number of steps per epoch.
+  // Number of steps per epoch.
   size_t epochSize;
 
-  //! Current step number.
+  // Current step number.
   size_t step;
 
-  //! Number of steps taken.
+  // Number of steps taken.
   size_t steps;
 
-  //! Indicates a new epoch.
+  // Indicates a new epoch.
   bool newEpoch;
 
-  //! Locally-stored epoch.
+  // Locally-stored epoch.
   size_t epoch;
 
-  //! Locally-stored step timer object.
+  // Tracks whether there is an epoch whose progress is being displayed.
+  bool epochStarted;
+
+  // Lets EndOptimization() distinguish a complete epoch from a partial one.
+  bool epochCompleted;
+
+  // Locally-stored step timer object.
   arma::wall_clock stepTimer;
 
-  //! Locally-stored epoch timer object.
+  // Locally-stored epoch timer object.
   arma::wall_clock epochTimer;
 };
 
