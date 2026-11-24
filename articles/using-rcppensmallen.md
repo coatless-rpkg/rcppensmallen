@@ -20,7 +20,8 @@ create the underlying *C++* code from *R*.
 
 **Note:** Optimizers in `RcppEnsmallen` only work with
 [`armadillo`](https://arma.sourceforge.net/docs.html) data structures.
-Thus, if using [`Eigen`](https://libeigen.gitlab.io/) through
+Thus, if using
+[`Eigen`](https://eigen.tuxfamily.org/index.php?title=Main_Page) through
 [`RcppEigen`](https://cran.r-project.org/package=RcppEigen), please
 consider the
 [`RcppNumerical`](https://cran.r-project.org/package=RcppNumerical)
@@ -120,10 +121,8 @@ From there:
 3.  Combine the optimizer with the linear regression class to compute
     the solution to the problem.
 
-**Note:** the `// [[Rcpp::export]]` attribute has to appear in the
-`.cpp` file Rcpp compiles, but the class does not have to. Moving the
-class into a header beside it and including it with `#include` works
-under both `sourceCpp()` and a package build.
+**Note:** Make sure to have the definition of the Linear Regression
+class in the same *C++* file as the exported *C++* function into *R*.
 
 ``` cpp
 // [[Rcpp::export]]
