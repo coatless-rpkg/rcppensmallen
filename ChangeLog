@@ -1,5 +1,25 @@
 2026-11-24  James Balamuta  <balamut2@illinois.edu>
 
+	* src/example-logistic-regression-lbfgs.cpp: New; logistic regression with L-BFGS.
+	* src/example-logistic-regression-adam.cpp: New; the separable objective with Adam.
+	* src/example-logistic-regression-path.cpp: New; a callback that records the path.
+	* src/example-lad-gradient-free.cpp: New; least absolute deviations with LBestPSO.
+	* src/example-nnls-constrained.cpp: New; non-negative least squares with AugLagrangian.
+	* inst/examples/logistic-regression.cpp: New; the standalone logistic regression example.
+	* vignettes/logistic-regression.Rmd: New.
+	* vignettes/watching-an-optimizer.Rmd: New.
+	* vignettes/gradient-free-optimization.Rmd: New.
+	* vignettes/constrained-optimization.Rmd: New.
+	* vignettes/using-rcppensmallen.Rmd: Correct the note on where the class may live.
+	* tests/tinytest.R: New.
+	* inst/tinytest: New; tests for the example functions and the standalone file.
+	* man/figures: New; the package logo, static and animated, light and dark.
+	* README.md: Show the logo.
+	* DESCRIPTION (Suggests): Add tinytest, quantreg and nnls.
+	* NEWS.md: Describe the examples, vignettes, tests and logo.
+
+2026-11-24  James Balamuta  <balamut2@illinois.edu>
+
 	* DESCRIPTION (Version): Release 3.11.2
 	* NEWS.md: Update for Ensmallen release 3.11.2
 	* inst/include/ensmallen_bits: Upgraded to Ensmallen 3.11.2
